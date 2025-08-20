@@ -36,7 +36,7 @@ export default function ChatAgent() {
     
     // Check if question is about Ahmet first (priority responses)
     if (msg.includes('ahmet') || msg.includes('contact') || msg.includes('email') || msg.includes('phone') || msg.includes('reach')) {
-      return "Contact Ahmet directly: ahmet@doganconsult.com, +966-500-666-084. Website: www.doganahmet.com, LinkedIn: ahmed-elgazzar-ict. Based in Riyadh with Saudi Premium Residency. Responds within 24 hours.";
+      return "Contact Ahmet directly: info@doganahmet.com, +966-500-666-084. Website: www.doganahmet.com, LinkedIn: ahmed-elgazzar-ict. Based in Riyadh with Saudi Premium Residency. Responds within 24 hours.";
     }
 
     if ((msg.includes('experience') || msg.includes('career') || msg.includes('background') || msg.includes('work')) && (msg.includes('his') || msg.includes('ahmet') || msg.includes('you'))) {

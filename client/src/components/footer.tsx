@@ -24,7 +24,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a 
-                href="mailto:ahmet@doganconsult.com" 
+                href="mailto:info@doganahmet.com" 
                 className="text-gray-400 hover:text-white transition-colors"
                 data-testid="link-email"
                 target="_blank" 
