@@ -63,7 +63,7 @@ export default function Home() {
     {
       number: "25+",
       label: "Elite Certifications",
-      description: "Global top 0.001% portfolio",
+      description: "Global top 0.001% - Only 1 in 100,000 professionals hold this portfolio depth",
       testId: "achievement-certifications"
     },
     {
