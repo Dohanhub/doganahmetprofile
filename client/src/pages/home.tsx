@@ -57,37 +57,43 @@ export default function Home() {
     {
       number: "SAR 125M+",
       label: "Contracts Secured (2024)",
-      description: "125% YoY Growth",
+      description: "Exceptional revenue growth through strategic client partnerships and Vision 2030 alignment",
+      icon: "💰",
       testId: "achievement-contracts"
     },
     {
       number: "$18M",
-      label: "Annual ICT Division Revenue",
-      description: "Built from scratch in 5 years",
+      label: "Annual ICT Revenue",
+      description: "Built comprehensive ICT division from ground zero to market leadership",
+      icon: "🏗️",
       testId: "achievement-revenue"
     },
     {
       number: "130+",
-      label: "Team Members Led",
-      description: "Across multiple countries",
+      label: "Global Teams Led",
+      description: "Cross-cultural leadership spanning Saudi Arabia, Kuwait, Turkey, and Egypt",
+      icon: "👥",
       testId: "achievement-teams"
     },
     {
       number: "20+",
-      label: "Years Experience",
-      description: "ICT & Digital Transformation",
+      label: "Years ICT Experience",
+      description: "Progressive leadership from technical specialist to C-suite executive",
+      icon: "⚡",
       testId: "achievement-experience"
     },
     {
       number: "5×",
-      label: "Profit Increase",
-      description: "Regional turnaround success",
+      label: "Profit Growth Achieved",
+      description: "Transformed underperforming Western Region to #1 national position",
+      icon: "📈",
       testId: "achievement-profit"
     },
     {
       number: "25+",
-      label: "Elite Certifications",
-      description: "Global top 0.001% portfolio",
+      label: "Elite Professional Certifications",
+      description: "Rare global credential portfolio placing in top 0.001% worldwide",
+      icon: "🏆",
       testId: "achievement-certifications"
     }
   ];
@@ -139,19 +145,25 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-4" data-testid="text-expertise-philosophy-title">
-              Technical and Management Expertise Strategy Philosophy
+              Strategic Excellence Portfolio
             </h2>
+            <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto">
+              Quantified achievements demonstrating technical mastery, management excellence, and strategic vision across global ICT transformations
+            </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {achievements.map((achievement) => (
-              <div key={achievement.testId} className="text-center bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl" data-testid={achievement.testId}>
-                <div className="text-3xl md:text-4xl font-bold text-primary-700 mb-2">
+              <div key={achievement.testId} className="text-center bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-blue-100" data-testid={achievement.testId}>
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <span className="text-2xl font-bold text-white">{achievement.icon || "🎯"}</span>
+                </div>
+                <div className="text-3xl md:text-4xl font-bold text-primary-700 mb-3">
                   {achievement.number}
                 </div>
-                <div className="text-lg font-semibold text-gray-900 mb-1">
+                <div className="text-lg font-semibold text-gray-900 mb-2">
                   {achievement.label}
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-gray-600 leading-relaxed">
                   {achievement.description}
                 </div>
               </div>
