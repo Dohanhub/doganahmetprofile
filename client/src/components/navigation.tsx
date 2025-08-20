@@ -76,7 +76,7 @@ export default function Navigation() {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-100">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-100 dark:border-gray-800">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -86,8 +86,8 @@ export default function Navigation() {
                   <span
                     className={`block px-3 py-2 text-base font-medium transition-colors ${
                       isActive(item.href)
-                        ? "text-primary-600"
-                        : "text-gray-700 hover:text-primary-600"
+                        ? "text-primary-600 dark:text-primary-400"
+                        : "text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400"
                     }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
@@ -95,6 +95,11 @@ export default function Navigation() {
                   </span>
                 </Link>
               ))}
+              
+              <div className="flex items-center justify-between px-3 py-2">
+                <span className="text-base font-medium text-gray-700 dark:text-gray-300">Theme</span>
+                <ThemeToggle />
+              </div>
               
               <Link href="/contact" data-testid="button-contact-mobile">
                 <Button 
