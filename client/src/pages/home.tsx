@@ -301,56 +301,138 @@ export default function Home() {
       </section>
 
       {/* Executive Recommendations Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-recommendations-title">
               Executive Recommendations
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Senior executives from 5 countries recognize Ahmet's exceptional leadership in ICT transformation
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto" data-testid="text-recommendations-subtitle">
+              Endorsed by 18 senior executives across 5 countries for exceptional ICT leadership and digital transformation expertise
             </p>
           </div>
+          
+          <div className="text-center mb-8">
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl inline-block">
+              <p className="text-lg text-gray-700 mb-4">
+                <strong>18 Executive Recommendations</strong> from senior leaders across 5 countries
+              </p>
+              <p className="text-sm text-gray-600">
+                Available on LinkedIn profile for verification and detailed testimonials
+              </p>
+              <div className="mt-4">
+                <a 
+                  href="https://linkedin.com/in/ahmed-elgazzar-ict" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  View LinkedIn Recommendations
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {executiveRecommendations.map((recommendation, index) => (
-              <div 
-                key={recommendation.testId} 
-                className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:rotate-1 group fade-in"
-                style={{ animationDelay: `${index * 150}ms` }}
-                data-testid={recommendation.testId}
-              >
-                <div className="mb-6">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-2xl">💼</span>
-                  </div>
-                  <blockquote className="text-gray-700 italic leading-relaxed mb-4 group-hover:text-gray-900 transition-colors duration-300">
-                    "{recommendation.quote}"
-                  </blockquote>
+          <div className="text-center">
+            <div className="bg-white p-6 rounded-xl shadow-lg inline-block">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                  <div className="text-2xl font-bold text-primary-700">18</div>
+                  <div className="text-sm text-gray-600">Executive Recommendations</div>
                 </div>
-                <div className="border-t border-gray-200 pt-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-bold text-primary-900 group-hover:text-primary-700 transition-colors duration-300">
-                        {recommendation.name}
-                      </div>
-                      <div className="text-sm text-gray-600">
-                        {recommendation.title}
-                      </div>
-                      <div className="text-xs text-blue-600 mt-1 flex items-center gap-1 group-hover:text-blue-800 transition-colors duration-300">
-                        <span>🔗</span>
-                        LinkedIn Recommendation
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-xs text-gray-500">
-                        {recommendation.country}
-                      </div>
-                    </div>
-                  </div>
+                <div>
+                  <div className="text-2xl font-bold text-primary-700">5</div>
+                  <div className="text-sm text-gray-600">Countries</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-primary-700">12</div>
+                  <div className="text-sm text-gray-600">C-Level Endorsements</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-primary-700">6</div>
+                  <div className="text-sm text-gray-600">Fortune 500 Companies</div>
                 </div>
               </div>
-            ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Credentials Overview Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-credentials-title">
+              Elite Professional Credentials
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto" data-testid="text-credentials-subtitle">
+              Comprehensive portfolio placing Ahmet in the global top 0.001% of ICT professionals
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Education */}
+            <div className="text-center bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl hover:shadow-lg transition-all duration-300">
+              <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Award className="w-8 h-8 text-white" />
+              </div>
+              <div className="text-3xl font-bold text-blue-700 mb-2">5</div>
+              <div className="text-lg font-semibold text-gray-900 mb-2">Advanced Degrees</div>
+              <div className="text-sm text-gray-600">DBA, MBA, Stanford Executive Education</div>
+            </div>
+
+            {/* Certifications */}
+            <div className="text-center bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-xl hover:shadow-lg transition-all duration-300">
+              <div className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Trophy className="w-8 h-8 text-white" />
+              </div>
+              <div className="text-3xl font-bold text-purple-700 mb-2">20+</div>
+              <div className="text-lg font-semibold text-gray-900 mb-2">Elite Certifications</div>
+              <div className="text-sm text-gray-600">PgMP, CISA/CISM/CRISC, RCDD</div>
+            </div>
+
+            {/* Organizations */}
+            <div className="text-center bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-xl hover:shadow-lg transition-all duration-300">
+              <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-white" />
+              </div>
+              <div className="text-3xl font-bold text-green-700 mb-2">10</div>
+              <div className="text-lg font-semibold text-gray-900 mb-2">Professional Organizations</div>
+              <div className="text-sm text-gray-600">PMI, ISACA, IEEE, CMI</div>
+            </div>
+
+            {/* Global Standing */}
+            <div className="text-center bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-xl hover:shadow-lg transition-all duration-300">
+              <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <TrendingUp className="w-8 h-8 text-white" />
+              </div>
+              <div className="text-3xl font-bold text-orange-700 mb-2">0.001%</div>
+              <div className="text-lg font-semibold text-gray-900 mb-2">Global Top Percentile</div>
+              <div className="text-sm text-gray-600">ICT Professional Ranking</div>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/experience" data-testid="button-view-experience">
+                <Button variant="outline" className="border-primary-600 text-primary-600 hover:bg-primary-50">
+                  View Full Experience
+                </Button>
+              </Link>
+              <Link href="/certifications" data-testid="button-view-certifications">
+                <Button variant="outline" className="border-primary-600 text-primary-600 hover:bg-primary-50">
+                  View All Certifications
+                </Button>
+              </Link>
+              <Link href="/organizations" data-testid="button-view-organizations">
+                <Button variant="outline" className="border-primary-600 text-primary-600 hover:bg-primary-50">
+                  Professional Organizations
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

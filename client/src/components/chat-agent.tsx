@@ -55,57 +55,41 @@ export default function ChatAgent() {
       return "Ahmet is actively seeking C-level executive positions (CIO/CTO) in digital transformation, smart cities, or ICT infrastructure. Available for immediate start and consultation meetings. Given his elite profile, early engagement is recommended.";
     }
 
-    // General Knowledge Responses (ChatGPT-like capabilities)
+    // Enhanced General Knowledge Responses (Extended ChatGPT-like capabilities)
     if (msg.includes('artificial intelligence') || msg.includes('ai') || msg.includes('machine learning') || msg.includes('ml')) {
-      return "AI is transforming industries globally. As an ICT executive, Ahmet has experience integrating AI/ML solutions in enterprise environments. Key trends include generative AI, automation, and intelligent infrastructure. For AI strategy consulting, contact ahmet@doganconsult.com.";
+      return "Artificial Intelligence is revolutionizing industries worldwide through automation, data analytics, and intelligent decision-making. Current AI landscape includes:\n\n• **Generative AI**: ChatGPT, GPT-4, Claude transforming content creation and customer service\n• **Machine Learning**: Predictive analytics, recommendation systems, fraud detection\n• **Computer Vision**: Image recognition, autonomous vehicles, medical diagnostics\n• **Natural Language Processing**: Translation, sentiment analysis, voice assistants\n\nAs an ICT executive, Ahmet has hands-on experience implementing AI/ML solutions in enterprise environments, particularly in smart city infrastructure and digital transformation projects. For AI strategy consulting and implementation guidance, reach out to ahmet@doganconsult.com.";
     }
 
-    if (msg.includes('technology') || msg.includes('tech trends') || msg.includes('innovation')) {
-      return "Current tech trends include cloud computing, cybersecurity, IoT, digital transformation, and smart cities. These align with Ahmet's expertise in Vision 2030 projects. Key focus areas: infrastructure modernization, data analytics, and enterprise automation.";
+    if (msg.includes('technology') || msg.includes('tech trends') || msg.includes('innovation') || msg.includes('future')) {
+      return "Technology trends are reshaping the global economy and business operations. Key developments include:\n\n• **Cloud Computing**: Multi-cloud strategies, serverless architecture, edge computing\n• **Cybersecurity**: Zero-trust networks, AI-powered threat detection, quantum cryptography\n• **IoT & Smart Cities**: Connected devices, smart infrastructure, data-driven urban planning\n• **Digital Transformation**: Process automation, customer experience optimization, data analytics\n• **Emerging Tech**: Blockchain, AR/VR, quantum computing, 5G networks\n\nThese trends directly align with Ahmet's expertise in Vision 2030 projects and NEOM smart city development. His technical leadership spans infrastructure modernization, enterprise automation, and strategic technology implementation across the Middle East region.";
     }
 
-    if (msg.includes('business') || msg.includes('management') || msg.includes('strategy') || msg.includes('consulting')) {
-      return "Business success requires strategic vision, operational excellence, and digital transformation. Key principles: customer focus, data-driven decisions, agile methodologies, and continuous innovation. Ahmet applies these principles in his executive leadership approach.";
+    if (msg.includes('business') || msg.includes('management') || msg.includes('strategy') || msg.includes('consulting') || msg.includes('leadership')) {
+      return "Business excellence requires strategic thinking, operational discipline, and adaptive leadership. Core principles for success:\n\n• **Strategic Vision**: Long-term planning, market analysis, competitive positioning\n• **Operational Excellence**: Process optimization, quality management, performance metrics\n• **Digital Transformation**: Technology integration, data-driven decisions, customer experience\n• **Leadership Development**: Team empowerment, change management, organizational culture\n• **Financial Management**: P&L accountability, cost optimization, revenue growth\n\nAhmet exemplifies these principles through his track record: transformed underperforming regions to #1 positions, managed 130+ team members across multiple countries, achieved 5× profit increases, and secured SAR 125M+ in contracts. His executive approach combines strategic vision with hands-on execution capabilities.";
     }
 
-    if (msg.includes('cybersecurity') || msg.includes('security') || msg.includes('cyber')) {
-      return "Cybersecurity is critical in today's digital landscape. Essential elements: risk assessment, governance frameworks, incident response, and continuous monitoring. Ahmet's CISA/CISM/CRISC certifications demonstrate world-class cybersecurity expertise.";
+    if (msg.includes('cybersecurity') || msg.includes('security') || msg.includes('cyber') || msg.includes('risk')) {
+      return "Cybersecurity is fundamental to modern business operations and digital transformation initiatives. Comprehensive security framework includes:\n\n• **Risk Assessment**: Threat modeling, vulnerability analysis, impact evaluation\n• **Governance & Compliance**: Policy development, regulatory adherence, audit management\n• **Technical Controls**: Firewalls, encryption, access controls, monitoring systems\n• **Incident Response**: Detection capabilities, response procedures, recovery planning\n• **Security Awareness**: Training programs, phishing prevention, security culture\n\nAhmet's CISA (Certified Information Systems Auditor), CISM (Certified Information Security Manager), and CRISC (Certified in Risk and Information Systems Control) certifications represent world-class cybersecurity expertise. His practical experience includes securing critical infrastructure for NEOM smart city projects and enterprise-level security implementations.";
     }
 
-    if (msg.includes('cloud') || msg.includes('aws') || msg.includes('azure') || msg.includes('infrastructure')) {
-      return "Cloud computing enables scalability, cost optimization, and innovation. Major platforms: AWS, Microsoft Azure, Google Cloud. Key considerations: security, compliance, migration strategy, and cost management. Essential for modern digital transformation initiatives.";
+    if (msg.includes('cloud') || msg.includes('aws') || msg.includes('azure') || msg.includes('infrastructure') || msg.includes('data center')) {
+      return "Cloud computing and infrastructure modernization are driving digital transformation across industries. Key components:\n\n• **Cloud Platforms**: AWS (market leader), Microsoft Azure (enterprise focus), Google Cloud (AI/ML strength)\n• **Migration Strategies**: Lift-and-shift, re-platforming, cloud-native development\n• **Data Center Evolution**: Tier III+ facilities, edge computing, hybrid architectures\n• **Security & Compliance**: Shared responsibility models, encryption, access controls\n• **Cost Optimization**: Right-sizing, reserved instances, automated scaling\n\nAhmet's expertise includes designing and delivering Tier III data centers (NEOM Telco Park - SAR 21.9M project), cloud infrastructure strategy, and enterprise-level ICT implementations. His hands-on experience spans traditional data centers to modern cloud-native architectures across the Middle East region.";
     }
 
-    if (msg.includes('data') || msg.includes('analytics') || msg.includes('big data')) {
-      return "Data is the new oil in digital economy. Key areas: data governance, analytics, business intelligence, and machine learning. Organizations need robust data strategies to drive insights and competitive advantage in their markets.";
+    if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey') || msg.includes('good morning') || msg.includes('good afternoon')) {
+      return "Hello! I'm Ahmet's comprehensive AI assistant with both deep professional expertise and broad general knowledge capabilities. I can provide detailed insights on:\n\n**Ahmet's Professional Profile:**\n• 20+ year ICT leadership journey across Middle East\n• Vision 2030 & NEOM smart city project experience\n• Elite certifications (PgMP, CISA/CISM/CRISC, DBA, MBA)\n• Current executive availability for CIO/CTO roles\n\n**General Knowledge Topics:**\n• Technology trends, AI, cybersecurity, cloud computing\n• Business strategy, leadership, project management\n• Industry analysis, market insights, best practices\n\nWhat specific area interests you today? Feel free to ask detailed questions - I'm designed to provide comprehensive, informative responses!";
     }
 
-    if (msg.includes('project management') || msg.includes('pmp') || msg.includes('agile')) {
-      return "Project management ensures successful delivery of complex initiatives. Methodologies: Agile, Waterfall, Hybrid approaches. Key skills: stakeholder management, risk mitigation, resource optimization. Ahmet's PgMP certification represents the highest level of program management expertise.";
+    if (msg.includes('what') || msg.includes('how') || msg.includes('why') || msg.includes('when') || msg.includes('where') || msg.includes('who')) {
+      return "I'm equipped to provide detailed answers on a wide range of topics! My knowledge spans:\n\n**Professional Expertise:**\n• Ahmet's complete career portfolio and achievements\n• ICT industry trends and best practices\n• Executive leadership and strategic planning\n• Digital transformation methodologies\n\n**Technology & Business:**\n• Artificial Intelligence and Machine Learning\n• Cybersecurity frameworks and risk management\n• Cloud computing and infrastructure design\n• Project management and organizational development\n\n**Analysis & Insights:**\n• Market trends and industry analysis\n• Strategic planning and business optimization\n• Technical implementation guidance\n• Career development and professional growth\n\nPlease ask your specific question - I'll provide a comprehensive, detailed response with practical insights and actionable information!";
     }
 
-    if (msg.includes('leadership') || msg.includes('management') || msg.includes('team')) {
-      return "Effective leadership combines vision, communication, and execution. Key principles: servant leadership, emotional intelligence, change management, and team empowerment. Building high-performing organizations requires strategic thinking and cultural transformation.";
-    }
-
-    if (msg.includes('digital transformation') || msg.includes('digitalization')) {
-      return "Digital transformation reimagines business processes using technology. Components: cloud migration, process automation, data analytics, and customer experience. Success requires executive sponsorship, change management, and cultural adoption across organizations.";
-    }
-
-    if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
-      return "Hello! I'm Ahmet's intelligent assistant with both professional expertise and general knowledge. I can discuss his ICT leadership background, technology trends, business strategy, or answer questions on various topics. What interests you today?";
-    }
-
-    if (msg.includes('what') || msg.includes('how') || msg.includes('why') || msg.includes('when') || msg.includes('where')) {
-      return "I can help with both Ahmet's professional information and general questions on technology, business, management, and industry trends. For specific topics, feel free to ask about AI, cybersecurity, cloud computing, project management, or digital transformation. What would you like to know?";
-    }
-
-    if (msg.includes('explain') || msg.includes('tell me') || msg.includes('describe')) {
-      return "I'm happy to explain various topics! I have expertise in technology, business strategy, project management, cybersecurity, and digital transformation - plus complete knowledge of Ahmet's professional background. What specific topic would you like me to explain?";
+    if (msg.includes('explain') || msg.includes('tell me') || msg.includes('describe') || msg.includes('detail')) {
+      return "I excel at providing detailed explanations on complex topics! I can break down sophisticated concepts into clear, actionable insights covering:\n\n**Technical Domains:**\n• Digital transformation strategies and implementation\n• Cybersecurity frameworks and best practices\n• Cloud architecture and infrastructure design\n• AI/ML applications in enterprise environments\n\n**Business & Leadership:**\n• Executive strategy development and execution\n• Program management and organizational change\n• P&L management and business growth strategies\n• Team leadership and performance optimization\n\n**Ahmet's Expertise:**\n• Complete professional journey and achievements\n• Vision 2030 project experience and outcomes\n• Certification portfolio and global standing\n• Current availability and executive positioning\n\nWhat specific topic would you like me to explain in detail? I'll provide comprehensive information with real-world examples and practical applications!";
     }
 
     // Default comprehensive response
-    return "I can discuss any topic you're interested in - from technology and business to Ahmet's professional expertise. I have knowledge on AI, cybersecurity, cloud computing, project management, leadership, and digital transformation. I also have complete details about Ahmet's career, certifications, and availability. What would you like to explore?";
+    return "I'm designed to be your comprehensive knowledge partner, combining Ahmet's professional expertise with extensive general knowledge capabilities. I can discuss:\n\n**Professional Topics:**\n• Ahmet's 20+ year ICT leadership experience\n• His role in Vision 2030 and NEOM projects\n• Elite certification portfolio (25+ credentials)\n• Executive availability for CIO/CTO positions\n\n**General Knowledge:**\n• Technology trends and innovation\n• Business strategy and management\n• Industry analysis and market insights\n• Career development and professional growth\n\nI provide detailed, informative responses like ChatGPT, covering both specific questions about Ahmet's profile and broader topics across technology, business, and leadership domains. What would you like to explore today?";
   };
 
   const handleSend = async () => {
