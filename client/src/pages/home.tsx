@@ -57,7 +57,7 @@ export default function Home() {
     {
       number: "Elite",
       label: "Certifications",
-      description: "Global top 0.001% portfolio",
+      description: "Global top 0.001% portfolio combining PgMP, CISA/CISM/CRISC, RCDD, and 20+ specialized credentials. Statistical analysis shows fewer than 1 in 100,000 ICT professionals hold this comprehensive certification depth across multiple domains.",
       testId: "achievement-certifications"
     }
   ];
