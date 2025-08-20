@@ -55,30 +55,29 @@ export default function Home() {
 
   const achievements = [
     {
-      number: "20+",
-      label: "Years ICT Leadership",
-      description: "Digital transformation expertise",
-      testId: "achievement-experience"
-    },
-    {
       number: "25+",
       label: "Elite Certifications",
       description: "Global top 0.001% - Only 1 in 100,000 professionals hold this portfolio depth",
       testId: "achievement-certifications"
     },
     {
-      number: "130+",
-      label: "Team Members Led",
-      description: "Across multiple regions",
-      testId: "achievement-teams"
+      number: "DBA + MBA",
+      label: "Advanced Education",
+      description: "Business & Technical Leadership",
+      testId: "achievement-education"
     },
     {
-      number: "Vision 2030",
-      label: "Strategic Alignment",
-      description: "KSA digital transformation",
-      testId: "achievement-vision"
+      number: "PgMP + PMP",
+      label: "Program Management",
+      description: "Elite Project & Portfolio Leadership",
+      testId: "achievement-management"
     },
-
+    {
+      number: "Stanford",
+      label: "Executive Education",
+      description: "Strategic Leadership Program",
+      testId: "achievement-stanford"
+    }
   ];
 
 
