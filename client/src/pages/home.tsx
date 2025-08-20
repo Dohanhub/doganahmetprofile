@@ -54,7 +54,42 @@ export default function Home() {
   ];
 
   const achievements = [
-    // Content removed - ready for new achievements
+    {
+      number: "20+",
+      label: "Years ICT Leadership",
+      description: "Digital transformation expertise",
+      testId: "achievement-experience"
+    },
+    {
+      number: "25+",
+      label: "Elite Certifications",
+      description: "Global top 0.001% portfolio",
+      testId: "achievement-certifications"
+    },
+    {
+      number: "130+",
+      label: "Team Members Led",
+      description: "Across multiple regions",
+      testId: "achievement-teams"
+    },
+    {
+      number: "Vision 2030",
+      label: "Strategic Alignment",
+      description: "KSA digital transformation",
+      testId: "achievement-vision"
+    },
+    {
+      number: "NEOM",
+      label: "Smart City Projects",
+      description: "Tier III infrastructure delivery",
+      testId: "achievement-neom"
+    },
+    {
+      number: "Multi-National",
+      label: "Executive Experience",
+      description: "Middle East & Global markets",
+      testId: "achievement-global"
+    }
   ];
 
 
