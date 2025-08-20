@@ -8,10 +8,10 @@ export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/experience", label: "Career" },
     { href: "/certifications", label: "Credentials" },
+    { href: "/organizations", label: "Organizations" },
   ];
 
   const isActive = (href: string) => {
