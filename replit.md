@@ -45,6 +45,8 @@ A professional executive website for Ahmet Doğan, Elite ICT Executive & Digital
 - **Job-Seeking Content Removal**: Eliminated all employment-seeking language, repositioned as established executive
 
 ### Content & Messaging Updates
+- **Job-Seeking Content Removal**: Eliminated all employment-seeking language from chat agent and homepage CTA section
+- **Executive Positioning**: Repositioned content to focus on established consultancy and expertise delivery
 
 ### Design System Color Update
 - **Purple Color Removal**: Completely removed all purple color references from the entire codebase

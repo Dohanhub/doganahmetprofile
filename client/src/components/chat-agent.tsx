@@ -40,7 +40,7 @@ export default function ChatAgent() {
     }
 
     if ((msg.includes('experience') || msg.includes('career') || msg.includes('background') || msg.includes('work')) && (msg.includes('his') || msg.includes('ahmet') || msg.includes('you'))) {
-      return "Ahmet has 20+ years progressive ICT leadership across Middle East. Key: Led NEOM Tier III Data Center (SAR 21.9M), transformed underperforming region to #1 position, SAR 125M+ contracts secured, 130+ teams managed, built $18M ICT division from scratch. Currently seeking CIO/CTO roles.";
+      return "Ahmet has 20+ years progressive ICT leadership across Middle East. Key: Led NEOM Tier III Data Center (SAR 21.9M), transformed underperforming region to #1 position, SAR 125M+ contracts secured, 130+ teams managed, built $18M ICT division from scratch.";
     }
 
     if (msg.includes('certification') || msg.includes('credential') || msg.includes('qualification') || msg.includes('pgmp')) {

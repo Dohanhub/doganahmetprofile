@@ -421,8 +421,8 @@ export default function Home() {
             Ready for Executive-Level Digital Transformation?
           </h2>
           <p className="text-xl mb-8 max-w-3xl mx-auto animate-fade-in-up animation-delay-200" data-testid="text-cta-description">
-            Seeking a CIO/CTO or digital transformation leadership role to drive innovation, 
-            growth, and organizational excellence aligned with Vision 2030 objectives.
+            Driving innovation, growth, and organizational excellence through strategic digital transformation 
+            initiatives aligned with Vision 2030 objectives.
           </p>
           <Link href="/contact" data-testid="button-cta-contact">
             <Button className="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold transition-all duration-500 transform hover:scale-110 hover:shadow-2xl animate-bounce-subtle">
