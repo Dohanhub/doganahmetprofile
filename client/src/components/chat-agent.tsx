@@ -14,7 +14,7 @@ export default function ChatAgent() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hello! I'm Ahmet's AI assistant with complete access to his professional profile. I can discuss his 20+ year ICT career, 25+ certifications, Vision 2030 projects, or any questions about his executive leadership background. What interests you?",
+      text: "Hello! I'm Ahmet's intelligent AI assistant. I can discuss his professional background, career achievements, and contact information. I also have general knowledge on technology, business, AI, cybersecurity, and various topics. Ask me anything - from his ICT expertise to general questions. What interests you?",
       isUser: false,
       timestamp: new Date()
     }
@@ -34,48 +34,78 @@ export default function ChatAgent() {
   const getIntelligentResponse = (userMessage: string): string => {
     const msg = userMessage.toLowerCase();
     
-    // Professional Profile & Contact
-    if (msg.includes('contact') || msg.includes('email') || msg.includes('phone') || msg.includes('reach')) {
+    // Check if question is about Ahmet first (priority responses)
+    if (msg.includes('ahmet') || msg.includes('contact') || msg.includes('email') || msg.includes('phone') || msg.includes('reach')) {
       return "Contact Ahmet directly: ahmet@doganconsult.com, +966-500-666-084. Website: www.doganahmet.com, LinkedIn: ahmed-elgazzar-ict. Based in Riyadh with Saudi Premium Residency. Responds within 24 hours.";
     }
 
-    // Experience & Career
-    if (msg.includes('experience') || msg.includes('career') || msg.includes('background') || msg.includes('work')) {
+    if ((msg.includes('experience') || msg.includes('career') || msg.includes('background') || msg.includes('work')) && (msg.includes('his') || msg.includes('ahmet') || msg.includes('you'))) {
       return "Ahmet has 20+ years progressive ICT leadership across Middle East. Key: Led NEOM Tier III Data Center (SAR 21.9M), transformed underperforming region to #1 position, SAR 125M+ contracts secured, 130+ teams managed, built $18M ICT division from scratch. Currently seeking CIO/CTO roles.";
     }
 
-    // Certifications & Credentials
     if (msg.includes('certification') || msg.includes('credential') || msg.includes('qualification') || msg.includes('pgmp')) {
       return "Ahmet holds 25+ elite certifications placing him in global top 0.001% of ICT professionals. Key: PgMP, CISA/CISM/CRISC, RCDD, ATD/AOS, plus DBA, MBA, Stanford Executive Education. This rare combination is unmatched in the region.";
     }
 
-    // Vision 2030 & Saudi Arabia
     if (msg.includes('vision') || msg.includes('2030') || msg.includes('saudi') || msg.includes('neom') || msg.includes('ksa')) {
       return "Ahmet is a strategic Vision 2030 expert with hands-on NEOM smart city infrastructure delivery. His Saudi Premium Residency, cultural fluency, and proven track record make him ideal for driving KSA's digital transformation initiatives.";
     }
 
-    // Availability & Hiring
     if (msg.includes('available') || msg.includes('hire') || msg.includes('position') || msg.includes('role') || msg.includes('cio') || msg.includes('cto')) {
       return "Ahmet is actively seeking C-level executive positions (CIO/CTO) in digital transformation, smart cities, or ICT infrastructure. Available for immediate start and consultation meetings. Given his elite profile, early engagement is recommended.";
     }
 
-    // Technical Skills
-    if (msg.includes('technical') || msg.includes('skills') || msg.includes('infrastructure') || msg.includes('cybersecurity') || msg.includes('data center')) {
-      return "Technical expertise: Digital Transformation & Strategy, ICT Infrastructure (Tier III+ data centers), Cybersecurity & Risk Management, Program/Project Management, P&L Leadership, Cloud/IoT solutions. Real-world delivery of complex Middle Eastern projects.";
+    // General Knowledge Responses (ChatGPT-like capabilities)
+    if (msg.includes('artificial intelligence') || msg.includes('ai') || msg.includes('machine learning') || msg.includes('ml')) {
+      return "AI is transforming industries globally. As an ICT executive, Ahmet has experience integrating AI/ML solutions in enterprise environments. Key trends include generative AI, automation, and intelligent infrastructure. For AI strategy consulting, contact ahmet@doganconsult.com.";
     }
 
-    // Education
-    if (msg.includes('education') || msg.includes('mba') || msg.includes('dba') || msg.includes('stanford') || msg.includes('degree')) {
-      return "Advanced education: DBA, MBA, Stanford Executive Education combined with 25+ professional certifications. This rare academic-practitioner profile creates unique value for organizations seeking both strategic vision and execution excellence.";
+    if (msg.includes('technology') || msg.includes('tech trends') || msg.includes('innovation')) {
+      return "Current tech trends include cloud computing, cybersecurity, IoT, digital transformation, and smart cities. These align with Ahmet's expertise in Vision 2030 projects. Key focus areas: infrastructure modernization, data analytics, and enterprise automation.";
     }
 
-    // Leadership & Management
-    if (msg.includes('leadership') || msg.includes('management') || msg.includes('team') || msg.includes('turnaround')) {
-      return "Proven leadership: Managed 130+ team members across multiple countries, achieved 5× profit increase through regional turnaround, built high-performing PMO organizations. Combines strategic vision with hands-on execution capabilities.";
+    if (msg.includes('business') || msg.includes('management') || msg.includes('strategy') || msg.includes('consulting')) {
+      return "Business success requires strategic vision, operational excellence, and digital transformation. Key principles: customer focus, data-driven decisions, agile methodologies, and continuous innovation. Ahmet applies these principles in his executive leadership approach.";
     }
 
-    // General/Default Response
-    return "I have comprehensive information about Ahmet's profile. Ask me about: his 20+ year career journey, 25+ elite certifications, Vision 2030 & NEOM projects, contact details, current availability for CIO/CTO roles, technical expertise, education credentials, or any specific questions. What would you like to know?";
+    if (msg.includes('cybersecurity') || msg.includes('security') || msg.includes('cyber')) {
+      return "Cybersecurity is critical in today's digital landscape. Essential elements: risk assessment, governance frameworks, incident response, and continuous monitoring. Ahmet's CISA/CISM/CRISC certifications demonstrate world-class cybersecurity expertise.";
+    }
+
+    if (msg.includes('cloud') || msg.includes('aws') || msg.includes('azure') || msg.includes('infrastructure')) {
+      return "Cloud computing enables scalability, cost optimization, and innovation. Major platforms: AWS, Microsoft Azure, Google Cloud. Key considerations: security, compliance, migration strategy, and cost management. Essential for modern digital transformation initiatives.";
+    }
+
+    if (msg.includes('data') || msg.includes('analytics') || msg.includes('big data')) {
+      return "Data is the new oil in digital economy. Key areas: data governance, analytics, business intelligence, and machine learning. Organizations need robust data strategies to drive insights and competitive advantage in their markets.";
+    }
+
+    if (msg.includes('project management') || msg.includes('pmp') || msg.includes('agile')) {
+      return "Project management ensures successful delivery of complex initiatives. Methodologies: Agile, Waterfall, Hybrid approaches. Key skills: stakeholder management, risk mitigation, resource optimization. Ahmet's PgMP certification represents the highest level of program management expertise.";
+    }
+
+    if (msg.includes('leadership') || msg.includes('management') || msg.includes('team')) {
+      return "Effective leadership combines vision, communication, and execution. Key principles: servant leadership, emotional intelligence, change management, and team empowerment. Building high-performing organizations requires strategic thinking and cultural transformation.";
+    }
+
+    if (msg.includes('digital transformation') || msg.includes('digitalization')) {
+      return "Digital transformation reimagines business processes using technology. Components: cloud migration, process automation, data analytics, and customer experience. Success requires executive sponsorship, change management, and cultural adoption across organizations.";
+    }
+
+    if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
+      return "Hello! I'm Ahmet's intelligent assistant with both professional expertise and general knowledge. I can discuss his ICT leadership background, technology trends, business strategy, or answer questions on various topics. What interests you today?";
+    }
+
+    if (msg.includes('what') || msg.includes('how') || msg.includes('why') || msg.includes('when') || msg.includes('where')) {
+      return "I can help with both Ahmet's professional information and general questions on technology, business, management, and industry trends. For specific topics, feel free to ask about AI, cybersecurity, cloud computing, project management, or digital transformation. What would you like to know?";
+    }
+
+    if (msg.includes('explain') || msg.includes('tell me') || msg.includes('describe')) {
+      return "I'm happy to explain various topics! I have expertise in technology, business strategy, project management, cybersecurity, and digital transformation - plus complete knowledge of Ahmet's professional background. What specific topic would you like me to explain?";
+    }
+
+    // Default comprehensive response
+    return "I can discuss any topic you're interested in - from technology and business to Ahmet's professional expertise. I have knowledge on AI, cybersecurity, cloud computing, project management, leadership, and digital transformation. I also have complete details about Ahmet's career, certifications, and availability. What would you like to explore?";
   };
 
   const handleSend = async () => {
@@ -136,8 +166,8 @@ export default function ChatAgent() {
                 <Bot className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-bold text-lg">Elite ICT Executive Assistant</h3>
-                <p className="text-xs opacity-90">Ask about Ahmet's complete profile</p>
+                <h3 className="font-bold text-lg">AI Assistant</h3>
+                <p className="text-xs opacity-90">Ask me anything - professional or general</p>
               </div>
             </div>
             <Button
@@ -209,7 +239,7 @@ export default function ChatAgent() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Ask about experience, certifications, availability..."
+                placeholder="Ask about Ahmet's profile, tech trends, or anything..."
                 className="flex-1 p-3 border-2 border-gray-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm transition-all duration-200"
                 rows={1}
                 data-testid="input-chat-message"
