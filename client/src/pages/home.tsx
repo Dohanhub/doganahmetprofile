@@ -115,11 +115,8 @@ export default function Home() {
             <div className="max-w-2xl w-full">
               {achievements.map((achievement) => (
                 <div key={achievement.testId} className="text-center bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-xl" data-testid={achievement.testId}>
-                  <div className="text-4xl md:text-5xl font-bold text-primary-700 mb-4">
-                    {achievement.number}
-                  </div>
-                  <div className="text-xl font-semibold text-gray-900 mb-3">
-                    {achievement.label}
+                  <div className="text-2xl md:text-3xl font-bold text-primary-700 mb-4">
+                    {achievement.number} {achievement.label}
                   </div>
                   <div className="text-base text-gray-600 leading-relaxed">
                     {achievement.description}
