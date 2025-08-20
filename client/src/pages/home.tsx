@@ -78,18 +78,7 @@ export default function Home() {
       description: "KSA digital transformation",
       testId: "achievement-vision"
     },
-    {
-      number: "NEOM",
-      label: "Smart City Projects",
-      description: "Tier III infrastructure delivery",
-      testId: "achievement-neom"
-    },
-    {
-      number: "Multi-National",
-      label: "Executive Experience",
-      description: "Middle East & Global markets",
-      testId: "achievement-global"
-    }
+
   ];
 
 
