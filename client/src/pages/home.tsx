@@ -6,7 +6,7 @@ import ServiceCard from "@/components/service-card";
 import TestimonialCard from "@/components/testimonial-card";
 import ChatAgent from "@/components/chat-agent";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Download, Trophy, Users, TrendingUp, Award } from "lucide-react";
+import { ChevronRight, Download, Trophy, Users, TrendingUp, Award, Phone, Linkedin } from "lucide-react";
 
 export default function Home() {
   useEffect(() => {
@@ -93,14 +93,20 @@ export default function Home() {
             </h1>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               <Link href="/contact" data-testid="button-executive-contact">
-                <Button className="bg-success hover:bg-success/90 text-success-foreground px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
-                  Executive Contact
+                <Button className="bg-success hover:bg-success/90 text-success-foreground p-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg rounded-full">
+                  <Phone className="w-6 h-6" />
                 </Button>
               </Link>
-              <Button variant="outline" className="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-4 text-lg font-semibold transition-all duration-300" data-testid="button-download-cv">
-                <Download className="w-5 h-5 mr-2" />
-                Download Elite CV
-              </Button>
+              <a 
+                href="https://www.linkedin.com/in/ahmed-elgazzar-ict/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                data-testid="button-linkedin-profile"
+              >
+                <Button variant="outline" className="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white p-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg rounded-full">
+                  <Linkedin className="w-6 h-6" />
+                </Button>
+              </a>
             </div>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">PgMP | MBA | DBA Candidate</span>

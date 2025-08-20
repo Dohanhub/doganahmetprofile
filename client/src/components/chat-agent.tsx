@@ -95,29 +95,70 @@ export default function ChatAgent() {
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      text: input,
-      isUser: true,
-      timestamp: new Date()
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
-    setIsTyping(true);
-
-    setTimeout(() => {
-      const response = getIntelligentResponse(input);
-      const botMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: response,
-        isUser: false,
+    try {
+      const userMessage: Message = {
+        id: Date.now().toString(),
+        text: input.trim(),
+        isUser: true,
         timestamp: new Date()
       };
 
-      setMessages(prev => [...prev, botMessage]);
+      setMessages(prev => [...prev, userMessage]);
+      const userInput = input.trim();
+      setInput('');
+      setIsTyping(true);
+
+      setTimeout(() => {
+        try {
+          const response = getIntelligentResponse(userInput);
+          
+          if (!response || response.trim().length === 0) {
+            throw new Error("Empty response generated");
+          }
+          
+          const botMessage: Message = {
+            id: (Date.now() + 1).toString(),
+            text: response,
+            isUser: false,
+            timestamp: new Date()
+          };
+
+          setMessages(prev => [...prev, botMessage]);
+          setIsTyping(false);
+          
+          // Auto-scroll to bottom
+          setTimeout(() => {
+            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+          }, 100);
+          
+        } catch (error) {
+          console.error("Chat response error:", error);
+          
+          const errorMessage: Message = {
+            id: (Date.now() + 1).toString(),
+            text: "I apologize, but I'm having trouble generating a response right now. Please try asking your question again, or feel free to contact Ahmet directly at info@doganahmet.com for immediate assistance.",
+            isUser: false,
+            timestamp: new Date()
+          };
+          
+          setMessages(prev => [...prev, errorMessage]);
+          setIsTyping(false);
+        }
+      }, 1200 + Math.random() * 800);
+      
+    } catch (error) {
+      console.error("Chat send error:", error);
       setIsTyping(false);
-    }, 1200);
+      
+      const errorMessage: Message = {
+        id: (Date.now() + 2).toString(),
+        text: "Sorry, there was an error processing your message. Please try again.",
+        isUser: false,
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, errorMessage]);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -242,7 +283,7 @@ export default function ChatAgent() {
               </Button>
             </div>
             <p className="text-xs text-gray-500 mt-3 text-center">
-              For executive discussions: ahmet@doganconsult.com | www.doganahmet.com
+              For executive discussions: info@doganahmet.com | www.doganahmet.com
             </p>
           </div>
         </div>

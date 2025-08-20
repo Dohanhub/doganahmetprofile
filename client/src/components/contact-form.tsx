@@ -28,21 +28,58 @@ export default function ContactForm() {
 
   const contactMutation = useMutation({
     mutationFn: async (data: InsertContact) => {
-      const response = await apiRequest("POST", "/api/contact", data);
-      return response.json();
+      try {
+        const response = await apiRequest("POST", "/api/contact", data);
+        
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ error: "Network error" }));
+          throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        return response.json();
+      } catch (error) {
+        if (error instanceof TypeError && error.message.includes('fetch')) {
+          throw new Error("Network connection failed. Please check your internet connection and try again.");
+        }
+        throw error;
+      }
     },
-    onSuccess: () => {
-      toast({
-        title: "Message sent successfully!",
-        description: "I'll get back to you within 24 hours.",
-      });
-      form.reset();
-      queryClient.invalidateQueries({ queryKey: ["/api/contacts"] });
+    onSuccess: (data) => {
+      if (data.success) {
+        toast({
+          title: "Message sent successfully!",
+          description: "Thank you for reaching out. I'll get back to you within 24 hours.",
+        });
+        form.reset();
+        queryClient.invalidateQueries({ queryKey: ["/api/contacts"] });
+      } else {
+        throw new Error(data.error || "Unexpected response format");
+      }
     },
     onError: (error: any) => {
+      console.error("Contact form submission error:", error);
+      
+      let errorMessage = "Please try again later.";
+      let errorTitle = "Error sending message";
+      
+      if (error.message) {
+        if (error.message.includes("Validation failed")) {
+          errorTitle = "Form validation error";
+          errorMessage = "Please check all fields are filled correctly.";
+        } else if (error.message.includes("Network")) {
+          errorTitle = "Connection error";
+          errorMessage = error.message;
+        } else if (error.message.includes("HTTP 429")) {
+          errorTitle = "Too many requests";
+          errorMessage = "Please wait a moment before trying again.";
+        } else {
+          errorMessage = error.message;
+        }
+      }
+      
       toast({
-        title: "Error sending message",
-        description: error.message || "Please try again later.",
+        title: errorTitle,
+        description: errorMessage,
         variant: "destructive",
       });
     },
