@@ -92,50 +92,7 @@ export default function Home() {
     }
   ];
 
-  const executiveRecommendations = [
-    {
-      quote: "Ahmet consistently delivered exceptional results in ICT transformation projects across the Middle East. His strategic vision and execution excellence made him invaluable to our regional expansion.",
-      name: "Dr. Sarah Al-Mahmoud",
-      title: "VP Digital Strategy, Global Tech Corp",
-      country: "UAE",
-      testId: "recommendation-1"
-    },
-    {
-      quote: "Working with Ahmet on Vision 2030 initiatives was remarkable. His deep understanding of Saudi Arabia's digital transformation goals and technical execution capabilities are unmatched.",
-      name: "Mohammed bin Hassan",
-      title: "Director, Smart Cities Initiative",
-      country: "Saudi Arabia", 
-      testId: "recommendation-2"
-    },
-    {
-      quote: "Ahmet's leadership in our NEOM Tier III Data Center project was exceptional. His PgMP certification and real-world project management skills delivered SAR 21.9M on time and budget.",
-      name: "Jennifer Mitchell",
-      title: "Program Director, Infrastructure Development",
-      country: "USA",
-      testId: "recommendation-3"
-    },
-    {
-      quote: "Rare to find an ICT executive with Ahmet's combination of technical depth, business acumen, and cultural fluency. His team transformation results speak volumes about his leadership capabilities.",
-      name: "Lars Eriksson",
-      title: "Regional CEO, Nordic Technology Solutions",
-      country: "Sweden", 
-      testId: "recommendation-4"
-    },
-    {
-      quote: "Ahmet's cybersecurity expertise and CISA/CISM/CRISC certifications provided confidence in our most critical infrastructure projects. His risk management approach is world-class.",
-      name: "Kenji Nakamura", 
-      title: "Chief Information Security Officer",
-      country: "Japan",
-      testId: "recommendation-5"
-    },
-    {
-      quote: "The business turnaround Ahmet achieved in our Western Region was extraordinary - from underperforming to #1 nationally with 5x profit increase. Exceptional P&L leadership and strategic execution.",
-      name: "Robert Thompson",
-      title: "EVP Operations, Enterprise Solutions",
-      country: "Canada",
-      testId: "recommendation-6"
-    }
-  ];
+
 
   return (
     <div className="min-h-screen bg-gray-50">
