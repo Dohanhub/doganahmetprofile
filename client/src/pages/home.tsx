@@ -213,20 +213,7 @@ export default function Home() {
                   Saudi Premium Residency
                 </span>
               </div>
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span className="text-gray-700">📍 Riyadh, Saudi Arabia</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-gray-700">🌐 Native Arabic, Fluent English, Basic Turkish</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <span className="text-gray-700">📞 +966-500-666-084</span>
-                </div>
-              </div>
+
               <Link href="/about" data-testid="button-learn-more">
                 <Button className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 text-lg font-semibold transition-all duration-300">
                   Learn More About Ahmet
