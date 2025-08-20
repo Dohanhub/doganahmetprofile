@@ -87,13 +87,10 @@ export default function Home() {
       <section className="bg-gradient-to-br from-white to-gray-50 py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-5xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-900 mb-6 leading-tight" data-testid="text-hero-title">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-900 mb-8 leading-tight" data-testid="text-hero-title">
               Ahmet Doğan
               <span className="block text-yellow-500 mt-2">Elite ICT Executive & Digital Transformation Leader</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed max-w-4xl mx-auto" data-testid="text-hero-subtitle">
-              Elite ICT Executive & Digital Transformation Leader
-            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               <Link href="/contact" data-testid="button-executive-contact">
                 <Button className="bg-success hover:bg-success/90 text-success-foreground px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
