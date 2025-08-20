@@ -117,7 +117,7 @@ export default function Home() {
               </a>
             </div>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">PgMP | MBA | DBA Candidate</span>
+              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">Doctor of Business Administration Candidate | PgMP | MBA | Chartered Management Institute</span>
               <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">CISM | CISA | CRISC</span>
               <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">Saudi Premium Residency</span>
             </div>
