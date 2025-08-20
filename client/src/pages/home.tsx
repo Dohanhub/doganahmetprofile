@@ -159,9 +159,9 @@ export default function Home() {
                 Visionary ICT Leader
               </h2>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed" data-testid="text-profile-description-1">
-                Visionary ICT leader with 20+ years of experience driving large-scale digital transformation and infrastructure 
-                projects across the Middle East (Saudi Arabia, Kuwait, Turkey, Egypt). Proven track record of turning around 
-                underperforming operations and accelerating growth.
+                Visionary ICT leader specializing in digital transformation and infrastructure projects across the Middle East 
+                (Saudi Arabia, Kuwait, Turkey, Egypt). Proven track record of turning around underperforming operations and 
+                accelerating growth.
               </p>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed" data-testid="text-profile-description-2">
                 Combines deep technical expertise with strategic business acumen: led nationwide sales and P&L management, 
