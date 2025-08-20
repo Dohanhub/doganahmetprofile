@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
+import FloatingLinkedIn from "@/components/floating-linkedin";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import About from "@/pages/about";
@@ -35,6 +36,7 @@ function App() {
           <div className="min-h-screen bg-background text-foreground">
             <Toaster />
             <Router />
+            <FloatingLinkedIn />
           </div>
         </TooltipProvider>
       </QueryClientProvider>
