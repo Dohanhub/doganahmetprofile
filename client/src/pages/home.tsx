@@ -105,10 +105,10 @@ export default function Home() {
                 Download Elite CV
               </Button>
             </div>
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
-              <span className="bg-white/80 px-3 py-1 rounded-full">PgMP | MBA | DBA Candidate</span>
-              <span className="bg-white/80 px-3 py-1 rounded-full">CISM | CISA | CRISC</span>
-              <span className="bg-white/80 px-3 py-1 rounded-full">Saudi Premium Residency</span>
+            <div className="flex flex-wrap justify-center gap-4 text-sm">
+              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">PgMP | MBA | DBA Candidate</span>
+              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">CISM | CISA | CRISC</span>
+              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">Saudi Premium Residency</span>
             </div>
           </div>
         </div>
