@@ -51,8 +51,8 @@ export default function ChatAgent() {
       return "Ahmet is a strategic Vision 2030 expert with hands-on NEOM smart city infrastructure delivery. His Saudi Premium Residency, cultural fluency, and proven track record make him ideal for driving KSA's digital transformation initiatives.";
     }
 
-    if (msg.includes('available') || msg.includes('hire') || msg.includes('position') || msg.includes('role') || msg.includes('cio') || msg.includes('cto')) {
-      return "Ahmet is actively seeking C-level executive positions (CIO/CTO) in digital transformation, smart cities, or ICT infrastructure. Available for immediate start and consultation meetings. Given his elite profile, early engagement is recommended.";
+    if (msg.includes('experience') || msg.includes('expertise') || msg.includes('collaboration') || msg.includes('consulting')) {
+      return "Ahmet brings 20+ years of elite ICT leadership experience in digital transformation, smart cities, and ICT infrastructure across the Middle East. His unique certification portfolio and proven track record make him a valuable strategic partner for complex technology initiatives.";
     }
 
     // Enhanced General Knowledge Responses (Extended ChatGPT-like capabilities)
