@@ -75,10 +75,22 @@ export default function Home() {
       testId: "achievement-teams"
     },
     {
+      number: "20+",
+      label: "Years Experience",
+      description: "ICT & Digital Transformation",
+      testId: "achievement-experience"
+    },
+    {
       number: "5×",
       label: "Profit Increase",
       description: "Regional turnaround success",
       testId: "achievement-profit"
+    },
+    {
+      number: "25+",
+      label: "Elite Certifications",
+      description: "Global top 0.001% portfolio",
+      testId: "achievement-certifications"
     }
   ];
 
@@ -130,7 +142,7 @@ export default function Home() {
               Key Achievements & Impact
             </h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {achievements.map((achievement) => (
               <div key={achievement.testId} className="text-center bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl" data-testid={achievement.testId}>
                 <div className="text-3xl md:text-4xl font-bold text-primary-700 mb-2">
