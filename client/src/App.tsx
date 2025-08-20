@@ -31,41 +31,8 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div className="relative min-h-screen">
-          {/* Elite Background Layer */}
-          <div className="fixed inset-0 executive-gradient" />
-
-          {/* Elite Ambient Effects */}
-          <div className="fixed inset-0 pointer-events-none">
-            {/* Animated background gradients */}
-            <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-[var(--executive-gold)]/10 to-transparent rounded-full blur-3xl animate-float" />
-            <div
-              className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-[var(--executive-platinum)]/10 to-transparent rounded-full blur-3xl animate-float"
-              style={{ animationDelay: "2s" }}
-            />
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-[var(--executive-diamond)]/5 to-transparent rounded-full blur-3xl animate-pulse" />
-          </div>
-
-          {/* Main Application Content */}
-          <div className="relative z-10">
-            <Router />
-          </div>
-
-          {/* Elite Notification Systems */}
-          <Toaster />
-
-          {/* Elite Performance Overlay */}
-          <div className="fixed bottom-4 right-4 z-[9998] pointer-events-none">
-            <div className="glass-morphism px-3 py-2 rounded-lg">
-              <div className="flex items-center space-x-2 text-xs">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-[var(--executive-platinum)]">
-                  Elite Experience Active
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Toaster />
+        <Router />
       </TooltipProvider>
     </QueryClientProvider>
   );
