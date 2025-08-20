@@ -80,16 +80,16 @@ export default function Home() {
 
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-white to-gray-50 py-20 lg:py-32">
+      <section className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-5xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-900 mb-8 leading-tight" data-testid="text-hero-title">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-900 dark:text-white mb-8 leading-tight" data-testid="text-hero-title">
               Ahmet Doğan
-              <span className="block text-yellow-500 mt-2">Elite ICT Executive & Digital Transformation Leader</span>
+              <span className="block text-yellow-500 dark:text-yellow-400 mt-2">Elite ICT Executive & Digital Transformation Leader</span>
             </h1>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               <Link href="/contact" data-testid="button-executive-contact">
@@ -112,10 +112,10 @@ export default function Home() {
       </section>
 
       {/* Key Achievements Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-4" data-testid="text-accreditation-title">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-4" data-testid="text-accreditation-title">
               Accreditation Beyond Boundaries
             </h2>
           </div>
