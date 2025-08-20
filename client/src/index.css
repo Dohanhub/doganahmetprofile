@@ -72,10 +72,24 @@
   * {
     @apply border-border;
   }
-
+  
+  html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
     font-family: var(--font-sans);
+  }
+  
+  /* Ensure proper theme application */
+  .light {
+    color-scheme: light;
+  }
+  
+  .dark {
+    color-scheme: dark;
   }
 
   h1, h2, h3, h4, h5, h6 {

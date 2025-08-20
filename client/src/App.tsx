@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, Router as WouterRouter } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -13,17 +13,19 @@ import Organizations from "@/pages/organizations";
 import Certifications from "@/pages/certifications";
 import Contact from "@/pages/contact";
 
-function Router() {
+function AppRouter() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/experience" component={Experience} />
-      <Route path="/certifications" component={Certifications} />
-      <Route path="/organizations" component={Organizations} />
-      <Route path="/contact" component={Contact} />
-      <Route component={NotFound} />
-    </Switch>
+    <WouterRouter>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/experience" component={Experience} />
+        <Route path="/certifications" component={Certifications} />
+        <Route path="/organizations" component={Organizations} />
+        <Route path="/contact" component={Contact} />
+        <Route component={NotFound} />
+      </Switch>
+    </WouterRouter>
   );
 }
 
@@ -32,9 +34,9 @@ function App() {
     <ThemeProvider defaultTheme="light" storageKey="dogan-theme">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <div className="min-h-screen bg-background text-foreground">
+          <div className="min-h-screen bg-background text-foreground transition-colors">
             <Toaster />
-            <Router />
+            <AppRouter />
           </div>
         </TooltipProvider>
       </QueryClientProvider>
