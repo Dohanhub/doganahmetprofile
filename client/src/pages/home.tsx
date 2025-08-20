@@ -87,13 +87,9 @@ export default function Home() {
       <section className="bg-gradient-to-br from-white to-gray-50 py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-5xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-6" data-testid="badge-global-top">
-              <Trophy className="w-4 h-4" />
-              Global Top 0.001% ICT Executive
-            </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-900 mb-6 leading-tight" data-testid="text-hero-title">
               Ahmet Doğan
-              <span className="block text-accent mt-2">Elite ICT Executive & Digital Transformation Leader</span>
+              <span className="block text-yellow-500 mt-2">Elite ICT Executive & Digital Transformation Leader</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed max-w-4xl mx-auto" data-testid="text-hero-subtitle">
               Elite ICT Executive specializing in digital transformation and strategic infrastructure development.
