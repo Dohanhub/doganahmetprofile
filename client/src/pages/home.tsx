@@ -84,80 +84,51 @@ export default function Home() {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-blue-900 dark:to-indigo-900 py-20 lg:py-32">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,#fff,rgba(255,255,255,0.6))] dark:bg-grid-slate-700/25 dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]"></div>
-        
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-20 floating-animation"></div>
-        <div className="absolute top-40 right-20 w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full opacity-20 floating-animation" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full opacity-20 floating-animation" style={{ animationDelay: '4s' }}></div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-5xl mx-auto fade-in-up">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-900 dark:text-white mb-8 leading-tight text-shadow-lg" data-testid="text-hero-title">
+      <section className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 py-20 lg:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-5xl mx-auto">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-900 dark:text-white mb-8 leading-tight" data-testid="text-hero-title">
               Ahmet Doğan
-              <span className="block text-transparent bg-gradient-to-r from-yellow-500 via-yellow-400 to-amber-500 bg-clip-text mt-2 animate-pulse">
-                Elite ICT Executive & Digital Transformation Leader
-              </span>
+              <span className="block text-yellow-500 dark:text-yellow-400 mt-2">Elite ICT Executive & Digital Transformation Leader</span>
             </h1>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               <Link href="/contact" data-testid="button-executive-contact">
-                <Button className="relative overflow-hidden bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-10 py-5 text-lg font-bold transition-all duration-300 transform hover:scale-105 box-shadow-xl rounded-xl group">
-                  <span className="relative z-10">Executive Contact</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <Button className="bg-success hover:bg-success/90 text-success-foreground px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                  Executive Contact
                 </Button>
               </Link>
-              <Button variant="outline" className="relative overflow-hidden border-2 border-gradient-to-r from-blue-500 to-purple-600 text-blue-600 dark:text-blue-400 hover:text-white px-10 py-5 text-lg font-bold transition-all duration-300 rounded-xl group box-shadow-lg" data-testid="button-download-cv">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <Download className="w-5 h-5 mr-2 relative z-10" />
-                <span className="relative z-10">Download Elite CV</span>
+              <Button variant="outline" className="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-4 text-lg font-semibold transition-all duration-300" data-testid="button-download-cv">
+                <Download className="w-5 h-5 mr-2" />
+                Download Elite CV
               </Button>
             </div>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <span className="bg-gradient-to-r from-yellow-100 to-amber-100 dark:from-yellow-900/30 dark:to-amber-900/30 text-yellow-800 dark:text-yellow-200 px-4 py-2 rounded-full font-semibold shadow-md border border-yellow-200 dark:border-yellow-700">
-                PgMP | MBA | DBA Candidate
-              </span>
-              <span className="bg-gradient-to-r from-yellow-100 to-amber-100 dark:from-yellow-900/30 dark:to-amber-900/30 text-yellow-800 dark:text-yellow-200 px-4 py-2 rounded-full font-semibold shadow-md border border-yellow-200 dark:border-yellow-700">
-                CISM | CISA | CRISC
-              </span>
-              <span className="bg-gradient-to-r from-yellow-100 to-amber-100 dark:from-yellow-900/30 dark:to-amber-900/30 text-yellow-800 dark:text-yellow-200 px-4 py-2 rounded-full font-semibold shadow-md border border-yellow-200 dark:border-yellow-700">
-                Saudi Premium Residency
-              </span>
+              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">PgMP | MBA | DBA Candidate</span>
+              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">CISM | CISA | CRISC</span>
+              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">Saudi Premium Residency</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* Key Achievements Section */}
-      <section className="py-20 bg-gradient-to-r from-white via-gray-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900">
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text mb-6 text-shadow" data-testid="text-accreditation-title">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-4" data-testid="text-accreditation-title">
               Accreditation Beyond Boundaries
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full"></div>
           </div>
           <div className="flex justify-center">
-            <div className="max-w-3xl w-full">
+            <div className="max-w-2xl w-full">
               {achievements.map((achievement) => (
-                <div key={achievement.testId} className="relative text-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-blue-900/20 dark:via-gray-800/50 dark:to-purple-900/20 p-10 rounded-2xl shadow-2xl border border-blue-100 dark:border-blue-800/30 overflow-hidden group hover:transform hover:scale-[1.02] transition-all duration-500" data-testid={achievement.testId}>
-                  {/* Animated background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400/5 via-purple-400/5 to-blue-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
-                  {/* Content */}
-                  <div className="relative z-10">
-                    <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
-                      {achievement.number} {achievement.label}
-                    </div>
-                    <div className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                      {achievement.description}
-                    </div>
+                <div key={achievement.testId} className="text-center bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-xl" data-testid={achievement.testId}>
+                  <div className="text-2xl md:text-3xl font-bold text-primary-700 mb-4">
+                    {achievement.number} {achievement.label}
                   </div>
-                  
-                  {/* Decorative elements */}
-                  <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-xl"></div>
-                  <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-r from-purple-400/20 to-blue-400/20 rounded-full blur-xl"></div>
+                  <div className="text-base text-gray-600 leading-relaxed">
+                    {achievement.description}
+                  </div>
                 </div>
               ))}
             </div>
@@ -166,23 +137,20 @@ export default function Home() {
       </section>
 
       {/* Core Expertise Section */}
-      <section id="expertise" className="py-20 lg:py-32 bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 dark:from-gray-800 dark:via-blue-900 dark:to-indigo-900">
+      <section id="expertise" className="py-20 lg:py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-gradient-to-r from-gray-900 via-blue-800 to-indigo-900 dark:from-white dark:via-blue-200 dark:to-indigo-200 bg-clip-text mb-8 text-shadow" data-testid="text-expertise-title">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-900 mb-6" data-testid="text-expertise-title">
               Core Expertise Areas
             </h2>
-            <div className="w-32 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 mx-auto rounded-full mb-6"></div>
-            <p className="text-xl text-gray-700 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed" data-testid="text-expertise-subtitle">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto" data-testid="text-expertise-subtitle">
               Proven leadership across digital transformation, infrastructure development, and strategic business growth with alignment to Vision 2030 objectives and international best practices.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-            {expertiseAreas.map((area, index) => (
-              <div key={area.testId} className="group" style={{ animationDelay: `${index * 100}ms` }}>
-                <ServiceCard {...area} />
-              </div>
+            {expertiseAreas.map((area) => (
+              <ServiceCard key={area.testId} {...area} />
             ))}
           </div>
         </div>
