@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { MessageCircle, X, Send, User, UserCheck } from 'lucide-react';
+import { MessageCircle, X, Send, User, Bot } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -133,24 +133,24 @@ export default function ChatAgent() {
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-8 right-8 w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 z-50 animate-pulse"
+          className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-gradient-to-r from-primary-600 to-accent hover:from-primary-700 hover:to-accent/90 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 z-50 animate-pulse"
           data-testid="button-chat-open"
         >
-          <UserCheck className="w-8 h-8 text-white" />
+          <MessageCircle className="w-8 h-8 text-white" />
         </Button>
       )}
 
       {/* Chat Interface */}
       {isOpen && (
-        <div className="fixed bottom-8 right-8 w-96 h-[600px] bg-white rounded-2xl shadow-2xl border-2 border-gray-200 z-50 flex flex-col overflow-hidden animate-scale-in">
+        <div className="fixed bottom-6 right-6 w-96 h-[600px] bg-white rounded-2xl shadow-2xl border-2 border-primary-200 z-50 flex flex-col overflow-hidden animate-scale-in">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-primary-600 to-accent text-white p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center animate-float">
-                <UserCheck className="w-6 h-6" />
+                <Bot className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-bold text-lg">AI Agent</h3>
+                <h3 className="font-bold text-lg">AI Assistant</h3>
                 <p className="text-xs opacity-90">Ask me anything - professional or general</p>
               </div>
             </div>
@@ -179,7 +179,7 @@ export default function ChatAgent() {
                   {message.isUser ? (
                     <User className="w-5 h-5 text-white" />
                   ) : (
-                    <UserCheck className="w-5 h-5 text-gray-600" />
+                    <Bot className="w-5 h-5 text-gray-600" />
                   )}
                 </div>
                 <div
@@ -202,7 +202,7 @@ export default function ChatAgent() {
             {isTyping && (
               <div className="flex items-start gap-3 animate-fade-in-up">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-r from-gray-100 to-gray-200 flex items-center justify-center shadow-md">
-                  <UserCheck className="w-5 h-5 text-gray-600" />
+                  <Bot className="w-5 h-5 text-gray-600" />
                 </div>
                 <div className="bg-white p-4 rounded-2xl rounded-tl-sm shadow-lg border border-gray-100">
                   <div className="flex gap-1">
@@ -231,7 +231,7 @@ export default function ChatAgent() {
               <Button
                 onClick={handleSend}
                 disabled={!input.trim()}
-                className="px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                className="px-4 py-3 bg-gradient-to-r from-primary-600 to-accent hover:from-primary-700 hover:to-accent/90 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
                 data-testid="button-chat-send"
               >
                 <Send className="w-4 h-4" />
