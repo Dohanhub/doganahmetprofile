@@ -109,11 +109,7 @@ export default function About() {
     }
   ];
 
-  const languages = [
-    { language: "Arabic", level: "Native" },
-    { language: "English", level: "Fluent" },
-    { language: "Turkish", level: "Basic" }
-  ];
+
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -149,32 +145,23 @@ export default function About() {
             </div>
             <div className="relative">
               <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-8 text-white">
-                <h3 className="text-2xl font-bold mb-6">Executive Profile</h3>
+                <h3 className="text-2xl font-bold mb-6">Executive Summary</h3>
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <span>📍 Riyadh, Saudi Arabia</span>
+                    <span>Elite ICT Executive & Digital Transformation Leader</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <span>📞 +966-500-666-084</span>
+                    <span>Global Top 0.001% Professional Portfolio</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <span>✉️ ahmet.dogan@doganhub.com</span>
+                    <span>20+ Years Progressive Leadership Experience</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <span>🆔 Saudi Premium Residency</span>
-                  </div>
-                  <div className="mt-6 pt-4 border-t border-white/30">
-                    <h4 className="font-semibold mb-2">Languages & Accessibility</h4>
-                    {languages.map((lang, index) => (
-                      <div key={index} className="flex justify-between text-sm mb-1">
-                        <span>{lang.language}</span>
-                        <span className="text-white/80">{lang.level}</span>
-                      </div>
-                    ))}
+                    <span>Vision 2030 Strategic Alignment Expert</span>
                   </div>
                 </div>
               </div>
