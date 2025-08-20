@@ -197,53 +197,62 @@ export default function Home() {
               </Link>
             </div>
             <div className="relative">
-              <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-8 text-white">
-                <h3 className="text-2xl font-bold mb-6" data-testid="text-featured-projects-title">
-                  Featured Projects
-                </h3>
-                <div className="space-y-6">
-                  <div className="border-l-4 border-yellow-400 pl-4 bg-white/5 rounded-r-lg p-3">
-                    <h4 className="font-bold text-lg mb-2 text-yellow-100">NEOM Telco Park Data Center</h4>
-                    <p className="text-white/90 text-sm mb-3 leading-relaxed">
-                      Spearheaded enterprise-grade Tier III Data Center delivery for NEOM Telco Park, achieving full Uptime Institute certification. 
-                      Established critical infrastructure foundation for Saudi Arabia's flagship smart city development, incorporating advanced 
-                      cooling systems, redundant power architecture, and ultra-low latency network design for next-generation digital services.
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="bg-gradient-to-r from-blue-500 to-blue-600 px-2 py-1 rounded-full text-xs font-medium">Vision 2030 Flagship</span>
-                      <span className="bg-gradient-to-r from-green-500 to-green-600 px-2 py-1 rounded-full text-xs font-medium">Smart Cities</span>
-                      <span className="bg-gradient-to-r from-purple-500 to-purple-600 px-2 py-1 rounded-full text-xs font-medium">Data Centers</span>
-                      <span className="bg-gradient-to-r from-red-500 to-red-600 px-2 py-1 rounded-full text-xs font-medium">Telecom Infrastructure</span>
+              <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-3xl p-10 text-white shadow-2xl">
+                {/* Background decorative elements */}
+                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-yellow-400/20 to-orange-400/20 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-green-400/20 to-blue-400/20 rounded-full blur-3xl"></div>
+                
+                <div className="relative z-10">
+                  <h3 className="text-3xl font-bold mb-8 text-center text-yellow-100" data-testid="text-featured-projects-title">
+                    Featured Projects
+                  </h3>
+                  <div className="space-y-8">
+                    <div className="relative border-l-4 border-yellow-400 pl-6 bg-white/10 rounded-r-2xl p-6 backdrop-blur-sm hover:bg-white/15 transition-all duration-300 group">
+                      <div className="absolute -left-2 top-6 w-4 h-4 bg-yellow-400 rounded-full shadow-lg"></div>
+                      <h4 className="font-bold text-xl mb-3 text-yellow-100 group-hover:text-yellow-50 transition-colors">NEOM Telco Park Data Center</h4>
+                      <p className="text-white/90 text-sm mb-4 leading-relaxed">
+                        Spearheaded enterprise-grade Tier III Data Center delivery for NEOM Telco Park, achieving full Uptime Institute certification. 
+                        Established critical infrastructure foundation for Saudi Arabia's flagship smart city development, incorporating advanced 
+                        cooling systems, redundant power architecture, and ultra-low latency network design for next-generation digital services.
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="bg-gradient-to-r from-blue-500 to-blue-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Vision 2030 Flagship</span>
+                        <span className="bg-gradient-to-r from-green-500 to-green-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Smart Cities</span>
+                        <span className="bg-gradient-to-r from-purple-500 to-purple-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Data Centers</span>
+                        <span className="bg-gradient-to-r from-red-500 to-red-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Telecom Infrastructure</span>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="border-l-4 border-yellow-400 pl-4 bg-white/5 rounded-r-lg p-3">
-                    <h4 className="font-bold text-lg mb-2 text-yellow-100">Regional Digital Transformation</h4>
-                    <p className="text-white/90 text-sm mb-3 leading-relaxed">
-                      Orchestrated comprehensive business transformation across Western Region operations, achieving nationwide market leadership 
-                      through strategic technology integration. Led multi-sector digitization initiatives spanning healthcare, education, 
-                      government services, and enterprise solutions with focus on operational excellence and sustainable growth frameworks.
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="bg-gradient-to-r from-orange-500 to-orange-600 px-2 py-1 rounded-full text-xs font-medium">Healthcare IT</span>
-                      <span className="bg-gradient-to-r from-teal-500 to-teal-600 px-2 py-1 rounded-full text-xs font-medium">Education Tech</span>
-                      <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 px-2 py-1 rounded-full text-xs font-medium">Government Services</span>
-                      <span className="bg-gradient-to-r from-pink-500 to-pink-600 px-2 py-1 rounded-full text-xs font-medium">Enterprise Solutions</span>
+                    
+                    <div className="relative border-l-4 border-yellow-400 pl-6 bg-white/10 rounded-r-2xl p-6 backdrop-blur-sm hover:bg-white/15 transition-all duration-300 group">
+                      <div className="absolute -left-2 top-6 w-4 h-4 bg-yellow-400 rounded-full shadow-lg"></div>
+                      <h4 className="font-bold text-xl mb-3 text-yellow-100 group-hover:text-yellow-50 transition-colors">Regional Digital Transformation</h4>
+                      <p className="text-white/90 text-sm mb-4 leading-relaxed">
+                        Orchestrated comprehensive business transformation across Western Region operations, achieving nationwide market leadership 
+                        through strategic technology integration. Led multi-sector digitization initiatives spanning healthcare, education, 
+                        government services, and enterprise solutions with focus on operational excellence and sustainable growth frameworks.
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="bg-gradient-to-r from-orange-500 to-orange-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Healthcare IT</span>
+                        <span className="bg-gradient-to-r from-teal-500 to-teal-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Education Tech</span>
+                        <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Government Services</span>
+                        <span className="bg-gradient-to-r from-pink-500 to-pink-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Enterprise Solutions</span>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="border-l-4 border-yellow-400 pl-4 bg-white/5 rounded-r-lg p-3">
-                    <h4 className="font-bold text-lg mb-2 text-yellow-100">Multi-Sector Technology Leadership</h4>
-                    <p className="text-white/90 text-sm mb-3 leading-relaxed">
-                      Delivered strategic ICT solutions across diverse industry verticals including financial services, manufacturing, 
-                      retail, and logistics. Implemented cloud-first architectures, cybersecurity frameworks, and IoT ecosystems 
-                      enabling digital transformation aligned with Saudi Vision goals and international best practices.
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="bg-gradient-to-r from-yellow-500 to-yellow-600 px-2 py-1 rounded-full text-xs font-medium">Financial Services</span>
-                      <span className="bg-gradient-to-r from-cyan-500 to-cyan-600 px-2 py-1 rounded-full text-xs font-medium">Manufacturing</span>
-                      <span className="bg-gradient-to-r from-lime-500 to-lime-600 px-2 py-1 rounded-full text-xs font-medium">Retail & E-commerce</span>
-                      <span className="bg-gradient-to-r from-rose-500 to-rose-600 px-2 py-1 rounded-full text-xs font-medium">Logistics & Supply Chain</span>
+                    
+                    <div className="relative border-l-4 border-yellow-400 pl-6 bg-white/10 rounded-r-2xl p-6 backdrop-blur-sm hover:bg-white/15 transition-all duration-300 group">
+                      <div className="absolute -left-2 top-6 w-4 h-4 bg-yellow-400 rounded-full shadow-lg"></div>
+                      <h4 className="font-bold text-xl mb-3 text-yellow-100 group-hover:text-yellow-50 transition-colors">Multi-Sector Technology Leadership</h4>
+                      <p className="text-white/90 text-sm mb-4 leading-relaxed">
+                        Delivered strategic ICT solutions across diverse industry verticals including financial services, manufacturing, 
+                        retail, and logistics. Implemented cloud-first architectures, cybersecurity frameworks, and IoT ecosystems 
+                        enabling digital transformation aligned with Saudi Vision goals and international best practices.
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="bg-gradient-to-r from-yellow-500 to-yellow-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Financial Services</span>
+                        <span className="bg-gradient-to-r from-cyan-500 to-cyan-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Manufacturing</span>
+                        <span className="bg-gradient-to-r from-lime-500 to-lime-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Retail & E-commerce</span>
+                        <span className="bg-gradient-to-r from-rose-500 to-rose-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Logistics & Supply Chain</span>
+                      </div>
                     </div>
                   </div>
                 </div>
