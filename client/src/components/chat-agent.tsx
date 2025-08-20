@@ -36,7 +36,7 @@ export default function ChatAgent() {
     
     // Check if question is about Ahmet first (priority responses)
     if (msg.includes('ahmet') || msg.includes('contact') || msg.includes('email') || msg.includes('phone') || msg.includes('reach')) {
-      return "Contact Ahmet directly: info@doganahmet.com, +966-500-666-084. Website: www.doganahmet.com, LinkedIn: ahmed-elgazzar-ict. Based in Riyadh with Saudi Premium Residency. Responds within 24 hours.";
+      return "Contact Ahmet directly: ahmet@doganconsult.com, +966-500-666-084. Website: www.doganahmet.com, LinkedIn: ahmed-elgazzar-ict. Based in Riyadh with Saudi Premium Residency. Responds within 24 hours.";
     }
 
     if ((msg.includes('experience') || msg.includes('career') || msg.includes('background') || msg.includes('work')) && (msg.includes('his') || msg.includes('ahmet') || msg.includes('you'))) {
@@ -51,8 +51,8 @@ export default function ChatAgent() {
       return "Ahmet is a strategic Vision 2030 expert with hands-on NEOM smart city infrastructure delivery. His Saudi Premium Residency, cultural fluency, and proven track record make him ideal for driving KSA's digital transformation initiatives.";
     }
 
-    if (msg.includes('experience') || msg.includes('expertise') || msg.includes('collaboration') || msg.includes('consulting')) {
-      return "Ahmet brings 20+ years of elite ICT leadership experience in digital transformation, smart cities, and ICT infrastructure across the Middle East. His unique certification portfolio and proven track record make him a valuable strategic partner for complex technology initiatives.";
+    if (msg.includes('available') || msg.includes('hire') || msg.includes('position') || msg.includes('role') || msg.includes('cio') || msg.includes('cto')) {
+      return "Ahmet is actively seeking C-level executive positions (CIO/CTO) in digital transformation, smart cities, or ICT infrastructure. Available for immediate start and consultation meetings. Given his elite profile, early engagement is recommended.";
     }
 
     // Enhanced General Knowledge Responses (Extended ChatGPT-like capabilities)
@@ -95,70 +95,29 @@ export default function ChatAgent() {
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    try {
-      const userMessage: Message = {
-        id: Date.now().toString(),
-        text: input.trim(),
-        isUser: true,
-        timestamp: new Date()
-      };
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      text: input,
+      isUser: true,
+      timestamp: new Date()
+    };
 
-      setMessages(prev => [...prev, userMessage]);
-      const userInput = input.trim();
-      setInput('');
-      setIsTyping(true);
+    setMessages(prev => [...prev, userMessage]);
+    setInput('');
+    setIsTyping(true);
 
-      setTimeout(() => {
-        try {
-          const response = getIntelligentResponse(userInput);
-          
-          if (!response || response.trim().length === 0) {
-            throw new Error("Empty response generated");
-          }
-          
-          const botMessage: Message = {
-            id: (Date.now() + 1).toString(),
-            text: response,
-            isUser: false,
-            timestamp: new Date()
-          };
-
-          setMessages(prev => [...prev, botMessage]);
-          setIsTyping(false);
-          
-          // Auto-scroll to bottom
-          setTimeout(() => {
-            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-          }, 100);
-          
-        } catch (error) {
-          console.error("Chat response error:", error);
-          
-          const errorMessage: Message = {
-            id: (Date.now() + 1).toString(),
-            text: "I apologize, but I'm having trouble generating a response right now. Please try asking your question again, or feel free to contact Ahmet directly at info@doganahmet.com for immediate assistance.",
-            isUser: false,
-            timestamp: new Date()
-          };
-          
-          setMessages(prev => [...prev, errorMessage]);
-          setIsTyping(false);
-        }
-      }, 1200 + Math.random() * 800);
-      
-    } catch (error) {
-      console.error("Chat send error:", error);
-      setIsTyping(false);
-      
-      const errorMessage: Message = {
-        id: (Date.now() + 2).toString(),
-        text: "Sorry, there was an error processing your message. Please try again.",
+    setTimeout(() => {
+      const response = getIntelligentResponse(input);
+      const botMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: response,
         isUser: false,
         timestamp: new Date()
       };
-      
-      setMessages(prev => [...prev, errorMessage]);
-    }
+
+      setMessages(prev => [...prev, botMessage]);
+      setIsTyping(false);
+    }, 1200);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -283,7 +242,7 @@ export default function ChatAgent() {
               </Button>
             </div>
             <p className="text-xs text-gray-500 mt-3 text-center">
-              For executive discussions: info@doganahmet.com | www.doganahmet.com
+              For executive discussions: ahmet@doganconsult.com | www.doganahmet.com
             </p>
           </div>
         </div>

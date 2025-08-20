@@ -340,20 +340,21 @@ export default function About() {
                 on-the-ground leadership.
               </p>
               <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                <strong>Holds Saudi Premium Residency,</strong> enabling hassle-free engagement across KSA with 
-                proven expertise in driving innovation, growth, and organizational excellence.
+                <strong>Holds Saudi Premium Residency,</strong> enabling hassle-free hiring and engagement across KSA. 
+                Now seeking a CIO/CTO or digital transformation leadership role to drive innovation, growth, and 
+                organizational excellence.
               </p>
               
               <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 text-white">
-                <h3 className="text-xl font-bold mb-4">Professional Excellence</h3>
+                <h3 className="text-xl font-bold mb-4">Availability</h3>
                 <p className="mb-4">
-                  Distinguished track record of leading transformational initiatives across multiple countries and industries. 
-                  Experienced in delivering complex digital transformation projects aligned with strategic objectives and 
-                  international best practices.
+                  Immediately available for senior leadership opportunities. Open to C-suite roles such as CIO, CTO, 
+                  or Executive Director of Digital Transformation. Willing to relocate and travel as required to drive 
+                  critical initiatives.
                 </p>
-                <Link href="/contact" data-testid="button-discuss-collaboration">
+                <Link href="/contact" data-testid="button-discuss-opportunities">
                   <Button className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 font-semibold">
-                    Discuss Collaboration
+                    Discuss Opportunities
                   </Button>
                 </Link>
               </div>

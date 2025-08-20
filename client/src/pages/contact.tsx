@@ -31,7 +31,7 @@ export default function Contact() {
                   </div>
                   <div className="ml-4">
                     <div className="text-sm text-primary-200" data-testid="text-email-label">Email</div>
-                    <div className="text-lg" data-testid="text-email-value">info@doganahmet.com</div>
+                    <div className="text-lg" data-testid="text-email-value">ahmet@doganconslt.com</div>
                   </div>
                 </div>
               </div>

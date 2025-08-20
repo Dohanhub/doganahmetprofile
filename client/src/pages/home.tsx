@@ -6,7 +6,7 @@ import ServiceCard from "@/components/service-card";
 import TestimonialCard from "@/components/testimonial-card";
 import ChatAgent from "@/components/chat-agent";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Download, Trophy, Users, TrendingUp, Award, Calendar, Linkedin } from "lucide-react";
+import { ChevronRight, Download, Trophy, Users, TrendingUp, Award } from "lucide-react";
 
 export default function Home() {
   useEffect(() => {
@@ -88,37 +88,22 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-5xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-900 dark:text-white mb-8 leading-tight" data-testid="text-hero-title">
-              Dr. Ahmet Doğan
-              <span className="block text-yellow-500 dark:text-yellow-400 mt-2 text-2xl md:text-3xl">DBA, MBA, PgMP Candidate</span>
-              <span className="block text-lg md:text-xl text-gray-600 dark:text-gray-300 mt-2 font-normal">Elite ICT Executive & Digital Transformation Leader</span>
+              Ahmet Doğan
+              <span className="block text-yellow-500 dark:text-yellow-400 mt-2">Elite ICT Executive & Digital Transformation Leader</span>
             </h1>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               <Link href="/contact" data-testid="button-executive-contact">
-                <Button className="bg-success hover:bg-success/90 text-success-foreground p-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg rounded-full">
-                  <Calendar className="w-6 h-6" />
+                <Button className="bg-success hover:bg-success/90 text-success-foreground px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                  Executive Contact
                 </Button>
               </Link>
-              <a 
-                href="https://www.linkedin.com/in/ahmet-dogan-ict/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                data-testid="button-linkedin-profile"
-              >
-                <Button 
-                  variant="outline" 
-                  className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white p-3 text-sm font-semibold transition-all duration-300 transform hover:scale-110 rounded-full hover:shadow-2xl active:scale-95"
-                  style={{
-                    boxShadow: '0 4px 15px rgba(37, 99, 235, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
-                    background: 'linear-gradient(145deg, #ffffff, #f8fafc)',
-                    border: '2px solid #2563eb'
-                  }}
-                >
-                  <Linkedin className="w-4 h-4" />
-                </Button>
-              </a>
+              <Button variant="outline" className="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-4 text-lg font-semibold transition-all duration-300" data-testid="button-download-cv">
+                <Download className="w-5 h-5 mr-2" />
+                Download Elite CV
+              </Button>
             </div>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">Doctoral Business Administration</span>
+              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">PgMP | MBA | DBA Candidate</span>
               <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">CISM | CISA | CRISC</span>
               <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">Saudi Premium Residency</span>
             </div>
