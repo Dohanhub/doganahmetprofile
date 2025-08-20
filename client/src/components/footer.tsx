@@ -6,13 +6,14 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
-            <div className="text-2xl font-bold text-white mb-4">Shane Kinkennon</div>
+            <div className="text-2xl font-bold text-white mb-4">Ahmet Doğan</div>
             <p className="text-gray-400 mb-6 max-w-md">
-              Strategic leadership consultant specializing in principled, person-centered leadership for executives, management teams, and boards.
+              Elite ICT Executive & Digital Transformation Leader specializing in strategic leadership, 
+              cybersecurity governance, and Vision 2030 alignment for enterprise organizations.
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://www.linkedin.com/in/shanekinkennon/" 
+                href="https://www.linkedin.com/in/ahmed-elgazzar-ict/" 
                 className="text-gray-400 hover:text-white transition-colors"
                 data-testid="link-linkedin"
                 target="_blank" 
@@ -23,42 +24,43 @@ export default function Footer() {
                 </svg>
               </a>
               <a 
-                href="https://shanekinkennon.medium.com/" 
+                href="mailto:ahmet.dogan@doganhub.com" 
                 className="text-gray-400 hover:text-white transition-colors"
-                data-testid="link-medium"
+                data-testid="link-email"
                 target="_blank" 
                 rel="noopener noreferrer"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"></path>
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                  <path d="m18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                 </svg>
               </a>
             </div>
           </div>
           
           <div>
-            <h3 className="text-white font-semibold mb-4">Services</h3>
+            <h3 className="text-white font-semibold mb-4">Expertise</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/executive-coaching" data-testid="link-footer-executive-coaching">
-                  <span className="text-gray-400 hover:text-white transition-colors">Executive Coaching</span>
+                <Link href="/experience" data-testid="link-footer-career">
+                  <span className="text-gray-400 hover:text-white transition-colors">Career Experience</span>
                 </Link>
               </li>
               <li>
-                <Link href="/management-consulting" data-testid="link-footer-management-consulting">
-                  <span className="text-gray-400 hover:text-white transition-colors">Management Consulting</span>
+                <Link href="/certifications" data-testid="link-footer-certifications">
+                  <span className="text-gray-400 hover:text-white transition-colors">Certifications</span>
                 </Link>
               </li>
               <li>
-                <Link href="/board-consulting" data-testid="link-footer-board-consulting">
-                  <span className="text-gray-400 hover:text-white transition-colors">Board Consulting</span>
+                <Link href="/organizations" data-testid="link-footer-organizations">
+                  <span className="text-gray-400 hover:text-white transition-colors">Professional Organizations</span>
                 </Link>
               </li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-white font-semibold mb-4">Company</h3>
+            <h3 className="text-white font-semibold mb-4">Connect</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/about" data-testid="link-footer-about">
@@ -66,9 +68,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/testimonials" data-testid="link-footer-testimonials">
-                  <span className="text-gray-400 hover:text-white transition-colors">Testimonials</span>
-                </Link>
+                <a 
+                  href="tel:+966500666084"
+                  className="text-gray-400 hover:text-white transition-colors"
+                  data-testid="link-footer-phone"
+                >
+                  +966-500-666-084
+                </a>
               </li>
               <li>
                 <Link href="/contact" data-testid="link-footer-contact">
@@ -80,7 +86,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400">&copy; 2024 Shane Kinkennon. All rights reserved.</p>
+          <p className="text-gray-400">&copy; 2025 Ahmet Doğan. All rights reserved.</p>
         </div>
       </div>
     </footer>

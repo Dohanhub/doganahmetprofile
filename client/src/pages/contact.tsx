@@ -98,7 +98,7 @@ export default function Contact() {
                 Initial Consultation
               </h3>
               <p className="text-gray-600" data-testid="text-step-1-description">
-                We'll discuss your current challenges, goals, and explore how our services can best support your needs.
+                We'll discuss your digital transformation challenges, strategic goals, and explore how my expertise can best support your organization's needs.
               </p>
             </div>
 
@@ -110,7 +110,7 @@ export default function Contact() {
                 Customized Proposal
               </h3>
               <p className="text-gray-600" data-testid="text-step-2-description">
-                Receive a detailed proposal outlining our recommended approach, timeline, and expected outcomes.
+                Receive a detailed proposal outlining my recommended digital transformation approach, implementation timeline, and expected strategic outcomes.
               </p>
             </div>
 
@@ -122,7 +122,7 @@ export default function Contact() {
                 Engagement Begins
               </h3>
               <p className="text-gray-600" data-testid="text-step-3-description">
-                Start your leadership transformation journey with ongoing support and accountability.
+                Begin your digital transformation journey with expert strategic guidance, implementation oversight, and ongoing executive support.
               </p>
             </div>
           </div>

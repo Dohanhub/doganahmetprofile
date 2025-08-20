@@ -122,7 +122,8 @@ export default function ContactForm() {
                 <FormControl>
                   <Input 
                     placeholder="Your organization" 
-                    {...field} 
+                    {...field}
+                    value={field.value || ""}
                     data-testid="input-organization"
                   />
                 </FormControl>
@@ -137,16 +138,19 @@ export default function ContactForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Service Interest</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
                   <FormControl>
                     <SelectTrigger data-testid="select-service">
                       <SelectValue placeholder="Select a service" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="executive-coaching">Executive Coaching</SelectItem>
-                    <SelectItem value="management-consulting">Management Consulting</SelectItem>
-                    <SelectItem value="board-consulting">Board Consulting</SelectItem>
+                    <SelectItem value="digital-transformation">Digital Transformation Leadership</SelectItem>
+                    <SelectItem value="cybersecurity-governance">Cybersecurity Governance</SelectItem>
+                    <SelectItem value="ict-strategy">ICT Strategy & Architecture</SelectItem>
+                    <SelectItem value="program-management">Program Management</SelectItem>
+                    <SelectItem value="vision-2030">Vision 2030 Alignment</SelectItem>
+                    <SelectItem value="executive-consulting">Executive Consulting</SelectItem>
                     <SelectItem value="other">Other</SelectItem>
                   </SelectContent>
                 </Select>
@@ -163,7 +167,7 @@ export default function ContactForm() {
                 <FormLabel>Message</FormLabel>
                 <FormControl>
                   <Textarea 
-                    placeholder="Tell me about your leadership challenges and goals..."
+                    placeholder="Tell me about your digital transformation challenges and strategic goals..."
                     rows={4}
                     {...field} 
                     data-testid="textarea-message"
