@@ -45,10 +45,6 @@ A professional executive website for Ahmet Doğan, Elite ICT Executive & Digital
 - **Job-Seeking Content Removal**: Eliminated all employment-seeking language, repositioned as established executive
 
 ### Content & Messaging Updates
-- **Professional Credentials Update**: Changed title to "Dr. Ahmet Doğan" with credentials "DBA Candidate, PgMP, MBA"
-- **Professional Role Update**: Updated title to "Elite ICT Executive & Consultant Engineer"
-
-### Content & Messaging Updates
 
 ### Design System Color Update
 - **Purple Color Removal**: Completely removed all purple color references from the entire codebase
