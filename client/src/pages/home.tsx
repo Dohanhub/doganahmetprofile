@@ -103,7 +103,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 data-testid="button-linkedin-profile"
               >
-                <Button variant="outline" className="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white p-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg rounded-full">
+                <Button variant="outline" className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white p-4 text-lg font-semibold transition-all duration-300 transform hover:scale-110 shadow-lg rounded-full hover:shadow-xl active:scale-95">
                   <Linkedin className="w-6 h-6" />
                 </Button>
               </a>
