@@ -111,20 +111,22 @@ export default function Home() {
               Accreditation Beyond Boundaries
             </h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {achievements.map((achievement) => (
-              <div key={achievement.testId} className="text-center bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl" data-testid={achievement.testId}>
-                <div className="text-3xl md:text-4xl font-bold text-primary-700 mb-2">
-                  {achievement.number}
+          <div className="flex justify-center">
+            <div className="max-w-2xl w-full">
+              {achievements.map((achievement) => (
+                <div key={achievement.testId} className="text-center bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-xl" data-testid={achievement.testId}>
+                  <div className="text-4xl md:text-5xl font-bold text-primary-700 mb-4">
+                    {achievement.number}
+                  </div>
+                  <div className="text-xl font-semibold text-gray-900 mb-3">
+                    {achievement.label}
+                  </div>
+                  <div className="text-base text-gray-600 leading-relaxed">
+                    {achievement.description}
+                  </div>
                 </div>
-                <div className="text-lg font-semibold text-gray-900 mb-1">
-                  {achievement.label}
-                </div>
-                <div className="text-sm text-gray-600">
-                  {achievement.description}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
