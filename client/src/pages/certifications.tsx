@@ -211,7 +211,7 @@ export default function Certifications() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {certificationStats.map((stat) => (
-              <div key={stat.testId} className="text-center bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl" data-testid={stat.testId}>
+              <div key={stat.testId} className="text-center bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl" data-testid={stat.testId}>
                 <div className="text-3xl md:text-4xl font-bold text-primary-700 mb-2">
                   {stat.number}
                 </div>
@@ -378,7 +378,7 @@ export default function Certifications() {
             ))}
           </div>
 
-          <div className="mt-12 bg-gradient-to-br from-blue-600 to-purple-600 text-white p-8 rounded-xl text-center">
+          <div className="mt-12 bg-gradient-to-br from-blue-600 to-blue-700 text-white p-8 rounded-xl text-center">
             <Star className="w-12 h-12 mx-auto mb-4" />
             <h3 className="text-2xl font-bold mb-4">Global Standing Analysis</h3>
             <p className="text-lg leading-relaxed max-w-4xl mx-auto">

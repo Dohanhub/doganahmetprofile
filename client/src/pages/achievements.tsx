@@ -31,7 +31,7 @@ export default function Achievements() {
       testId: "achievement-ict-division"
     },
     {
-      icon: <Target className="w-12 h-12 text-purple-600" />,
+      icon: <Target className="w-12 h-12 text-indigo-600" />,
       title: "Oracle Market Leadership",
       subtitle: "Channel Excellence",
       description: "Maintained Ingram Micro as Oracle's #1 distributor in KSA by expanding channel partner network and increasing sales pipeline by 25%. Led nationwide go-to-market strategies and partner enablement programs.",
@@ -170,7 +170,7 @@ export default function Achievements() {
                 <div className="text-sm text-gray-600">Teams Led</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-purple-600">5×</div>
+                <div className="text-3xl font-bold text-indigo-600">5×</div>
                 <div className="text-sm text-gray-600">Profit Increase</div>
               </div>
             </div>
@@ -219,7 +219,7 @@ export default function Achievements() {
       </section>
 
       {/* Global Standing Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-blue-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-global-standing-title">
@@ -263,13 +263,13 @@ export default function Achievements() {
 
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-600"></div>
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-blue-600"></div>
 
             <div className="space-y-12">
               {careerProgression.map((position, index) => (
                 <div key={position.testId} className="relative flex gap-8" data-testid={position.testId}>
                   {/* Timeline dot */}
-                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
                     {index + 1}
                   </div>
                   

@@ -239,7 +239,7 @@ export default function Experience() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {careerStats.map((stat) => (
-              <div key={stat.testId} className="text-center bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl" data-testid={stat.testId}>
+              <div key={stat.testId} className="text-center bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl" data-testid={stat.testId}>
                 <div className="text-3xl md:text-4xl font-bold text-primary-700 mb-2">
                   {stat.number}
                 </div>

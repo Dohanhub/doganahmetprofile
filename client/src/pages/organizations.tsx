@@ -97,7 +97,7 @@ export default function Organizations() {
       description: "Alignment with international standards and best practices in project management, engineering, and business leadership"
     },
     {
-      icon: <Users className="w-8 h-8 text-purple-600" />,
+      icon: <Users className="w-8 h-8 text-indigo-600" />,
       title: "Strategic Networking",
       description: "Executive-level connections across Middle East, North Africa, and global markets"
     },
@@ -147,7 +147,7 @@ export default function Organizations() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {globalOrganizations.map((org) => (
-              <div key={org.testId} className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl border border-gray-200" data-testid={org.testId}>
+              <div key={org.testId} className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border border-gray-200" data-testid={org.testId}>
                 <div className="flex items-start gap-4 mb-4">
                   <Building2 className="w-8 h-8 text-blue-600 flex-shrink-0 mt-1" />
                   <div>

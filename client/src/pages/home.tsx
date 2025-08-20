@@ -122,7 +122,7 @@ export default function Home() {
           <div className="flex justify-center">
             <div className="max-w-2xl w-full">
               {achievements.map((achievement) => (
-                <div key={achievement.testId} className="text-center bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-xl" data-testid={achievement.testId}>
+                <div key={achievement.testId} className="text-center bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl" data-testid={achievement.testId}>
                   <div className="text-2xl md:text-3xl font-bold text-primary-700 mb-4">
                     {achievement.number} {achievement.label}
                   </div>
@@ -181,7 +181,7 @@ export default function Home() {
                 <span className="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium" data-testid="badge-vision-2030">
                   Vision 2030 Aligned
                 </span>
-                <span className="bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-medium" data-testid="badge-pgmp-certified">
+                <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium" data-testid="badge-pgmp-certified">
                   PgMP Certified
                 </span>
                 <span className="bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium" data-testid="badge-premium-residency">
@@ -197,7 +197,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="relative">
-              <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-3xl p-10 text-white shadow-2xl">
+              <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 rounded-3xl p-10 text-white shadow-2xl">
                 {/* Background decorative elements */}
                 <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-yellow-400/20 to-orange-400/20 rounded-full blur-3xl"></div>
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-green-400/20 to-blue-400/20 rounded-full blur-3xl"></div>
@@ -218,7 +218,7 @@ export default function Home() {
                       <div className="flex flex-wrap gap-2">
                         <span className="bg-gradient-to-r from-blue-500 to-blue-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Vision 2030 Flagship</span>
                         <span className="bg-gradient-to-r from-green-500 to-green-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Smart Cities</span>
-                        <span className="bg-gradient-to-r from-purple-500 to-purple-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Data Centers</span>
+                        <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Data Centers</span>
                         <span className="bg-gradient-to-r from-red-500 to-red-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Telecom Infrastructure</span>
                       </div>
                     </div>
@@ -275,7 +275,7 @@ export default function Home() {
           </div>
           
           <div className="text-center mb-8">
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl inline-block">
+            <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl inline-block">
               <p className="text-lg text-gray-700 mb-4">
                 <strong>18 Executive Recommendations</strong> from senior leaders across 5 countries
               </p>
@@ -347,11 +347,11 @@ export default function Home() {
             </div>
 
             {/* Certifications */}
-            <div className="text-center bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-xl hover:shadow-lg transition-all duration-300">
-              <div className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="text-center bg-gradient-to-br from-indigo-50 to-indigo-100 p-8 rounded-xl hover:shadow-lg transition-all duration-300">
+              <div className="w-16 h-16 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Trophy className="w-8 h-8 text-white" />
               </div>
-              <div className="text-3xl font-bold text-purple-700 mb-2">20+</div>
+              <div className="text-3xl font-bold text-indigo-700 mb-2">20+</div>
               <div className="text-lg font-semibold text-gray-900 mb-2">Elite Certifications</div>
               <div className="text-sm text-gray-600">PgMP, CISA/CISM/CRISC, RCDD</div>
             </div>
@@ -401,7 +401,7 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-primary-600 to-accent text-white overflow-hidden relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-blue-700/20 animate-pulse"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-in-up" data-testid="text-cta-title">
             Ready for Executive-Level Digital Transformation?

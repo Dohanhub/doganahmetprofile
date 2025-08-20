@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { MessageCircle, X, Send, User, Zap } from 'lucide-react';
+import { MessageCircle, X, Send, User, Zap, Bot } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -235,7 +235,7 @@ export default function ChatAgent() {
               <Button
                 onClick={handleSend}
                 disabled={!input.trim()}
-                className="px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                className="px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
                 data-testid="button-chat-send"
               >
                 <Send className="w-4 h-4" />

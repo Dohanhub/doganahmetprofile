@@ -17,7 +17,7 @@ export default function About() {
       description: "Led delivery of NEOM Tier III Data Center (SAR 21.9M) - flagship Vision 2030 project providing critical infrastructure for Saudi Arabia's premier smart city."
     },
     {
-      icon: <TrendingUp className="w-8 h-8 text-purple-600" />,
+      icon: <TrendingUp className="w-8 h-8 text-indigo-600" />,
       title: "Business Transformation Expert",
       description: "Transformed underperforming Western Region to #1 nationwide position with SAR 125M in contracts and 5× profit increase within one year."
     },
@@ -100,7 +100,7 @@ export default function About() {
     {
       title: "Leadership & Management",
       description: "P&L management, Program/Project Management, PMO establishment, cross-functional team leadership across 130+ members.",
-      icon: <Users className="w-6 h-6 text-purple-600" />
+      icon: <Users className="w-6 h-6 text-indigo-600" />
     },
     {
       title: "Business Development",
@@ -144,7 +144,7 @@ export default function About() {
               </div>
             </div>
             <div className="relative">
-              <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-8 text-white">
+              <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl p-8 text-white">
                 <h3 className="text-2xl font-bold mb-6">Executive Summary</h3>
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
@@ -267,7 +267,7 @@ export default function About() {
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {globalStanding.map((stat, index) => (
-              <div key={index} className="text-center bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-xl">
+              <div key={index} className="text-center bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl">
                 <div className="text-4xl font-bold text-primary-700 mb-4">{stat.metric}</div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">{stat.description}</h3>
                 <p className="text-sm text-gray-600">{stat.analysis}</p>
@@ -275,7 +275,7 @@ export default function About() {
             ))}
           </div>
 
-          <div className="bg-gradient-to-br from-blue-600 to-purple-600 text-white p-8 rounded-xl text-center">
+          <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white p-8 rounded-xl text-center">
             <Award className="w-16 h-16 mx-auto mb-6" />
             <h3 className="text-2xl font-bold mb-4">Exceptionally Rare Combination</h3>
             <p className="text-lg leading-relaxed max-w-4xl mx-auto">
@@ -317,7 +317,7 @@ export default function About() {
       </section>
 
       {/* Executive Summary Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-blue-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-summary-title">
@@ -345,7 +345,7 @@ export default function About() {
                 organizational excellence.
               </p>
               
-              <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-6 text-white">
+              <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 text-white">
                 <h3 className="text-xl font-bold mb-4">Availability</h3>
                 <p className="mb-4">
                   Immediately available for senior leadership opportunities. Open to C-suite roles such as CIO, CTO, 
