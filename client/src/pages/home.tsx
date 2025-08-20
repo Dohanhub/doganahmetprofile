@@ -6,7 +6,7 @@ import ServiceCard from "@/components/service-card";
 import TestimonialCard from "@/components/testimonial-card";
 import ChatAgent from "@/components/chat-agent";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Download, Trophy, Users, TrendingUp, Award, Phone, Linkedin } from "lucide-react";
+import { ChevronRight, Download, Trophy, Users, TrendingUp, Award, Calendar, Linkedin } from "lucide-react";
 
 export default function Home() {
   useEffect(() => {
@@ -94,7 +94,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               <Link href="/contact" data-testid="button-executive-contact">
                 <Button className="bg-success hover:bg-success/90 text-success-foreground p-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg rounded-full">
-                  <Phone className="w-6 h-6" />
+                  <Calendar className="w-6 h-6" />
                 </Button>
               </Link>
               <a 
@@ -103,8 +103,16 @@ export default function Home() {
                 rel="noopener noreferrer"
                 data-testid="button-linkedin-profile"
               >
-                <Button variant="outline" className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white p-4 text-lg font-semibold transition-all duration-300 transform hover:scale-110 shadow-lg rounded-full hover:shadow-xl active:scale-95">
-                  <Linkedin className="w-6 h-6" />
+                <Button 
+                  variant="outline" 
+                  className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white p-3 text-sm font-semibold transition-all duration-300 transform hover:scale-110 rounded-full hover:shadow-2xl active:scale-95"
+                  style={{
+                    boxShadow: '0 4px 15px rgba(37, 99, 235, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                    background: 'linear-gradient(145deg, #ffffff, #f8fafc)',
+                    border: '2px solid #2563eb'
+                  }}
+                >
+                  <Linkedin className="w-4 h-4" />
                 </Button>
               </a>
             </div>
