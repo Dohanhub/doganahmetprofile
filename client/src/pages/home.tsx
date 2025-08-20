@@ -59,7 +59,7 @@ export default function Home() {
         <div className="container">
           <div className="text-center mb-16">
             <p className="text-3xl md:text-4xl font-bold text-[var(--fg)] mb-4 animate-slide-up">
-              Here's how I help.
+              Core Expertise Areas
             </p>
           </div>
           
