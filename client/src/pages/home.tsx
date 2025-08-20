@@ -92,7 +92,7 @@ export default function Home() {
               <span className="block text-yellow-500 mt-2">Elite ICT Executive & Digital Transformation Leader</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed max-w-4xl mx-auto" data-testid="text-hero-subtitle">
-              Elite ICT Executive specializing in digital transformation and strategic infrastructure development.
+              Elite ICT Executive & Digital Transformation Leader
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               <Link href="/contact" data-testid="button-executive-contact">
