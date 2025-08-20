@@ -9,7 +9,7 @@ import ExecutiveCoaching from "@/pages/executive-coaching";
 import ManagementConsulting from "@/pages/management-consulting";
 import BoardConsulting from "@/pages/board-consulting";
 import About from "@/pages/about";
-import Testimonials from "@/pages/testimonials";
+import Achievements from "@/pages/achievements";
 import Contact from "@/pages/contact";
 
 function Router() {
@@ -20,7 +20,7 @@ function Router() {
       <Route path="/management-consulting" component={ManagementConsulting} />
       <Route path="/board-consulting" component={BoardConsulting} />
       <Route path="/about" component={About} />
-      <Route path="/testimonials" component={Testimonials} />
+      <Route path="/achievements" component={Achievements} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>

@@ -13,10 +13,10 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold mb-6" data-testid="text-hero-title">
-              Ready to Transform Your Leadership?
+              Ready to Transform Your Digital Future?
             </h1>
             <p className="text-xl text-primary-100 max-w-3xl mx-auto mb-8" data-testid="text-hero-subtitle">
-              Let's discuss how we can elevate your leadership impact and drive the meaningful change your organization needs.
+              Let's discuss how we can drive your digital transformation initiatives and accelerate your Vision 2030 alignment.
             </p>
           </div>
 
@@ -31,7 +31,7 @@ export default function Contact() {
                   </div>
                   <div className="ml-4">
                     <div className="text-sm text-primary-200" data-testid="text-email-label">Email</div>
-                    <div className="text-lg" data-testid="text-email-value">shane@shanekinkennon.com</div>
+                    <div className="text-lg" data-testid="text-email-value">ahmet.dogan@doganhub.com</div>
                   </div>
                 </div>
                 
@@ -41,7 +41,7 @@ export default function Contact() {
                   </div>
                   <div className="ml-4">
                     <div className="text-sm text-primary-200" data-testid="text-phone-label">Phone</div>
-                    <div className="text-lg" data-testid="text-phone-value">(555) 123-4567</div>
+                    <div className="text-lg" data-testid="text-phone-value">+966-500-666-084</div>
                   </div>
                 </div>
 
@@ -59,14 +59,14 @@ export default function Contact() {
               <div className="mt-12 pt-8 border-t border-primary-600">
                 <h3 className="text-xl font-semibold mb-4" data-testid="text-linkedin-title">Connect on LinkedIn</h3>
                 <a 
-                  href="https://www.linkedin.com/in/shanekinkennon/" 
+                  href="https://www.linkedin.com/in/ahmed-elgazzar-ict/" 
                   className="inline-flex items-center text-primary-200 hover:text-white transition-colors"
                   data-testid="link-linkedin-profile"
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
                   <Linkedin className="w-5 h-5 mr-2" />
-                  @shanekinkennon
+                  @ahmed-elgazzar-ict
                 </a>
               </div>
             </div>

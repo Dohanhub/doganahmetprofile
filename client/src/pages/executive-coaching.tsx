@@ -42,15 +42,15 @@ export default function ExecutiveCoaching() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h1 className="text-4xl md:text-5xl font-bold text-primary-900 mb-6 leading-tight" data-testid="text-hero-title">
-                Executive Coaching for Transformational Leadership
+                Digital Transformation & Strategy
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed" data-testid="text-hero-subtitle">
-                Unlock new mindsets and methods to inspire teams, equip them to lead change, and actually hold them accountable. Develop the leadership skills that transform organizations from the top down.
+                IT modernization, Smart Cities, IoT/Cloud Solutions, aligning tech initiatives with business goals and Vision 2030 objectives. Transform your organization's digital landscape with proven methodologies.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/contact" data-testid="button-start-coaching">
                   <Button className="bg-success hover:bg-success/90 text-success-foreground px-8 py-4 text-lg font-semibold">
-                    Start Your Coaching Journey
+                    Begin Your Digital Transformation
                   </Button>
                 </Link>
                 <Link href="/testimonials" data-testid="button-view-success-stories">

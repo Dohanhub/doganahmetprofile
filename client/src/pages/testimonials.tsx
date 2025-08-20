@@ -71,10 +71,10 @@ export default function Testimonials() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold text-primary-900 mb-6 leading-tight" data-testid="text-hero-title">
-              What Leaders Say About Our Work Together
+              Professional References & Project Impact
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed" data-testid="text-hero-subtitle">
-              Trusted by executives and boards who demand results while maintaining their commitment to principled leadership. Here's what they have to say about the transformation they've experienced.
+              Proven track record delivering SAR 125M+ in contracts, leading 130+ teams, and driving digital transformation across the Middle East with Vision 2030 alignment.
             </p>
             <Link href="/contact" data-testid="button-start-your-journey">
               <Button className="bg-success hover:bg-success/90 text-success-foreground px-8 py-4 text-lg font-semibold">

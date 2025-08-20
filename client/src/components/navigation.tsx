@@ -10,7 +10,7 @@ export default function Navigation() {
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { href: "/testimonials", label: "Testimonials" },
+    { href: "/achievements", label: "Achievements" },
   ];
 
   const isActive = (href: string) => {
@@ -25,7 +25,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
             <Link href="/" data-testid="link-home">
-              <span className="text-2xl font-bold text-primary-900">Shane Kinkennon</span>
+              <span className="text-2xl font-bold text-primary-900">Ahmet Doğan</span>
             </Link>
           </div>
           

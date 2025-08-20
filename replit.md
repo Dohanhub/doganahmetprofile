@@ -1,13 +1,14 @@
-# Professional Personal Branding Website
+# Ahmet Doğan - Elite ICT Executive Professional Website
 
 ## Project Overview
-A professional personal branding website redesign with executive-level styling inspired by Shane Kinkennon's design approach. Features modern design patterns, story-driven content structure, and professional consulting presentation.
+A professional executive website for Ahmet Doğan, Elite ICT Executive & Digital Transformation Leader. Features modern executive design, comprehensive career showcase, and Vision 2030 aligned professional presentation for C-suite positioning.
 
 ## User Preferences
-- Executive-level professional styling
+- Use document content exactly as written, word by word
+- Executive-level professional styling for ICT industry
 - Clean, modern design approach
-- Story-driven content structure
-- Inspired by top personal branding sites (Brittany Chiang, Gary Sheng, Shane Kinkennon)
+- Comprehensive achievement showcase
+- Vision 2030 and NEOM project emphasis
 
 ## Project Architecture
 - **Frontend**: React with TypeScript, Vite, shadcn/ui, Tailwind CSS
@@ -28,5 +29,7 @@ A professional personal branding website redesign with executive-level styling i
 - SEO optimization
 
 ## Recent Changes
-- Initial project setup - August 20, 2025
-- Implementing professional personal branding template
+- Updated entire website with Ahmet Doğan's exact information from document - August 20, 2025
+- Transformed from Shane Kinkennon coaching template to Ahmet's ICT executive profile
+- Updated hero sections, contact information, expertise areas, and professional credentials
+- Aligned all content with Vision 2030, NEOM projects, and global ICT leadership positioning
