@@ -203,7 +203,7 @@ export default function Home() {
                 </h3>
                 <div className="space-y-6">
                   <div className="border-l-4 border-yellow-400 pl-4 bg-white/5 rounded-r-lg p-3">
-                    <h4 className="font-bold text-lg mb-2 text-yellow-100">NEOM Smart City Infrastructure</h4>
+                    <h4 className="font-bold text-lg mb-2 text-yellow-100">NEOM Telco Park Data Center</h4>
                     <p className="text-white/90 text-sm mb-3 leading-relaxed">
                       Spearheaded enterprise-grade Tier III Data Center delivery for NEOM Telco Park, achieving full Uptime Institute certification. 
                       Established critical infrastructure foundation for Saudi Arabia's flagship smart city development, incorporating advanced 
