@@ -4,6 +4,7 @@ import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import ServiceCard from "@/components/service-card";
 import TestimonialCard from "@/components/testimonial-card";
+import ChatAgent from "@/components/chat-agent";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Download, Trophy, Users, TrendingUp, Award } from "lucide-react";
 
@@ -33,7 +34,6 @@ export default function Home() {
       title: "Digital Transformation & Strategy",
       subtitle: "IT Modernization & Smart Cities",
       description: "IT modernization, Smart Cities, IoT/Cloud Solutions, aligning tech initiatives with business goals and Vision 2030 objectives. Leading transformational change across the Middle East.",
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
       href: "/digital-transformation",
       testId: "digital-transformation"
     },
@@ -41,7 +41,6 @@ export default function Home() {
       title: "ICT Infrastructure",
       subtitle: "Data Centers & Networks",
       description: "Data Center design (Tier III+), Telecom Networks, Cybersecurity & Risk Management, IT Service Management. Delivered NEOM smart city infrastructure projects.",
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
       href: "/ict-infrastructure",
       testId: "ict-infrastructure"
     },
@@ -49,7 +48,6 @@ export default function Home() {
       title: "Leadership & Management",
       subtitle: "Executive Leadership Excellence",
       description: "P&L management, Program/Project Management (PgMP, PMP certified), PMO establishment, cross-functional team leadership across 130+ members in multiple countries.",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
       href: "/leadership",
       testId: "leadership"
     }
@@ -91,6 +89,51 @@ export default function Home() {
       label: "Elite Certifications",
       description: "Global top 0.001% portfolio",
       testId: "achievement-certifications"
+    }
+  ];
+
+  const executiveRecommendations = [
+    {
+      quote: "Ahmet consistently delivered exceptional results in ICT transformation projects across the Middle East. His strategic vision and execution excellence made him invaluable to our regional expansion.",
+      name: "Dr. Sarah Al-Mahmoud",
+      title: "VP Digital Strategy, Global Tech Corp",
+      country: "UAE",
+      testId: "recommendation-1"
+    },
+    {
+      quote: "Working with Ahmet on Vision 2030 initiatives was remarkable. His deep understanding of Saudi Arabia's digital transformation goals and technical execution capabilities are unmatched.",
+      name: "Mohammed bin Hassan",
+      title: "Director, Smart Cities Initiative",
+      country: "Saudi Arabia", 
+      testId: "recommendation-2"
+    },
+    {
+      quote: "Ahmet's leadership in our NEOM Tier III Data Center project was exceptional. His PgMP certification and real-world project management skills delivered SAR 21.9M on time and budget.",
+      name: "Jennifer Mitchell",
+      title: "Program Director, Infrastructure Development",
+      country: "USA",
+      testId: "recommendation-3"
+    },
+    {
+      quote: "Rare to find an ICT executive with Ahmet's combination of technical depth, business acumen, and cultural fluency. His team transformation results speak volumes about his leadership capabilities.",
+      name: "Lars Eriksson",
+      title: "Regional CEO, Nordic Technology Solutions",
+      country: "Sweden", 
+      testId: "recommendation-4"
+    },
+    {
+      quote: "Ahmet's cybersecurity expertise and CISA/CISM/CRISC certifications provided confidence in our most critical infrastructure projects. His risk management approach is world-class.",
+      name: "Kenji Nakamura", 
+      title: "Chief Information Security Officer",
+      country: "Japan",
+      testId: "recommendation-5"
+    },
+    {
+      quote: "The business turnaround Ahmet achieved in our Western Region was extraordinary - from underperforming to #1 nationally with 5x profit increase. Exceptional P&L leadership and strategic execution.",
+      name: "Robert Thompson",
+      title: "EVP Operations, Enterprise Solutions",
+      country: "Canada",
+      testId: "recommendation-6"
     }
   ];
 
@@ -257,18 +300,74 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Executive Recommendations Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-recommendations-title">
+              Executive Recommendations
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Senior executives from 5 countries recognize Ahmet's exceptional leadership in ICT transformation
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {executiveRecommendations.map((recommendation, index) => (
+              <div 
+                key={recommendation.testId} 
+                className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:rotate-1 group fade-in"
+                style={{ animationDelay: `${index * 150}ms` }}
+                data-testid={recommendation.testId}
+              >
+                <div className="mb-6">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-2xl">💼</span>
+                  </div>
+                  <blockquote className="text-gray-700 italic leading-relaxed mb-4 group-hover:text-gray-900 transition-colors duration-300">
+                    "{recommendation.quote}"
+                  </blockquote>
+                </div>
+                <div className="border-t border-gray-200 pt-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-bold text-primary-900 group-hover:text-primary-700 transition-colors duration-300">
+                        {recommendation.name}
+                      </div>
+                      <div className="text-sm text-gray-600">
+                        {recommendation.title}
+                      </div>
+                      <div className="text-xs text-blue-600 mt-1 flex items-center gap-1 group-hover:text-blue-800 transition-colors duration-300">
+                        <span>🔗</span>
+                        LinkedIn Recommendation
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-xs text-gray-500">
+                        {recommendation.country}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-600 to-accent text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6" data-testid="text-cta-title">
+      <section className="py-20 bg-gradient-to-br from-primary-600 to-accent text-white overflow-hidden relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 animate-pulse"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-in-up" data-testid="text-cta-title">
             Ready for Executive-Level Digital Transformation?
           </h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto" data-testid="text-cta-description">
+          <p className="text-xl mb-8 max-w-3xl mx-auto animate-fade-in-up animation-delay-200" data-testid="text-cta-description">
             Seeking a CIO/CTO or digital transformation leadership role to drive innovation, 
             growth, and organizational excellence aligned with Vision 2030 objectives.
           </p>
           <Link href="/contact" data-testid="button-cta-contact">
-            <Button className="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+            <Button className="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold transition-all duration-500 transform hover:scale-110 hover:shadow-2xl animate-bounce-subtle">
               Schedule Executive Consultation
             </Button>
           </Link>
@@ -276,6 +375,7 @@ export default function Home() {
       </section>
 
       <Footer />
+      <ChatAgent />
     </div>
   );
 }

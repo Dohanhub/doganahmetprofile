@@ -6,7 +6,7 @@ interface ServiceCardProps {
   title: string;
   subtitle: string;
   description: string;
-  image: string;
+  image?: string;
   href: string;
   testId: string;
 }
@@ -14,13 +14,15 @@ interface ServiceCardProps {
 export default function ServiceCard({ title, subtitle, description, image, href, testId }: ServiceCardProps) {
   return (
     <div className="bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group fade-in">
-      <div className="mb-6">
-        <img 
-          src={image} 
-          alt={`${title} service`} 
-          className="w-full h-48 object-cover rounded-xl shadow-md" 
-        />
-      </div>
+      {image && (
+        <div className="mb-6">
+          <img 
+            src={image} 
+            alt={`${title} service`} 
+            className="w-full h-48 object-cover rounded-xl shadow-md" 
+          />
+        </div>
+      )}
       <h3 className="text-2xl font-bold text-primary-900 mb-4" data-testid={`text-${testId}-title`}>
         {title}
       </h3>
