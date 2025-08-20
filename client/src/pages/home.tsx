@@ -19,14 +19,29 @@ export default function Home() {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          
+          // Add staggered animation for child elements
+          const children = entry.target.querySelectorAll('[data-animate]');
+          children.forEach((child, index) => {
+            setTimeout(() => {
+              child.classList.add('animate-fade-in-up');
+            }, index * 100);
+          });
         }
       });
     }, observerOptions);
 
-    const elements = document.querySelectorAll('.fade-in');
+    // Observe multiple animation classes
+    const elements = document.querySelectorAll('.fade-in, .lazy-fade, .lazy-slide-left, .lazy-slide-right');
     elements.forEach(el => observer.observe(el));
 
-    return () => observer.disconnect();
+    // Add smooth scrolling behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    return () => {
+      observer.disconnect();
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
   }, []);
 
   const expertiseAreas = [

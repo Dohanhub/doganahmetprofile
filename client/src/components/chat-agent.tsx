@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { MessageCircle, X, Send, User, Bird } from 'lucide-react';
+import { MessageCircle, X, Send, User, Zap } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -151,11 +151,11 @@ export default function ChatAgent() {
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center animate-float">
-                <Bot className="w-6 h-6" />
+                <Zap className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-bold text-lg">AI Assistant</h3>
-                <p className="text-xs opacity-90">Ask me anything - professional or general</p>
+                <h3 className="font-bold text-lg">Doğan AI</h3>
+                <p className="text-xs opacity-90">Powered by GPT - Ask me anything</p>
               </div>
             </div>
             <Button
@@ -183,7 +183,7 @@ export default function ChatAgent() {
                   {message.isUser ? (
                     <User className="w-5 h-5 text-white" />
                   ) : (
-                    <Bot className="w-5 h-5 text-gray-600" />
+                    <Zap className="w-5 h-5 text-gray-600" />
                   )}
                 </div>
                 <div
