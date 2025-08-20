@@ -6,9 +6,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
-            <div className="text-2xl font-bold text-white mb-4">Dr. Ahmet Doğan</div>
+            <div className="text-2xl font-bold text-white mb-4">Ahmet Doğan</div>
             <p className="text-gray-400 mb-6 max-w-md">
-              DBA, MBA, PgMP Candidate - Elite ICT Executive & Digital Transformation Leader specializing in strategic leadership, 
+              Elite ICT Executive & Digital Transformation Leader specializing in strategic leadership, 
               cybersecurity governance, and Vision 2030 alignment for enterprise organizations.
             </p>
             <div className="flex space-x-4">

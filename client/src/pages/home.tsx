@@ -88,9 +88,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-5xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-900 dark:text-white mb-8 leading-tight" data-testid="text-hero-title">
-              Dr. Ahmet Doğan
-              <span className="block text-yellow-500 dark:text-yellow-400 mt-2 text-2xl md:text-3xl">DBA, MBA, PgMP Candidate</span>
-              <span className="block text-lg md:text-xl text-gray-600 dark:text-gray-300 mt-2 font-normal">Elite ICT Executive & Digital Transformation Leader</span>
+              Ahmet Doğan
+              <span className="block text-yellow-500 dark:text-yellow-400 mt-2">Elite ICT Executive & Digital Transformation Leader</span>
             </h1>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               <Link href="/contact" data-testid="button-executive-contact">
@@ -118,7 +117,7 @@ export default function Home() {
               </a>
             </div>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">Doctoral Business Administration</span>
+              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">PgMP | MBA | DBA Candidate</span>
               <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">CISM | CISA | CRISC</span>
               <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">Saudi Premium Residency</span>
             </div>
