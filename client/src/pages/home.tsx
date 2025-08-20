@@ -81,8 +81,7 @@ export default function Home() {
               <span className="block text-accent mt-2">Elite ICT Executive & Digital Transformation Leader</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed max-w-4xl mx-auto" data-testid="text-hero-subtitle">
-              Visionary ICT leader with 20+ years of experience driving large-scale digital transformation 
-              across the Middle East. SAR 125M+ contracts secured, 130+ teams led, Vision 2030 aligned innovator.
+              Elite ICT Executive specializing in digital transformation and strategic infrastructure development.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               <Link href="/contact" data-testid="button-executive-contact">
