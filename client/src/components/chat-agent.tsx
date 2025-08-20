@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { MessageCircle, X, Send, User, Bot } from 'lucide-react';
+import { MessageCircle, X, Send, User, Bird } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -133,7 +133,11 @@ export default function ChatAgent() {
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-gradient-to-r from-primary-600 to-accent hover:from-primary-700 hover:to-accent/90 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 z-50 animate-pulse"
+          className="fixed bottom-8 right-8 w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 z-50 animate-pulse hover:animate-none"
+          style={{
+            filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.2))',
+            transition: 'all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)'
+          }}
           data-testid="button-chat-open"
         >
           <MessageCircle className="w-8 h-8 text-white" />
@@ -142,9 +146,9 @@ export default function ChatAgent() {
 
       {/* Chat Interface */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-96 h-[600px] bg-white rounded-2xl shadow-2xl border-2 border-primary-200 z-50 flex flex-col overflow-hidden animate-scale-in">
+        <div className="fixed bottom-8 right-8 w-96 h-[600px] bg-white rounded-2xl shadow-2xl border-2 border-gray-200 z-50 flex flex-col overflow-hidden animate-scale-in">
           {/* Header */}
-          <div className="bg-gradient-to-r from-primary-600 to-accent text-white p-4 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center animate-float">
                 <Bot className="w-6 h-6" />
@@ -231,7 +235,7 @@ export default function ChatAgent() {
               <Button
                 onClick={handleSend}
                 disabled={!input.trim()}
-                className="px-4 py-3 bg-gradient-to-r from-primary-600 to-accent hover:from-primary-700 hover:to-accent/90 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                className="px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
                 data-testid="button-chat-send"
               >
                 <Send className="w-4 h-4" />
