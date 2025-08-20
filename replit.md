@@ -30,6 +30,14 @@ A professional executive website for Ahmet Doğan, Elite ICT Executive & Digital
 
 ## Recent Changes (Latest Session - August 20, 2025)
 
+### Security & URL Fixes (August 20, 2025)
+- **Critical URL Fixes**: Corrected all LinkedIn URLs to use consistent `https://www.linkedin.com/in/ahmet-dogan-ict/`
+- **Security Implementation**: Added Helmet.js for XSS, clickjacking, and content security protection
+- **Rate Limiting**: Implemented contact form rate limiting (5 requests per 15 minutes per IP)
+- **Input Sanitization**: Added server-side input sanitization to prevent injection attacks
+- **CORS Configuration**: Proper cross-origin resource sharing headers
+- **Error Handling**: Enhanced error responses with development/production mode awareness
+
 ### Error Handling & Reliability Improvements
 - **Enhanced Contact Form**: Added comprehensive error handling with specific error messages for validation, network, and server errors
 - **Robust API Routes**: Implemented detailed error handling with proper HTTP status codes and development/production error messaging

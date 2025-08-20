@@ -30,6 +30,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
+      // Input sanitization
+      const sanitizeInput = (str: string) => str.trim().replace(/[<>\"']/g, '');
+      
+      validatedData.firstName = sanitizeInput(validatedData.firstName);
+      validatedData.lastName = sanitizeInput(validatedData.lastName);
+      validatedData.email = sanitizeInput(validatedData.email);
+      if (validatedData.organization) validatedData.organization = sanitizeInput(validatedData.organization);
+      if (validatedData.service) validatedData.service = sanitizeInput(validatedData.service);
+      if (validatedData.message) validatedData.message = sanitizeInput(validatedData.message);
+
       // Store contact with error handling
       const contact = await storage.createContact(validatedData);
       

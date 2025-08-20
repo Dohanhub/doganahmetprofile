@@ -36,7 +36,7 @@ export default function ChatAgent() {
     
     // Check if question is about Ahmet first (priority responses)
     if (msg.includes('ahmet') || msg.includes('contact') || msg.includes('email') || msg.includes('phone') || msg.includes('reach')) {
-      return "Contact Ahmet directly: info@doganahmet.com, +966-500-666-084. Website: www.doganahmet.com, LinkedIn: ahmed-elgazzar-ict. Based in Riyadh with Saudi Premium Residency. Responds within 24 hours.";
+      return "Contact Ahmet directly: info@doganahmet.com, +966-500-666-084. LinkedIn: https://www.linkedin.com/in/ahmet-dogan-ict/. Based in Riyadh with Saudi Premium Residency. Responds within 24 hours.";
     }
 
     if ((msg.includes('experience') || msg.includes('career') || msg.includes('background') || msg.includes('work')) && (msg.includes('his') || msg.includes('ahmet') || msg.includes('you'))) {
@@ -283,7 +283,7 @@ export default function ChatAgent() {
               </Button>
             </div>
             <p className="text-xs text-gray-500 mt-3 text-center">
-              For executive discussions: info@doganahmet.com | www.doganahmet.com
+              For executive discussions: info@doganahmet.com | LinkedIn: https://www.linkedin.com/in/ahmet-dogan-ict/
             </p>
           </div>
         </div>

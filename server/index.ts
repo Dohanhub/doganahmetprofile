@@ -1,10 +1,71 @@
 import express, { type Request, Response, NextFunction } from "express";
+import helmet from "helmet";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
+// Security middleware
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'", "ws:", "wss:"]
+    }
+  },
+  crossOriginEmbedderPolicy: false
+}));
+
+// Rate limiting for contact form (simple in-memory implementation)
+const rateLimitMap = new Map();
+const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 minutes
+const RATE_LIMIT_MAX_REQUESTS = 5; // 5 requests per window
+
+app.use('/api/contact', (req, res, next) => {
+  const clientIP = req.ip || req.connection.remoteAddress || 'unknown';
+  const now = Date.now();
+  
+  if (!rateLimitMap.has(clientIP)) {
+    rateLimitMap.set(clientIP, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+    return next();
+  }
+  
+  const clientData = rateLimitMap.get(clientIP);
+  
+  if (now > clientData.resetTime) {
+    rateLimitMap.set(clientIP, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+    return next();
+  }
+  
+  if (clientData.count >= RATE_LIMIT_MAX_REQUESTS) {
+    return res.status(429).json({ 
+      success: false, 
+      error: "Too many requests. Please try again later." 
+    });
+  }
+  
+  clientData.count++;
+  next();
+});
+
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: false, limit: '10mb' }));
+
+// CORS headers
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
 
 app.use((req, res, next) => {
   const start = Date.now();

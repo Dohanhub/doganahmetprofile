@@ -298,7 +298,7 @@ export default function Home() {
               </p>
               <div className="mt-4">
                 <a 
-                  href="https://linkedin.com/in/ahmed-elgazzar-ict" 
+                  href="https://www.linkedin.com/in/ahmet-dogan-ict/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium"
