@@ -8,7 +8,7 @@ export default function Home() {
         <div className="container">
           <div className="flex justify-between items-center py-4">
             <div className="text-2xl font-bold text-gradient">
-              Shane Kinkennon
+              Ahmet Doğan
             </div>
             <div className="hidden md:flex space-x-8">
               <Link href="/" className="text-sm font-medium text-[var(--fg)] hover:text-[var(--executive-gold)] transition-all duration-300">
@@ -33,22 +33,22 @@ export default function Home() {
         <div className="container">
           <div className="text-center animate-fade-in">
             <div className="kpi-ribbon mb-8 mx-auto w-fit">
-              <span>Executive Leadership Excellence</span>
+              <span>Global Top 0.001% ICT Executive</span>
             </div>
             <h1 className="holographic-text mb-6">
-              Transform Your Leadership Impact
+              Elite ICT Executive & Digital Transformation Leader
             </h1>
             <p className="text-xl text-[var(--fg)]/80 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Empowering executives and organizations with strategic insights, proven methodologies, 
-              and transformational leadership development for sustainable growth and mission delivery.
+              Visionary ICT leader with 20+ years of experience driving large-scale digital transformation 
+              across the Middle East. SAR 125M+ contracts secured, 130+ teams led, Vision 2030 aligned innovator.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link href="/contact" className="btn primary">
-                Schedule Consultation
+                Executive Contact
               </Link>
-              <Link href="/about" className="btn">
-                Learn More
-              </Link>
+              <a href="#" className="btn">
+                Download Elite CV
+              </a>
             </div>
           </div>
         </div>
