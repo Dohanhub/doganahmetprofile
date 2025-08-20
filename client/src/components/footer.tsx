@@ -13,7 +13,7 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://www.linkedin.com/in/ahmed-elgazzar-ict/" 
+                href="https://www.linkedin.com/in/ahmet-dogan-ict/" 
                 className="text-gray-400 hover:text-white transition-colors"
                 data-testid="link-linkedin"
                 target="_blank" 

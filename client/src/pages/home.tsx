@@ -98,7 +98,7 @@ export default function Home() {
                 </Button>
               </Link>
               <a 
-                href="https://www.linkedin.com/in/ahmed-elgazzar-ict/" 
+                href="https://www.linkedin.com/in/ahmet-dogan-ict/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 data-testid="button-linkedin-profile"
