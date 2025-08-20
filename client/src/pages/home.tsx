@@ -55,28 +55,10 @@ export default function Home() {
 
   const achievements = [
     {
-      number: "25+",
-      label: "Elite Certifications",
-      description: "Global top 0.001% - Only 1 in 100,000 professionals hold this portfolio depth",
+      number: "Elite",
+      label: "Certifications",
+      description: "Global top 0.001% portfolio",
       testId: "achievement-certifications"
-    },
-    {
-      number: "DBA + MBA",
-      label: "Advanced Education",
-      description: "Business & Technical Leadership",
-      testId: "achievement-education"
-    },
-    {
-      number: "PgMP + PMP",
-      label: "Program Management",
-      description: "Elite Project & Portfolio Leadership",
-      testId: "achievement-management"
-    },
-    {
-      number: "Stanford",
-      label: "Executive Education",
-      description: "Strategic Leadership Program",
-      testId: "achievement-stanford"
     }
   ];
 
