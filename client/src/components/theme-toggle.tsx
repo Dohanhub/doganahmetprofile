@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button"
 import { useTheme } from "@/components/theme-provider"
 
 export function ThemeToggle() {
-  const { actualTheme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
 
   const handleToggle = () => {
-    const newTheme = actualTheme === "light" ? "dark" : "light"
+    const newTheme = theme === "light" ? "dark" : "light"
     setTheme(newTheme)
   }
 
@@ -18,7 +18,7 @@ export function ThemeToggle() {
       className="h-10 w-10 px-0 bg-white dark:bg-gray-800 border-2 border-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
       data-testid="button-theme-toggle"
     >
-      {actualTheme === "dark" ? (
+      {theme === "dark" ? (
         <Sun className="h-5 w-5 text-blue-600 dark:text-blue-400" />
       ) : (
         <Moon className="h-5 w-5 text-blue-600" />
