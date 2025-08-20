@@ -14,7 +14,7 @@ export default function ChatAgent() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hello! I'm Ahmet's intelligent AI assistant. I can discuss his professional background, career achievements, and contact information. I also have general knowledge on technology, business, AI, cybersecurity, and various topics. Ask me anything - from his ICT expertise to general questions. What interests you?",
+      text: "Hello! I'm Ahmet's AI assistant. I can provide information about his professional background, career achievements, and contact details. What would you like to know?",
       isUser: false,
       timestamp: new Date()
     }
