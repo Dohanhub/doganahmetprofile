@@ -138,8 +138,7 @@ export default function Home() {
               Core Expertise Areas
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto" data-testid="text-expertise-subtitle">
-              Proven leadership across digital transformation, infrastructure development, and strategic business growth 
-              with alignment to Vision 2030 objectives and international best practices.
+              Proven leadership across digital transformation, infrastructure development, and strategic business growth with alignment to Vision 2030 objectives and international best practices.
             </p>
           </div>
 
