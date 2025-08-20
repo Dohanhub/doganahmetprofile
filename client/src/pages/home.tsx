@@ -54,42 +54,7 @@ export default function Home() {
   ];
 
   const achievements = [
-    {
-      number: "SAR 125M+",
-      label: "Contracts Secured (2024)",
-      description: "125% YoY Growth",
-      testId: "achievement-contracts"
-    },
-    {
-      number: "$18M",
-      label: "Annual ICT Division Revenue",
-      description: "Built from scratch in 5 years",
-      testId: "achievement-revenue"
-    },
-    {
-      number: "130+",
-      label: "Team Members Led",
-      description: "Across multiple countries",
-      testId: "achievement-teams"
-    },
-    {
-      number: "20+",
-      label: "Years Experience",
-      description: "ICT & Digital Transformation",
-      testId: "achievement-experience"
-    },
-    {
-      number: "5×",
-      label: "Profit Increase",
-      description: "Regional turnaround success",
-      testId: "achievement-profit"
-    },
-    {
-      number: "25+",
-      label: "Elite Certifications",
-      description: "Global top 0.001% portfolio",
-      testId: "achievement-certifications"
-    }
+    // Content removed - ready for new achievements
   ];
 
 
