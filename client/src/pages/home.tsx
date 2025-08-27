@@ -1,274 +1,231 @@
-import { useEffect } from "react";
+import React from "react";
 import { Link } from "wouter";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
+import { ChevronRight, Download, Trophy, Users, TrendingUp, Award } from "lucide-react";
 import ServiceCard from "@/components/service-card";
-import TestimonialCard from "@/components/testimonial-card";
+import Footer from "@/components/footer";
 import ChatAgent from "@/components/chat-agent";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Download, Trophy, Users, TrendingUp, Award, Calendar, Linkedin } from "lucide-react";
+import Navigation from "@/components/navigation";
+import { useTheme } from "@/components/theme-provider";
 
 export default function Home() {
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          
-          // Add staggered animation for child elements
-          const children = entry.target.querySelectorAll('[data-animate]');
-          children.forEach((child, index) => {
-            setTimeout(() => {
-              child.classList.add('animate-fade-in-up');
-            }, index * 100);
-          });
-        }
-      });
-    }, observerOptions);
-
-    // Observe multiple animation classes
-    const elements = document.querySelectorAll('.fade-in, .lazy-fade, .lazy-slide-left, .lazy-slide-right');
-    elements.forEach(el => observer.observe(el));
-
-    // Add smooth scrolling behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
-
-    return () => {
-      observer.disconnect();
-      document.documentElement.style.scrollBehavior = 'auto';
-    };
-  }, []);
+  const { theme } = useTheme();
+  
+  const achievements = [
+    {
+      testId: "achievement-1",
+      number: "20+",
+      label: "Elite Certifications",
+      description: "PgMP, CISA/CISM/CRISC, RCDD, and other globally recognized credentials placing Ahmet in the top 0.001% of ICT professionals worldwide."
+    },
+    {
+      testId: "achievement-2", 
+      number: "130+",
+      label: "Team Members Led",
+      description: "Cross-functional teams across multiple countries, delivering complex digital transformation projects with operational excellence."
+    },
+    {
+      testId: "achievement-3",
+      number: "5",
+      label: "Countries",
+      description: "Saudi Arabia, Kuwait, Turkey, Egypt, and international projects spanning the Middle East and global markets."
+    }
+  ];
 
   const expertiseAreas = [
     {
+      testId: "expertise-digital-transformation",
       title: "Digital Transformation & Strategy",
       subtitle: "IT Modernization & Smart Cities",
       description: "IT modernization, Smart Cities, IoT/Cloud Solutions, aligning tech initiatives with business goals and Vision 2030 objectives. Leading transformational change across the Middle East.",
-      href: "/digital-transformation",
-      testId: "digital-transformation"
+      href: "/management-consulting",
+      image: undefined
     },
     {
+      testId: "expertise-ict-infrastructure",
       title: "ICT Infrastructure",
-      subtitle: "Data Centers & Networks",
+      subtitle: "Data Centers & Networks", 
       description: "Data Center design (Tier III+), Telecom Networks, Cybersecurity & Risk Management, IT Service Management. Delivered NEOM smart city infrastructure projects.",
-      href: "/ict-infrastructure",
-      testId: "ict-infrastructure"
+      href: "/board-consulting",
+      image: undefined
     },
     {
+      testId: "expertise-leadership",
       title: "Leadership & Management",
       subtitle: "Executive Leadership Excellence",
       description: "P&L management, Program/Project Management (PgMP, PMP certified), PMO establishment, cross-functional team leadership across 130+ members in multiple countries.",
-      href: "/leadership",
-      testId: "leadership"
+      href: "/executive-coaching",
+      image: undefined
     }
   ];
-
-  const achievements = [
-    {
-      number: "Elite",
-      label: "Certifications",
-      description: "Global top 0.001% portfolio combining PgMP, CISA/CISM/CRISC, RCDD, and 20+ specialized credentials. Statistical analysis shows fewer than 1 in 100,000 ICT professionals hold this comprehensive certification depth across multiple domains.",
-      testId: "achievement-certifications"
-    }
-  ];
-
-
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 py-20 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-5xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-900 dark:text-white mb-8 leading-tight" data-testid="text-hero-title">
+      {/* 1. Hero Section - Exact Match to Image with Theme Support */}
+      <section className="relative bg-[#F7F7F7] dark:bg-gray-900 overflow-hidden min-h-screen flex items-center">
+        {/* Content Container */}
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24 text-center">
+          
+          {/* Name with Yellow Underline - EXACTLY as in image */}
+          <div className="mb-8">
+            <h1 
+              className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4 font-playfair animate-fade-in-up" 
+              data-testid="text-hero-title"
+            >
               Ahmet Doğan
-              <span className="block text-yellow-500 dark:text-yellow-400 mt-2">Elite ICT Executive & Digital Transformation Leader</span>
             </h1>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-              <Link href="/contact" data-testid="button-executive-contact">
-                <Button className="bg-success hover:bg-success/90 text-success-foreground p-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg rounded-full">
-                  <Calendar className="w-6 h-6" />
-                </Button>
-              </Link>
-              <a 
-                href="https://www.linkedin.com/in/ahmet-dogan-ict/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                data-testid="button-linkedin-profile"
-              >
-                <Button 
-                  variant="outline" 
-                  className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white p-3 text-sm font-semibold transition-all duration-300 transform hover:scale-110 rounded-full hover:shadow-2xl active:scale-95"
-                  style={{
-                    boxShadow: '0 4px 15px rgba(37, 99, 235, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
-                    background: 'linear-gradient(145deg, #ffffff, #f8fafc)',
-                    border: '2px solid #2563eb'
-                  }}
-                >
-                  <Linkedin className="w-4 h-4" />
-                </Button>
-              </a>
-            </div>
-            <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">Doctor of Business Administration Candidate | PgMP | MBA | Chartered Management Institute</span>
-              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">CISM | CISA | CRISC</span>
-              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">Saudi Premium Residency</span>
-            </div>
+            {/* Yellow Accent Line - EXACTLY as in image */}
+            <div className="w-24 sm:w-32 h-0.5 bg-yellow-400 dark:bg-yellow-500 mx-auto animate-fade-in-up animation-delay-200"></div>
+          </div>
+
+          {/* Credentials - EXACTLY as in image */}
+          <div className="mb-8 animate-fade-in-up animation-delay-400">
+            <p className="text-lg sm:text-xl md:text-2xl font-medium text-blue-600 dark:text-blue-400 font-montserrat tracking-wide">
+              DBA Candidate | PgMP | Chartered Manager | Consultant Engineer (SCE)
+            </p>
+          </div>
+
+          {/* Tagline - EXACTLY as in image */}
+          <div className="animate-fade-in-up animation-delay-600">
+            <p className="text-xl sm:text-2xl md:text-3xl italic text-black dark:text-gray-200 font-ibm-plex leading-relaxed max-w-4xl mx-auto">
+              "Shaping strategy and governance with accredited expertise — delivering impact across borders."
+            </p>
+          </div>
+
+          {/* Saudi Premium Residency Badge */}
+          <div className="mt-12 animate-fade-in-up animation-delay-800">
+            <span className="inline-block px-6 sm:px-8 py-3 bg-gradient-to-r from-[#0047AB] to-[#009873] text-white rounded-full text-base sm:text-lg font-semibold shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-105 transition-all duration-500 transform hover:rotate-1">
+              Saudi Premium Residency
+            </span>
+          </div>
+
+          {/* Theme Status Indicator (Debug) */}
+          <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+            Current Theme: <span className="font-mono">{theme}</span>
+            <br />
+            <button 
+              onClick={() => {
+                const root = document.documentElement
+                const newTheme = root.classList.contains('dark') ? 'light' : 'dark'
+                root.classList.remove('light', 'dark')
+                root.classList.add(newTheme)
+                console.log('Manual theme change to:', newTheme)
+              }}
+              className="mt-2 px-3 py-1 bg-blue-500 text-white rounded text-xs hover:bg-blue-600"
+            >
+              Test Theme Toggle
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Key Achievements Section */}
+      {/* 2. Accreditation & Elite Certifications - Merged Spotlight */}
       <section className="py-16 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-4" data-testid="text-accreditation-title">
-              Accreditation Beyond Boundaries
-            </h2>
-          </div>
-          <div className="flex justify-center">
-            <div className="max-w-2xl w-full">
-              {achievements.map((achievement) => (
-                <div key={achievement.testId} className="text-center bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl" data-testid={achievement.testId}>
-                  <div className="text-2xl md:text-3xl font-bold text-primary-700 mb-4">
-                    {achievement.number} {achievement.label}
+          <div className="text-center">
+            <div className="max-w-4xl mx-auto bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border border-blue-200 dark:border-blue-700 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-900 dark:text-primary-100 mb-4 sm:mb-6" data-testid="text-accreditation-title">
+                Accreditation Beyond Boundaries
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+                {achievements.map((achievement) => (
+                  <div key={achievement.testId} className="text-center" data-testid={achievement.testId}>
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-700 dark:text-primary-300 mb-2 sm:mb-3">
+                      {achievement.number}
+                    </div>
+                    <div className="text-base sm:text-lg font-semibold text-primary-800 dark:text-primary-200 mb-2">
+                      {achievement.label}
+                    </div>
+                    <div className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                      {achievement.description}
+                    </div>
                   </div>
-                  <div className="text-base text-gray-600 leading-relaxed">
-                    {achievement.description}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Core Expertise Section */}
-      <section id="expertise" className="py-20 lg:py-32 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-900 mb-6" data-testid="text-expertise-title">
-              Core Expertise Areas
+      {/* 3. Core Expertise & Projects - Unified Section */}
+      <section id="expertise" className="py-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 relative">
+        {/* Enhanced Background Pattern */}
+        <div className="absolute inset-0 opacity-10 dark:opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, #3b82f6 1px, transparent 0)`,
+            backgroundSize: '30px 30px'
+          }}></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary-900 dark:text-primary-100 mb-4 sm:mb-6" data-testid="text-expertise-title">
+              Core Expertise & Featured Projects
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto" data-testid="text-expertise-subtitle">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto px-4" data-testid="text-expertise-subtitle">
               Proven leadership across digital transformation, infrastructure development, and strategic business growth with alignment to Vision 2030 objectives and international best practices.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-            {expertiseAreas.map((area) => (
-              <ServiceCard key={area.testId} {...area} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Executive Profile Section */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-profile-title">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
+            {/* Left Side - Executive Profile */}
+            <div className="px-2 sm:px-0">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-900 dark:text-primary-100 mb-4 sm:mb-6" data-testid="text-profile-title">
                 Visionary ICT Leader
-              </h2>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed" data-testid="text-profile-description-1">
+              </h3>
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 mb-4 sm:mb-6 leading-relaxed" data-testid="text-profile-description-1">
                 Visionary ICT leader specializing in digital transformation and infrastructure projects across the Middle East 
                 (Saudi Arabia, Kuwait, Turkey, Egypt). Proven track record of turning around underperforming operations and 
                 accelerating growth.
               </p>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed" data-testid="text-profile-description-2">
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 leading-relaxed" data-testid="text-profile-description-2">
                 Combines deep technical expertise with strategic business acumen: led nationwide sales and P&L management, 
                 executed smart city and cloud initiatives aligned with Vision 2030 goals. One of the most highly certified 
                 ICT executives globally.
               </p>
-              <div className="flex flex-wrap gap-4 mb-8">
-                <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium" data-testid="badge-neom-leader">
+              <div className="flex flex-wrap gap-2 sm:gap-4 mb-6 sm:mb-8">
+                <span className="bg-blue-100 text-blue-700 px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-medium" data-testid="badge-neom-leader">
                   NEOM Project Leader
                 </span>
-                <span className="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium" data-testid="badge-vision-2030">
+                <span className="bg-green-100 text-green-700 px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-medium" data-testid="badge-vision-2030">
                   Vision 2030 Aligned
                 </span>
-                <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium" data-testid="badge-pgmp-certified">
+                <span className="bg-blue-100 text-blue-700 px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-medium" data-testid="badge-pgmp-certified">
                   PgMP Certified
                 </span>
-                <span className="bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium" data-testid="badge-premium-residency">
+                <span className="bg-orange-100 text-orange-700 px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-medium" data-testid="badge-premium-residency">
                   Saudi Premium Residency
                 </span>
               </div>
-
-              <Link href="/about" data-testid="button-learn-more">
-                <Button className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 text-lg font-semibold transition-all duration-300">
-                  Learn More About Ahmet
-                  <ChevronRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
             </div>
-            <div className="relative">
-              <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 rounded-3xl p-10 text-white shadow-2xl">
-                {/* Background decorative elements */}
-                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-yellow-400/20 to-orange-400/20 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-green-400/20 to-blue-400/20 rounded-full blur-3xl"></div>
-                
-                <div className="relative z-10">
-                  <h3 className="text-3xl font-bold mb-8 text-center text-yellow-100" data-testid="text-featured-projects-title">
-                    Featured Projects
-                  </h3>
-                  <div className="space-y-8">
-                    <div className="relative border-l-4 border-yellow-400 pl-6 bg-white/10 rounded-r-2xl p-6 backdrop-blur-sm hover:bg-white/15 transition-all duration-300 group">
-                      <div className="absolute -left-2 top-6 w-4 h-4 bg-yellow-400 rounded-full shadow-lg"></div>
-                      <h4 className="font-bold text-xl mb-3 text-yellow-100 group-hover:text-yellow-50 transition-colors">NEOM Telco Park Data Center</h4>
-                      <p className="text-white/90 text-sm mb-4 leading-relaxed">
-                        Spearheaded enterprise-grade Tier III Data Center delivery for NEOM Telco Park, achieving full Uptime Institute certification. 
-                        Established critical infrastructure foundation for Saudi Arabia's flagship smart city development, incorporating advanced 
-                        cooling systems, redundant power architecture, and ultra-low latency network design for next-generation digital services.
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        <span className="bg-gradient-to-r from-blue-500 to-blue-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Vision 2030 Flagship</span>
-                        <span className="bg-gradient-to-r from-green-500 to-green-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Smart Cities</span>
-                        <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Data Centers</span>
-                        <span className="bg-gradient-to-r from-red-500 to-red-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Telecom Infrastructure</span>
-                      </div>
-                    </div>
-                    
-                    <div className="relative border-l-4 border-yellow-400 pl-6 bg-white/10 rounded-r-2xl p-6 backdrop-blur-sm hover:bg-white/15 transition-all duration-300 group">
-                      <div className="absolute -left-2 top-6 w-4 h-4 bg-yellow-400 rounded-full shadow-lg"></div>
-                      <h4 className="font-bold text-xl mb-3 text-yellow-100 group-hover:text-yellow-50 transition-colors">Regional Digital Transformation</h4>
-                      <p className="text-white/90 text-sm mb-4 leading-relaxed">
-                        Orchestrated comprehensive business transformation across Western Region operations, achieving nationwide market leadership 
-                        through strategic technology integration. Led multi-sector digitization initiatives spanning healthcare, education, 
-                        government services, and enterprise solutions with focus on operational excellence and sustainable growth frameworks.
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        <span className="bg-gradient-to-r from-orange-500 to-orange-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Healthcare IT</span>
-                        <span className="bg-gradient-to-r from-teal-500 to-teal-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Education Tech</span>
-                        <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Government Services</span>
-                        <span className="bg-gradient-to-r from-pink-500 to-pink-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Enterprise Solutions</span>
-                      </div>
-                    </div>
-                    
-                    <div className="relative border-l-4 border-yellow-400 pl-6 bg-white/10 rounded-r-2xl p-6 backdrop-blur-sm hover:bg-white/15 transition-all duration-300 group">
-                      <div className="absolute -left-2 top-6 w-4 h-4 bg-yellow-400 rounded-full shadow-lg"></div>
-                      <h4 className="font-bold text-xl mb-3 text-yellow-100 group-hover:text-yellow-50 transition-colors">Multi-Sector Technology Leadership</h4>
-                      <p className="text-white/90 text-sm mb-4 leading-relaxed">
-                        Delivered strategic ICT solutions across diverse industry verticals including financial services, manufacturing, 
-                        retail, and logistics. Implemented cloud-first architectures, cybersecurity frameworks, and IoT ecosystems 
-                        enabling digital transformation aligned with Saudi Vision goals and international best practices.
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        <span className="bg-gradient-to-r from-yellow-500 to-yellow-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Financial Services</span>
-                        <span className="bg-gradient-to-r from-cyan-500 to-cyan-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Manufacturing</span>
-                        <span className="bg-gradient-to-r from-lime-500 to-lime-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Retail & E-commerce</span>
-                        <span className="bg-gradient-to-r from-rose-500 to-rose-600 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">Logistics & Supply Chain</span>
-                      </div>
-                    </div>
-                  </div>
+
+            {/* Right Side - Project Cards */}
+            <div className="space-y-4 sm:space-y-6">
+              <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-2xl hover:-translate-y-2 hover:scale-105 transition-all duration-500 transform hover:rotate-1 hover:shadow-blue-200/30 dark:hover:shadow-blue-500/20">
+                <h4 className="font-bold text-lg sm:text-xl mb-2 sm:mb-3 text-primary-900 dark:text-primary-100">NEOM Telco Park Data Center</h4>
+                <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">
+                  Spearheaded enterprise-grade Tier III Data Center delivery for NEOM Telco Park, achieving full Uptime Institute certification. 
+                  Established critical infrastructure foundation for Saudi Arabia's flagship smart city development.
+                </p>
+                <div className="flex flex-wrap gap-1 sm:gap-2">
+                  <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 sm:px-3 py-1 rounded-full text-xs font-semibold">Vision 2030 Flagship</span>
+                  <span className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 px-2 sm:px-3 py-1 rounded-full text-xs font-semibold">Smart Cities</span>
+                  <span className="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 px-2 sm:px-3 py-1 rounded-full text-xs font-semibold">Data Centers</span>
+                </div>
+              </div>
+              
+              <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-2xl hover:-translate-y-2 hover:scale-105 transition-all duration-500 transform hover:rotate-1 hover:shadow-green-200/30 dark:hover:shadow-green-500/20">
+                <h4 className="font-bold text-lg sm:text-xl mb-2 sm:mb-3 text-primary-900 dark:text-primary-100">Regional Digital Transformation</h4>
+                <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">
+                  Orchestrated comprehensive business transformation across Western Region operations, achieving nationwide market leadership 
+                  through strategic technology integration.
+                </p>
+                <div className="flex flex-wrap gap-1 sm:gap-2">
+                  <span className="bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 px-2 sm:px-3 py-1 rounded-full text-xs font-semibold">Healthcare IT</span>
+                  <span className="bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 px-2 sm:px-3 py-1 rounded-full text-xs font-semibold">Education Tech</span>
+                  <span className="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 px-2 sm:px-3 py-1 rounded-full text-xs font-semibold">Government Services</span>
                 </div>
               </div>
             </div>
@@ -276,135 +233,124 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Executive Recommendations Section */}
-      <section className="py-20 bg-gray-50">
+      {/* 4. Executive Recommendations - Horizontal Stats */}
+      <section className="py-16 bg-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-recommendations-title">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-900 mb-4 sm:mb-6" data-testid="text-recommendations-title">
               Executive Recommendations
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto" data-testid="text-recommendations-subtitle">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4" data-testid="text-recommendations-subtitle">
               Endorsed by 18 senior executives across 5 countries for exceptional ICT leadership and digital transformation expertise
             </p>
           </div>
           
-          <div className="text-center mb-8">
-            <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl inline-block">
-              <p className="text-lg text-gray-700 mb-4">
-                <strong>18 Executive Recommendations</strong> from senior leaders across 5 countries
-              </p>
-              <p className="text-sm text-gray-600">
-                Available on LinkedIn profile for verification and detailed testimonials
-              </p>
-              <div className="mt-4">
-                <a 
-                  href="https://www.linkedin.com/in/ahmet-dogan-ict/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium"
-                >
-                  View LinkedIn Recommendations
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </a>
-              </div>
+          {/* Horizontal Stat Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
+            <div className="bg-white p-4 sm:p-6 rounded-lg sm:rounded-xl shadow-lg text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-primary-700">18</div>
+              <div className="text-xs sm:text-sm text-gray-600">Executive Recommendations</div>
+            </div>
+            <div className="bg-white p-4 sm:p-6 rounded-lg sm:rounded-xl shadow-lg text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-primary-700">5</div>
+              <div className="text-xs sm:text-sm text-gray-600">Countries</div>
+            </div>
+            <div className="bg-white p-4 sm:p-6 rounded-lg sm:rounded-xl shadow-lg text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-primary-700">12</div>
+              <div className="text-xs sm:text-sm text-gray-600">C-Level Endorsements</div>
+            </div>
+            <div className="bg-white p-4 sm:p-6 rounded-lg sm:rounded-xl shadow-lg text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-primary-700">6</div>
+              <div className="text-xs sm:text-sm text-gray-600">Fortune 500 Companies</div>
             </div>
           </div>
 
+          {/* LinkedIn Recommendations CTA */}
           <div className="text-center">
-            <div className="bg-white p-6 rounded-xl shadow-lg inline-block">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div>
-                  <div className="text-2xl font-bold text-primary-700">18</div>
-                  <div className="text-sm text-gray-600">Executive Recommendations</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-primary-700">5</div>
-                  <div className="text-sm text-gray-600">Countries</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-primary-700">12</div>
-                  <div className="text-sm text-gray-600">C-Level Endorsements</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-primary-700">6</div>
-                  <div className="text-sm text-gray-600">Fortune 500 Companies</div>
-                </div>
-              </div>
-            </div>
+            <a 
+              href="https://www.linkedin.com/in/ahmet-dogan-ict-executive" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              data-testid="button-linkedin-recommendations"
+            >
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                View LinkedIn Recommendations
+                <ChevronRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
+              </Button>
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Credentials Overview Section */}
-      <section className="py-20 bg-white">
+      {/* 5. Elite Professional Credentials - Stats Grid */}
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-credentials-title">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-900 mb-4 sm:mb-6" data-testid="text-credentials-title">
               Elite Professional Credentials
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto" data-testid="text-credentials-subtitle">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4" data-testid="text-credentials-subtitle">
               Comprehensive portfolio placing Ahmet in the global top 0.001% of ICT professionals
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
             {/* Education */}
-            <div className="text-center bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl hover:shadow-lg transition-all duration-300">
-              <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="w-8 h-8 text-white" />
+            <div className="text-center bg-gradient-to-br from-blue-50 to-blue-100 p-6 sm:p-8 rounded-lg sm:rounded-xl hover:shadow-2xl hover:-translate-y-3 hover:scale-105 transition-all duration-500 transform hover:rotate-1 hover:shadow-blue-200/50">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <Award className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <div className="text-3xl font-bold text-blue-700 mb-2">5</div>
-              <div className="text-lg font-semibold text-gray-900 mb-2">Advanced Degrees</div>
-              <div className="text-sm text-gray-600">DBA, MBA, Stanford Executive Education</div>
+              <div className="text-2xl sm:text-3xl font-bold text-blue-700 mb-2">5</div>
+              <div className="text-base sm:text-lg font-semibold text-gray-900 mb-2">Advanced Degrees</div>
+              <div className="text-xs sm:text-sm text-gray-600">DBA, MBA, Stanford Executive Education</div>
             </div>
 
             {/* Certifications */}
-            <div className="text-center bg-gradient-to-br from-indigo-50 to-indigo-100 p-8 rounded-xl hover:shadow-lg transition-all duration-300">
-              <div className="w-16 h-16 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Trophy className="w-8 h-8 text-white" />
+            <div className="text-center bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 sm:p-8 rounded-lg sm:rounded-xl hover:shadow-2xl hover:-translate-y-3 hover:scale-105 transition-all duration-500 transform hover:rotate-1 hover:shadow-indigo-200/50">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <div className="text-3xl font-bold text-indigo-700 mb-2">20+</div>
-              <div className="text-lg font-semibold text-gray-900 mb-2">Elite Certifications</div>
-              <div className="text-sm text-gray-600">PgMP, CISA/CISM/CRISC, RCDD</div>
+              <div className="text-2xl sm:text-3xl font-bold text-indigo-700 mb-2">20+</div>
+              <div className="text-base sm:text-lg font-semibold text-gray-900 mb-2">Elite Certifications</div>
+              <div className="text-xs sm:text-sm text-gray-600">PgMP, CISA/CISM/CRISC, RCDD</div>
             </div>
 
             {/* Organizations */}
-            <div className="text-center bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-xl hover:shadow-lg transition-all duration-300">
-              <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-white" />
+            <div className="text-center bg-gradient-to-br from-green-50 to-green-100 p-6 sm:p-8 rounded-lg sm:rounded-xl hover:shadow-2xl hover:-translate-y-3 hover:scale-105 transition-all duration-500 transform hover:rotate-1 hover:shadow-green-200/50">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <div className="text-3xl font-bold text-green-700 mb-2">10</div>
-              <div className="text-lg font-semibold text-gray-900 mb-2">Professional Organizations</div>
-              <div className="text-sm text-gray-600">PMI, ISACA, IEEE, CMI</div>
+              <div className="text-2xl sm:text-3xl font-bold text-green-700 mb-2">10</div>
+              <div className="text-base sm:text-lg font-semibold text-gray-900 mb-2">Professional Organizations</div>
+              <div className="text-xs sm:text-sm text-gray-600">PMI, ISACA, IEEE, CMI</div>
             </div>
 
             {/* Global Standing */}
-            <div className="text-center bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-xl hover:shadow-lg transition-all duration-300">
-              <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="w-8 h-8 text-white" />
+            <div className="text-center bg-gradient-to-br from-orange-50 to-orange-100 p-6 sm:p-8 rounded-lg sm:rounded-xl hover:shadow-2xl hover:-translate-y-3 hover:scale-105 transition-all duration-500 transform hover:rotate-1 hover:shadow-orange-200/50">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <div className="text-3xl font-bold text-orange-700 mb-2">0.001%</div>
-              <div className="text-lg font-semibold text-gray-900 mb-2">Global Top Percentile</div>
-              <div className="text-sm text-gray-600">ICT Professional Ranking</div>
+              <div className="text-2xl sm:text-3xl font-bold text-orange-700 mb-2">0.001%</div>
+              <div className="text-base sm:text-lg font-semibold text-gray-900 mb-2">Global Top Percentile</div>
+              <div className="text-xs sm:text-sm text-gray-600">ICT Professional Ranking</div>
             </div>
           </div>
 
-          <div className="text-center mt-12">
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/experience" data-testid="button-view-experience">
-                <Button variant="outline" className="border-primary-600 text-primary-600 hover:bg-primary-50">
+          {/* Buttons in Single Row */}
+          <div className="text-center">
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
+              <Link href="/experience#experience" data-testid="button-view-experience">
+                <Button variant="outline" className="border-primary-600 text-primary-600 hover:bg-primary-50 w-full sm:w-auto">
                   View Full Experience
                 </Button>
               </Link>
-              <Link href="/certifications" data-testid="button-view-certifications">
-                <Button variant="outline" className="border-primary-600 text-primary-600 hover:bg-primary-50">
+              <Link href="/certifications#certifications" data-testid="button-view-certifications">
+                <Button variant="outline" className="border-primary-600 text-primary-600 hover:bg-primary-50 w-full sm:w-auto">
                   View All Certifications
                 </Button>
               </Link>
-              <Link href="/organizations" data-testid="button-view-organizations">
-                <Button variant="outline" className="border-primary-600 text-primary-600 hover:bg-primary-50">
+              <Link href="/organizations#organizations" data-testid="button-view-organizations">
+                <Button variant="outline" className="border-primary-600 text-primary-600 hover:bg-primary-50 w-full sm:w-auto">
                   Professional Organizations
                 </Button>
               </Link>
@@ -413,25 +359,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-600 to-accent text-white overflow-hidden relative">
+      {/* 6. Call-to-Action - Pre-Footer */}
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-primary-600 to-accent text-white overflow-hidden relative">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-blue-700/20 animate-pulse"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-in-up" data-testid="text-cta-title">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 animate-fade-in-up" data-testid="text-cta-title">
             Ready for Executive-Level Digital Transformation?
           </h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto animate-fade-in-up animation-delay-200" data-testid="text-cta-description">
+          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-3xl mx-auto px-4 animate-fade-in-up animation-delay-200" data-testid="text-cta-description">
             Driving innovation, growth, and organizational excellence through strategic digital transformation 
             initiatives aligned with Vision 2030 objectives.
           </p>
-          <Link href="/contact" data-testid="button-cta-contact">
-            <Button className="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold transition-all duration-500 transform hover:scale-110 hover:shadow-2xl animate-bounce-subtle">
-              Schedule Executive Consultation
+          <a href="mailto:info@doganahmet.com?subject=Contact%20Ahmet%20Doğan" data-testid="button-cta-contact">
+            <Button className="bg-white text-primary-600 hover:bg-gray-100 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold transition-all duration-500 transform hover:scale-110 hover:shadow-2xl animate-bounce-subtle w-full sm:w-auto">
+              Contact Ahmet
             </Button>
-          </Link>
+          </a>
         </div>
       </section>
 
+      {/* 7. Footer */}
       <Footer />
       <ChatAgent />
     </div>

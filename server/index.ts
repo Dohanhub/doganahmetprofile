@@ -1,7 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import helmet from "helmet";
-import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import routes from "./routes.js";
 
 const app = express();
 
@@ -19,38 +19,6 @@ app.use(helmet({
   },
   crossOriginEmbedderPolicy: false
 }));
-
-// Rate limiting for contact form (simple in-memory implementation)
-const rateLimitMap = new Map();
-const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 minutes
-const RATE_LIMIT_MAX_REQUESTS = 5; // 5 requests per window
-
-app.use('/api/contact', (req, res, next) => {
-  const clientIP = req.ip || req.connection.remoteAddress || 'unknown';
-  const now = Date.now();
-  
-  if (!rateLimitMap.has(clientIP)) {
-    rateLimitMap.set(clientIP, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
-    return next();
-  }
-  
-  const clientData = rateLimitMap.get(clientIP);
-  
-  if (now > clientData.resetTime) {
-    rateLimitMap.set(clientIP, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
-    return next();
-  }
-  
-  if (clientData.count >= RATE_LIMIT_MAX_REQUESTS) {
-    return res.status(429).json({ 
-      success: false, 
-      error: "Too many requests. Please try again later." 
-    });
-  }
-  
-  clientData.count++;
-  next();
-});
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: false, limit: '10mb' }));
@@ -98,7 +66,8 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  const server = await registerRoutes(app);
+  // Use the routes
+  app.use('/api', routes);
 
   // Health check endpoint for Azure
   app.get('/api/health', (req, res) => {
@@ -121,7 +90,7 @@ app.use((req, res, next) => {
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
   if (app.get("env") === "development") {
-    await setupVite(app, server);
+    await setupVite(app);
   } else {
     serveStatic(app);
   }
@@ -132,11 +101,7 @@ app.use((req, res, next) => {
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || '5000', 10);
   
-  const httpServer = server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
+  const httpServer = app.listen(port, () => {
     log(`serving on port ${port}`);
   });
 

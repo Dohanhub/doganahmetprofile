@@ -2,7 +2,7 @@ import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Award, Building2, Globe, Shield, Target, TrendingUp, Users, Zap } from "lucide-react";
+import { Award, Building2, Globe, Shield, Target, TrendingUp, Users, Zap, ChevronRight, GraduationCap, BookOpen, Clock, CheckCircle } from "lucide-react";
 
 export default function About() {
   const credentials = [
@@ -33,37 +33,35 @@ export default function About() {
       degree: "Doctor of Business Administration (DBA)",
       institution: "University of Northampton, UK",
       period: "2022-2026",
-      status: "Currently enrolled in final stage",
-      focus: "Research focus on cybersecurity integration in business strategy",
-      expected: "Expected completion 2026"
+      status: "ongoing",
+      focus: "Research focus on cybersecurity integration in business strategy"
     },
     {
       degree: "Master of Business Administration (MBA)",
       institution: "University of Leicester, UK",
       period: "2019-2021",
-      accreditation: "AMBA Accredited",
-      project: "MBA Graduation Project (18,000 words): 'The Impact of Internet of Things on Consumer Preferences and Behavior'",
+      status: "completed",
       focus: "Business Administration and Management, Marketing"
     },
     {
       degree: "Diploma in Strategic Management and Leadership Practice",
       institution: "Chartered Management Institute",
       period: "2019-2021",
-      level: "CMI Level 7",
+      status: "completed",
       focus: "Business Administration and Management"
     },
     {
       degree: "Stanford Advanced Computer Security",
       institution: "Stanford University School of Engineering",
       period: "2019-2020",
-      specialization: "Computer Science Specialization",
+      status: "completed",
       focus: "Comprehensive cybersecurity curriculum"
     },
     {
       degree: "Bachelor of Engineering",
       institution: "Faculty of Electronic Engineering, Menoufia University",
       period: "1999-2004",
-      accreditation: "WES Canada accredited",
+      status: "completed",
       focus: "Electronic and Electrical Communication, Electronics and Communications Engineering"
     }
   ];
@@ -109,42 +107,48 @@ export default function About() {
     }
   ];
 
-
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case 'ongoing':
+        return <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Ongoing</span>;
+      case 'completed':
+        return <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Completed</span>;
+      default:
+        return <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Accredited</span>;
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-white to-gray-50 py-20 lg:py-32">
+      {/* 1. Hero Section - About Intro */}
+      <section className="py-16 bg-gradient-to-br from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-6" data-testid="badge-global-executive">
-                <Award className="w-4 h-4" />
+              {/* Prestige Badge */}
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6 shadow-lg" data-testid="badge-global-executive">
+                <Award className="w-5 h-5" />
                 Global Top 0.001% ICT Executive
               </div>
+              
               <h1 className="text-4xl md:text-5xl font-bold text-primary-900 mb-6 leading-tight" data-testid="text-hero-title">
                 About Ahmet Doğan
               </h1>
+              
               <p className="text-xl text-gray-600 mb-8 leading-relaxed" data-testid="text-hero-subtitle">
                 Visionary ICT leader with 20+ years of experience driving large-scale digital transformation 
                 and infrastructure projects across the Middle East. Proven track record of turning around 
                 underperforming operations and accelerating growth.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Link href="/contact" data-testid="button-executive-contact">
-                  <Button className="bg-success hover:bg-success/90 text-success-foreground px-8 py-4 text-lg font-semibold">
-                    Executive Contact
-                  </Button>
-                </Link>
-                <Button variant="outline" className="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-4 text-lg font-semibold" data-testid="button-download-cv">
-                  Download Elite CV
-                </Button>
-              </div>
+              
+
             </div>
+            
+            {/* Executive Summary Box */}
             <div className="relative">
-              <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl p-8 text-white">
+              <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl p-8 text-white shadow-xl">
                 <h3 className="text-2xl font-bold mb-6">Executive Summary</h3>
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
@@ -170,8 +174,8 @@ export default function About() {
         </div>
       </section>
 
-      {/* Key Achievements Section */}
-      <section className="py-20 bg-white">
+      {/* 2. Key Credentials & Achievements - 2x2 Card Grid */}
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-achievements-title">
@@ -182,15 +186,20 @@ export default function About() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 mb-16">
+          {/* Subtle Section Divider */}
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto mb-12 rounded-full"></div>
+
+          <div className="grid md:grid-cols-2 gap-8">
             {credentials.map((credential, index) => (
-              <div key={index} className="flex gap-6 items-start">
-                <div className="flex-shrink-0 bg-white shadow-lg rounded-xl p-4">
-                  {credential.icon}
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{credential.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{credential.description}</p>
+              <div key={index} className="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div className="flex gap-6 items-start">
+                  <div className="flex-shrink-0 bg-gray-50 rounded-xl p-4">
+                    {credential.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">{credential.title}</h3>
+                    <p className="text-gray-600 leading-relaxed">{credential.description}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -198,8 +207,8 @@ export default function About() {
         </div>
       </section>
 
-      {/* Education Section */}
-      <section className="py-20 bg-gray-50">
+      {/* 3. Advanced Academic Credentials - Timeline Style */}
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-education-title">
@@ -211,54 +220,47 @@ export default function About() {
             </p>
           </div>
 
-          <div className="space-y-8">
-            {education.map((edu, index) => (
-              <div key={index} className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div>
-                    <h3 className="text-xl font-bold text-primary-900 mb-2">{edu.degree}</h3>
-                    <p className="text-blue-600 font-semibold mb-2">{edu.institution}</p>
-                    <p className="text-sm text-gray-600">{edu.period}</p>
-                  </div>
-                  <div>
-                    {edu.accreditation && (
-                      <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium mb-2 inline-block">
-                        {edu.accreditation}
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 to-blue-300"></div>
+            
+            <div className="space-y-8">
+              {education.map((edu, index) => (
+                <div key={index} className={`relative flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+                  {/* Timeline Dot */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow-lg z-10"></div>
+                  
+                  {/* Content Card */}
+                  <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8' : 'pl-8'}`}>
+                    <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                      <div className="flex items-center gap-3 mb-3">
+                        <GraduationCap className="w-5 h-5 text-blue-600" />
+                        <h3 className="text-lg font-bold text-primary-900">{edu.degree}</h3>
                       </div>
-                    )}
-                    {edu.status && (
-                      <div className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium mb-2 inline-block">
-                        {edu.status}
+                      <p className="text-blue-600 font-semibold mb-2">{edu.institution}</p>
+                      <div className="flex items-center gap-2 mb-3">
+                        <Clock className="w-4 h-4 text-gray-500" />
+                        <span className="text-sm text-gray-600">{edu.period}</span>
                       </div>
-                    )}
-                    {edu.level && (
-                      <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mb-2 inline-block">
-                        {edu.level}
+                      <div className="mb-3">
+                        {getStatusBadge(edu.status)}
                       </div>
-                    )}
-                  </div>
-                  <div>
-                    <p className="text-gray-700 mb-2">{edu.focus}</p>
-                    {edu.project && (
-                      <p className="text-sm text-gray-600 italic">{edu.project}</p>
-                    )}
-                    {edu.expected && (
-                      <p className="text-sm text-orange-600 font-medium">{edu.expected}</p>
-                    )}
+                      <p className="text-gray-700 text-sm">{edu.focus}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Global Standing Analysis Section */}
-      <section className="py-20 bg-white">
+      {/* 4. Global Standing & Benchmarking Analysis */}
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-global-standing-title">
-              Global Standing & Benchmarking Analysis
+              Where Ahmet Stands Globally
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Professional benchmarking study positioning Ahmet Doğan among the most exceptional ICT professionals globally.
@@ -267,7 +269,7 @@ export default function About() {
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {globalStanding.map((stat, index) => (
-              <div key={index} className="text-center bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl">
+              <div key={index} className="text-center bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl border border-blue-200">
                 <div className="text-4xl font-bold text-primary-700 mb-4">{stat.metric}</div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">{stat.description}</h3>
                 <p className="text-sm text-gray-600">{stat.analysis}</p>
@@ -275,7 +277,7 @@ export default function About() {
             ))}
           </div>
 
-          <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white p-8 rounded-xl text-center">
+          <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white p-8 rounded-xl text-center shadow-xl">
             <Award className="w-16 h-16 mx-auto mb-6" />
             <h3 className="text-2xl font-bold mb-4">Exceptionally Rare Combination</h3>
             <p className="text-lg leading-relaxed max-w-4xl mx-auto">
@@ -288,8 +290,8 @@ export default function About() {
         </div>
       </section>
 
-      {/* Core Expertise Section */}
-      <section className="py-20 bg-white">
+      {/* 5. Core Expertise Areas - 2x2 Grid with Hover Effects */}
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-expertise-title">
@@ -302,9 +304,9 @@ export default function About() {
 
           <div className="grid md:grid-cols-2 gap-8">
             {expertise.map((area, index) => (
-              <div key={index} className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-all">
+              <div key={index} className="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="bg-white shadow-lg rounded-lg p-3">
+                  <div className="bg-gradient-to-br from-gray-50 to-white shadow-lg rounded-lg p-3 group-hover:shadow-xl transition-all duration-300">
                     {area.icon}
                   </div>
                   <h3 className="text-xl font-bold text-gray-900">{area.title}</h3>
@@ -316,47 +318,23 @@ export default function About() {
         </div>
       </section>
 
-      {/* Executive Summary Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-blue-100">
+      {/* 6. Closing Call-to-Action */}
+      <section className="py-16 bg-gradient-to-br from-blue-50 to-blue-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-summary-title">
-              Executive Summary
-            </h2>
-          </div>
-
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-xl">
-              <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                <strong>Visionary ICT leader</strong> with 20+ years of experience driving large-scale digital transformation 
-                and infrastructure projects across the Middle East (Saudi Arabia, Kuwait, Turkey, Egypt). Proven track record 
-                of turning around underperforming operations and accelerating growth - delivered up to 5× profit increase and 
-                $125M+ in new contracts within a year.
+            <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-2xl p-8 lg:p-12 shadow-xl text-center">
+              <h3 className="text-2xl font-bold mb-4">Professional Excellence</h3>
+              <p className="text-lg leading-relaxed mb-6">
+                Distinguished track record of leading transformational initiatives across multiple countries and industries. 
+                Experienced in delivering complex digital transformation projects aligned with strategic objectives and 
+                international best practices.
               </p>
-              <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                Combines deep technical expertise with strategic business acumen: led nationwide sales and P&L management, 
-                executed smart city and cloud initiatives aligned with Vision 2030 goals. One of the most highly certified 
-                ICT executives globally (MBA, PgMP, PMP, CISM, and others), offering a rare blend of credentials and 
-                on-the-ground leadership.
-              </p>
-              <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                <strong>Holds Saudi Premium Residency,</strong> enabling hassle-free engagement across KSA with 
-                proven expertise in driving innovation, growth, and organizational excellence.
-              </p>
-              
-              <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 text-white">
-                <h3 className="text-xl font-bold mb-4">Professional Excellence</h3>
-                <p className="mb-4">
-                  Distinguished track record of leading transformational initiatives across multiple countries and industries. 
-                  Experienced in delivering complex digital transformation projects aligned with strategic objectives and 
-                  international best practices.
-                </p>
-                <Link href="/contact" data-testid="button-discuss-collaboration">
-                  <Button className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 font-semibold">
-                    Discuss Collaboration
-                  </Button>
-                </Link>
-              </div>
+              <a href="mailto:info@doganahmet.com?subject=Discuss%20Collaboration%20with%20Ahmet%20Doğan" data-testid="button-discuss-collaboration">
+                <Button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  Discuss Collaboration
+                  <ChevronRight className="ml-2 w-5 h-5" />
+                </Button>
+              </a>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react"
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 type Theme = "dark" | "light"
 
@@ -36,6 +36,15 @@ export function ThemeProvider({
     return defaultTheme
   })
 
+  // Force initial theme application
+  useEffect(() => {
+    const root = window.document.documentElement
+    root.classList.remove("light", "dark")
+    root.classList.add(theme)
+    root.style.colorScheme = theme
+    console.log('Initial theme applied:', theme)
+  }, [])
+
   useEffect(() => {
     const root = window.document.documentElement
     
@@ -47,7 +56,23 @@ export function ThemeProvider({
     
     // Set color scheme for browsers
     document.documentElement.style.colorScheme = theme
+    
+    // Force a repaint to ensure theme is applied
+    root.style.display = 'none'
+    root.offsetHeight // Trigger reflow
+    root.style.display = ''
+    
+    // Debug logging
+    console.log('Theme changed to:', theme)
+    console.log('Root classes:', root.classList.toString())
+    console.log('Color scheme:', document.documentElement.style.colorScheme)
   }, [theme])
+
+  // Initialize theme on mount
+  useEffect(() => {
+    console.log('ThemeProvider mounted with theme:', theme)
+    console.log('Initial root classes:', window.document.documentElement.classList.toString())
+  }, [])
 
   const value = {
     theme,
@@ -67,8 +92,10 @@ export function ThemeProvider({
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext)
 
-  if (context === undefined)
-    throw new Error("useTheme must be used within a ThemeProvider")
+  if (context === undefined) {
+    console.warn("useTheme must be used within a ThemeProvider")
+    return { theme: "light", setTheme: () => {} }
+  }
 
   return context
 }

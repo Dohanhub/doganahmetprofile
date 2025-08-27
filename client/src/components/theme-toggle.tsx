@@ -7,7 +7,23 @@ export function ThemeToggle() {
 
   const handleToggle = () => {
     const newTheme = theme === "light" ? "dark" : "light"
+    console.log('Theme toggle clicked. Current:', theme, 'New:', newTheme)
+    
+    // Force immediate DOM update
+    const root = document.documentElement
+    root.classList.remove("light", "dark")
+    root.classList.add(newTheme)
+    root.style.colorScheme = newTheme
+    
+    // Force repaint
+    root.style.display = 'none'
+    root.offsetHeight
+    root.style.display = ''
+    
     setTheme(newTheme)
+    
+    // Store in localStorage immediately
+    localStorage.setItem('dogan-theme', newTheme)
   }
 
   return (

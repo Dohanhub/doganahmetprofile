@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Calendar, Linkedin } from "lucide-react";
 
 export default function Navigation() {
   const [location] = useLocation();
@@ -50,14 +50,48 @@ export default function Navigation() {
                   </span>
                 </Link>
               ))}
-              
-              <ThemeToggle />
-              
-              <Link href="/contact" data-testid="button-contact-nav">
-                <Button className="bg-success hover:bg-success/90 text-success-foreground px-6 py-2">
-                  Contact
-                </Button>
-              </Link>
+            </div>
+          </div>
+
+          {/* Right side icons - LinkedIn, Calendar, and Theme Toggle */}
+          <div className="flex items-center space-x-2">
+            {/* Calendar Icon - Opens Email */}
+            <a 
+              href="mailto:info@doganahmet.com?subject=Contact%20Ahmet%20Doğan"
+              className="group relative"
+              data-testid="button-calendar-email-nav"
+            >
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-lg shadow-md hover:shadow-blue-400/30 transform hover:scale-105 transition-all duration-300 flex items-center justify-center border border-white/20">
+                <Calendar className="w-4 h-4 text-white" />
+              </div>
+              {/* Floating Label */}
+              <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm text-gray-800 px-2 py-1 rounded-lg text-xs font-medium shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                Schedule Meeting
+              </div>
+            </a>
+
+            {/* LinkedIn Icon - Opens LinkedIn */}
+            <a 
+              href="https://www.linkedin.com/in/ahmet-dogan-ict-executive"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative"
+              data-testid="button-linkedin-profile-nav"
+            >
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-lg shadow-md hover:shadow-blue-600/30 transform hover:scale-105 transition-all duration-300 flex items-center justify-center border border-white/20">
+                <Linkedin className="w-4 h-4 text-white" />
+              </div>
+              {/* Floating Label */}
+              <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm text-gray-800 px-2 py-1 rounded-lg text-xs font-medium shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                LinkedIn Profile
+              </div>
+            </a>
+            
+            <ThemeToggle />
+            
+            {/* Theme Debug Display */}
+            <div className="ml-2 text-xs text-white/70 font-mono">
+              {document.documentElement.classList.contains('dark') ? 'DARK' : 'LIGHT'}
             </div>
           </div>
           
@@ -101,14 +135,7 @@ export default function Navigation() {
                 <ThemeToggle />
               </div>
               
-              <Link href="/contact" data-testid="button-contact-mobile">
-                <Button 
-                  className="bg-success hover:bg-success/90 text-success-foreground w-full mt-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Contact
-                </Button>
-              </Link>
+              {/* Contact button removed from mobile menu - now handled by calendar icon on home page */}
             </div>
           </div>
         )}

@@ -8,7 +8,6 @@ import ChatAgent from "@/components/chat-agent";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import About from "@/pages/about";
-import Achievements from "@/pages/achievements";
 import Experience from "@/pages/experience";
 import Organizations from "@/pages/organizations";
 import Certifications from "@/pages/certifications";

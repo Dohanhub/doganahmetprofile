@@ -1,8 +1,7 @@
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
-import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
-import { Award, Building2, TrendingUp, Users, Target, CheckCircle, Star, Trophy } from "lucide-react";
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Trophy, Star, Target, TrendingUp, Award as AwardIcon } from 'lucide-react';
 
 export default function Achievements() {
   const keyAchievements = [
@@ -26,8 +25,8 @@ export default function Achievements() {
       icon: <Building2 className="w-12 h-12 text-blue-600" />,
       title: "ICT Division from Ground Up",
       subtitle: "Startup to Scale Success",
-      description: "Founded and built Gulf Group's ICT division into a $18M/year business. Established market presence in Kuwait and KSA, achieved ~30% annual growth, and delivered 50+ projects spanning data centers, cybersecurity, and telecommunications.",
-      metrics: ["$18M Annual Revenue", "130+ Team Members", "50+ Projects Delivered", "30% Annual Growth"],
+      description: "Founded and built Gulf Group's ICT division into a major enterprise business. Established market presence in Kuwait and KSA, achieved ~30% annual growth, and delivered 50+ projects spanning data centers, cybersecurity, and telecommunications.",
+      metrics: ["Major Enterprise Revenue", "130+ Team Members", "50+ Projects Delivered", "30% Annual Growth"],
       testId: "achievement-ict-division"
     },
     {
@@ -99,7 +98,7 @@ export default function Achievements() {
       company: "Gulf Group Co",
       location: "Kuwait/Saudi Arabia",
       highlights: [
-        "$18M Annual Revenue (built from startup)",
+        "Major Enterprise Revenue (built from startup)",
         "130+ Team Members",
         "50+ Projects Delivered",
         "30% Annual Growth"
@@ -130,7 +129,7 @@ export default function Achievements() {
     {
       category: "Business Impact",
       achievement: "Transformation Results",
-      description: "Delivered measurable business impact including 5× profit increases, $125M+ contract wins, and successful turnarounds of underperforming operations.",
+      description: "Delivered measurable business impact including 5× profit increases, major contract wins, and successful turnarounds of underperforming operations.",
       testId: "standing-impact"
     }
   ];
@@ -162,7 +161,7 @@ export default function Achievements() {
                 <div className="text-sm text-gray-600">Contracts Secured</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-green-600">$18M</div>
+                <div className="text-3xl font-bold text-green-600">Major Enterprise</div>
                 <div className="text-sm text-gray-600">Revenue Built</div>
               </div>
               <div className="text-center">

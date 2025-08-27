@@ -1,293 +1,633 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { MessageCircle, X, Send, User, Zap, Bot } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { useToast } from '@/hooks/use-toast';
+import { 
+  MessageCircle, X, Send, User, Sparkles, Heart, Star, 
+  Mic, MicOff, Volume2, VolumeX, Brain, Globe, Award,
+  Building2, GraduationCap, Shield, Target, Users, Zap,
+  ChevronRight, Play, Pause, Settings
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface Message {
   id: string;
   text: string;
   isUser: boolean;
   timestamp: Date;
+  type: 'text' | 'voice' | 'quick-reply';
+}
+
+interface QuickReply {
+  id: string;
+  text: string;
+  action: string;
+  icon: React.ReactNode;
+}
+
+interface ConversationContext {
+  currentPage: string;
+  topicsDiscussed: string[];
+  userPreferences: string[];
+  lastInteraction: Date;
 }
 
 export default function ChatAgent() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isAutoGreeting, setIsAutoGreeting] = useState(true);
+  const [conversationContext, setConversationContext] = useState<ConversationContext>({
+    currentPage: 'home',
+    topicsDiscussed: [],
+    userPreferences: [],
+    lastInteraction: new Date()
+  });
+  
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hello! I'm Ahmet's AI assistant. I can provide information about his professional background, career achievements, and contact details. What would you like to know?",
+      text: "Merhaba! I'm Eline, your personal digital assistant. I'm here to help you learn about Ahmet Doğan's expertise and answer any questions you have. How can I assist you today? 💫",
       isUser: false,
-      timestamp: new Date()
+      timestamp: new Date(),
+      type: 'text'
     }
   ]);
-  const [input, setInput] = useState('');
+  
+  const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [showQuickReplies, setShowQuickReplies] = useState(true);
+  
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<any>(null);
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const { toast } = useToast();
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  // Eline's comprehensive knowledge base
+  const elineKnowledge = {
+    aboutAhmet: {
+      name: "Ahmet Doğan",
+      title: "Elite ICT Executive & Digital Transformation Leader",
+      qualifications: "Doctor of Business Administration Candidate | PgMP | MBA | Chartered Management Institute CISM | CISA | CRISC",
+      residency: "Saudi Premium Residency",
+      expertise: [
+        "Digital Transformation & Strategy",
+        "ICT Infrastructure & Data Centers",
+        "Leadership & Management",
+        "Cybersecurity & Risk Management",
+        "Smart Cities & IoT Solutions"
+      ],
+      personality: "Visionary, strategic, results-driven, culturally aware, and deeply committed to excellence"
+    },
+    services: [
+      "Digital Transformation Leadership",
+      "Cybersecurity Governance", 
+      "ICT Strategy & Architecture",
+      "Program Management",
+      "Vision 2030 Alignment",
+      "Executive Consulting"
+    ],
+    achievements: [
+      "Global top 0.001% portfolio with PgMP, CISA/CISM/CRISC certifications",
+      "Delivered NEOM smart city infrastructure projects",
+      "Led 130+ member cross-functional teams across multiple countries",
+      "Established PMOs and managed P&L operations",
+      "Saudi Premium Residency holder"
+    ],
+    projects: [
+      "NEOM Smart City Infrastructure",
+      "Digital Transformation for Fortune 500 Companies",
+      "Cybersecurity Framework Implementation",
+      "ICT Strategy Development",
+      "Program Management Office Setup"
+    ],
+    certifications: [
+      "PgMP (Program Management Professional)",
+      "CISM (Certified Information Security Manager)",
+      "CISA (Certified Information Systems Auditor)",
+      "CRISC (Certified in Risk and Information Systems Control)"
+    ]
   };
 
+  // Quick reply options based on context
+  const getQuickReplies = (): QuickReply[] => {
+    const baseReplies = [
+      {
+        id: '1',
+        text: "Tell me about Ahmet",
+        action: 'about',
+        icon: <User className="w-4 h-4" />
+      },
+      {
+        id: '2',
+        text: "Show his services",
+        action: 'services',
+        icon: <Zap className="w-4 h-4" />
+      },
+      {
+        id: '3',
+        text: "What are his achievements?",
+        action: 'achievements',
+        icon: <Award className="w-4 h-4" />
+      }
+    ];
+
+    // Add context-specific replies
+    if (conversationContext.currentPage === 'career') {
+      baseReplies.push({
+        id: '4',
+        text: "Walk me through his career",
+        action: 'career',
+        icon: <Building2 className="w-4 h-4" />
+      });
+    }
+
+    if (conversationContext.currentPage === 'certifications') {
+      baseReplies.push({
+        id: '5',
+        text: "Explain his certifications",
+        action: 'certifications',
+        icon: <Shield className="w-4 h-4" />
+      });
+    }
+
+    return baseReplies;
+  };
+
+  // Initialize speech recognition
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = false;
+      recognitionRef.current.lang = 'en-US';
 
-  const getIntelligentResponse = (userMessage: string): string => {
-    const msg = userMessage.toLowerCase();
+      recognitionRef.current.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setInputValue(transcript);
+        handleSendMessage(transcript);
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onerror = (event: any) => {
+        console.error('Speech recognition error:', event.error);
+        setIsListening(false);
+        toast({
+          title: "Voice input error",
+          description: "Please try typing instead",
+          variant: "destructive"
+        });
+      };
+    }
+
+    // Auto-greeting after 8 seconds
+    if (isAutoGreeting) {
+      const timer = setTimeout(() => {
+        if (!isOpen) {
+          handleAutoGreeting();
+        }
+      }, 8000);
+      return () => clearTimeout(timer);
+    }
+  }, [isAutoGreeting, isOpen]);
+
+  // Auto-greeting function
+  const handleAutoGreeting = () => {
+    const greetings = [
+      "Hello there! 👋 Would you like me to walk you through Ahmet's executive profile?",
+      "Merhaba! I'm here to help you discover Ahmet's expertise. Shall we start? ✨",
+      "Hi! I can guide you through Ahmet's impressive credentials. Ready to explore? 🌟"
+    ];
     
-    // Check if question is about Ahmet first (priority responses)
-    if (msg.includes('ahmet') || msg.includes('contact') || msg.includes('email') || msg.includes('phone') || msg.includes('reach')) {
-      return "Contact Ahmet directly: info@doganahmet.com, +966-500-666-084. LinkedIn: https://www.linkedin.com/in/ahmet-dogan-ict/. Based in Riyadh with Saudi Premium Residency. Responds within 24 hours.";
-    }
-
-    if ((msg.includes('experience') || msg.includes('career') || msg.includes('background') || msg.includes('work')) && (msg.includes('his') || msg.includes('ahmet') || msg.includes('you'))) {
-      return "Ahmet has 20+ years progressive ICT leadership across Middle East. Key: Led NEOM Tier III Data Center (SAR 21.9M), transformed underperforming region to #1 position, SAR 125M+ contracts secured, 130+ teams managed, built $18M ICT division from scratch.";
-    }
-
-    if (msg.includes('certification') || msg.includes('credential') || msg.includes('qualification') || msg.includes('pgmp')) {
-      return "Ahmet holds 25+ elite certifications placing him in global top 0.001% of ICT professionals. Key: PgMP, CISA/CISM/CRISC, RCDD, ATD/AOS, plus DBA, MBA, Stanford Executive Education. This rare combination is unmatched in the region.";
-    }
-
-    if (msg.includes('vision') || msg.includes('2030') || msg.includes('saudi') || msg.includes('neom') || msg.includes('ksa')) {
-      return "Ahmet is a strategic Vision 2030 expert with hands-on NEOM smart city infrastructure delivery. His Saudi Premium Residency, cultural fluency, and proven track record make him ideal for driving KSA's digital transformation initiatives.";
-    }
-
-    if (msg.includes('experience') || msg.includes('expertise') || msg.includes('collaboration') || msg.includes('consulting')) {
-      return "Ahmet brings 20+ years of elite ICT leadership experience in digital transformation, smart cities, and ICT infrastructure across the Middle East. His unique certification portfolio and proven track record make him a valuable strategic partner for complex technology initiatives.";
-    }
-
-    // Enhanced General Knowledge Responses (Extended ChatGPT-like capabilities)
-    if (msg.includes('artificial intelligence') || msg.includes('ai') || msg.includes('machine learning') || msg.includes('ml')) {
-      return "Artificial Intelligence is revolutionizing industries worldwide through automation, data analytics, and intelligent decision-making. Current AI landscape includes:\n\n• **Generative AI**: ChatGPT, GPT-4, Claude transforming content creation and customer service\n• **Machine Learning**: Predictive analytics, recommendation systems, fraud detection\n• **Computer Vision**: Image recognition, autonomous vehicles, medical diagnostics\n• **Natural Language Processing**: Translation, sentiment analysis, voice assistants\n\nAs an ICT executive, Ahmet has hands-on experience implementing AI/ML solutions in enterprise environments, particularly in smart city infrastructure and digital transformation projects. For AI strategy consulting and implementation guidance, reach out to ahmet@doganconsult.com.";
-    }
-
-    if (msg.includes('technology') || msg.includes('tech trends') || msg.includes('innovation') || msg.includes('future')) {
-      return "Technology trends are reshaping the global economy and business operations. Key developments include:\n\n• **Cloud Computing**: Multi-cloud strategies, serverless architecture, edge computing\n• **Cybersecurity**: Zero-trust networks, AI-powered threat detection, quantum cryptography\n• **IoT & Smart Cities**: Connected devices, smart infrastructure, data-driven urban planning\n• **Digital Transformation**: Process automation, customer experience optimization, data analytics\n• **Emerging Tech**: Blockchain, AR/VR, quantum computing, 5G networks\n\nThese trends directly align with Ahmet's expertise in Vision 2030 projects and NEOM smart city development. His technical leadership spans infrastructure modernization, enterprise automation, and strategic technology implementation across the Middle East region.";
-    }
-
-    if (msg.includes('business') || msg.includes('management') || msg.includes('strategy') || msg.includes('consulting') || msg.includes('leadership')) {
-      return "Business excellence requires strategic thinking, operational discipline, and adaptive leadership. Core principles for success:\n\n• **Strategic Vision**: Long-term planning, market analysis, competitive positioning\n• **Operational Excellence**: Process optimization, quality management, performance metrics\n• **Digital Transformation**: Technology integration, data-driven decisions, customer experience\n• **Leadership Development**: Team empowerment, change management, organizational culture\n• **Financial Management**: P&L accountability, cost optimization, revenue growth\n\nAhmet exemplifies these principles through his track record: transformed underperforming regions to #1 positions, managed 130+ team members across multiple countries, achieved 5× profit increases, and secured SAR 125M+ in contracts. His executive approach combines strategic vision with hands-on execution capabilities.";
-    }
-
-    if (msg.includes('cybersecurity') || msg.includes('security') || msg.includes('cyber') || msg.includes('risk')) {
-      return "Cybersecurity is fundamental to modern business operations and digital transformation initiatives. Comprehensive security framework includes:\n\n• **Risk Assessment**: Threat modeling, vulnerability analysis, impact evaluation\n• **Governance & Compliance**: Policy development, regulatory adherence, audit management\n• **Technical Controls**: Firewalls, encryption, access controls, monitoring systems\n• **Incident Response**: Detection capabilities, response procedures, recovery planning\n• **Security Awareness**: Training programs, phishing prevention, security culture\n\nAhmet's CISA (Certified Information Systems Auditor), CISM (Certified Information Security Manager), and CRISC (Certified in Risk and Information Systems Control) certifications represent world-class cybersecurity expertise. His practical experience includes securing critical infrastructure for NEOM smart city projects and enterprise-level security implementations.";
-    }
-
-    if (msg.includes('cloud') || msg.includes('aws') || msg.includes('azure') || msg.includes('infrastructure') || msg.includes('data center')) {
-      return "Cloud computing and infrastructure modernization are driving digital transformation across industries. Key components:\n\n• **Cloud Platforms**: AWS (market leader), Microsoft Azure (enterprise focus), Google Cloud (AI/ML strength)\n• **Migration Strategies**: Lift-and-shift, re-platforming, cloud-native development\n• **Data Center Evolution**: Tier III+ facilities, edge computing, hybrid architectures\n• **Security & Compliance**: Shared responsibility models, encryption, access controls\n• **Cost Optimization**: Right-sizing, reserved instances, automated scaling\n\nAhmet's expertise includes designing and delivering Tier III data centers (NEOM Telco Park - SAR 21.9M project), cloud infrastructure strategy, and enterprise-level ICT implementations. His hands-on experience spans traditional data centers to modern cloud-native architectures across the Middle East region.";
-    }
-
-    if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey') || msg.includes('good morning') || msg.includes('good afternoon')) {
-      return "Hello! I'm Ahmet's comprehensive AI assistant with both deep professional expertise and broad general knowledge capabilities. I can provide detailed insights on:\n\n**Ahmet's Professional Profile:**\n• 20+ year ICT leadership journey across Middle East\n• Vision 2030 & NEOM smart city project experience\n• Elite certifications (PgMP, CISA/CISM/CRISC, DBA, MBA)\n• Current executive availability for CIO/CTO roles\n\n**General Knowledge Topics:**\n• Technology trends, AI, cybersecurity, cloud computing\n• Business strategy, leadership, project management\n• Industry analysis, market insights, best practices\n\nWhat specific area interests you today? Feel free to ask detailed questions - I'm designed to provide comprehensive, informative responses!";
-    }
-
-    if (msg.includes('what') || msg.includes('how') || msg.includes('why') || msg.includes('when') || msg.includes('where') || msg.includes('who')) {
-      return "I'm equipped to provide detailed answers on a wide range of topics! My knowledge spans:\n\n**Professional Expertise:**\n• Ahmet's complete career portfolio and achievements\n• ICT industry trends and best practices\n• Executive leadership and strategic planning\n• Digital transformation methodologies\n\n**Technology & Business:**\n• Artificial Intelligence and Machine Learning\n• Cybersecurity frameworks and risk management\n• Cloud computing and infrastructure design\n• Project management and organizational development\n\n**Analysis & Insights:**\n• Market trends and industry analysis\n• Strategic planning and business optimization\n• Technical implementation guidance\n• Career development and professional growth\n\nPlease ask your specific question - I'll provide a comprehensive, detailed response with practical insights and actionable information!";
-    }
-
-    if (msg.includes('explain') || msg.includes('tell me') || msg.includes('describe') || msg.includes('detail')) {
-      return "I excel at providing detailed explanations on complex topics! I can break down sophisticated concepts into clear, actionable insights covering:\n\n**Technical Domains:**\n• Digital transformation strategies and implementation\n• Cybersecurity frameworks and best practices\n• Cloud architecture and infrastructure design\n• AI/ML applications in enterprise environments\n\n**Business & Leadership:**\n• Executive strategy development and execution\n• Program management and organizational change\n• P&L management and business growth strategies\n• Team leadership and performance optimization\n\n**Ahmet's Expertise:**\n• Complete professional journey and achievements\n• Vision 2030 project experience and outcomes\n• Certification portfolio and global standing\n• Current availability and executive positioning\n\nWhat specific topic would you like me to explain in detail? I'll provide comprehensive information with real-world examples and practical applications!";
-    }
-
-    // Default comprehensive response
-    return "I'm designed to be your comprehensive knowledge partner, combining Ahmet's professional expertise with extensive general knowledge capabilities. I can discuss:\n\n**Professional Topics:**\n• Ahmet's 20+ year ICT leadership experience\n• His role in Vision 2030 and NEOM projects\n• Elite certification portfolio (25+ credentials)\n• Executive availability for CIO/CTO positions\n\n**General Knowledge:**\n• Technology trends and innovation\n• Business strategy and management\n• Industry analysis and market insights\n• Career development and professional growth\n\nI provide detailed, informative responses like ChatGPT, covering both specific questions about Ahmet's profile and broader topics across technology, business, and leadership domains. What would you like to explore today?";
+    const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+    addMessage(randomGreeting, false);
   };
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
+  // Add message to conversation
+  const addMessage = (text: string, isUser: boolean, type: 'text' | 'voice' | 'quick-reply' = 'text') => {
+    const newMessage: Message = {
+      id: Date.now().toString(),
+      text,
+      isUser,
+      timestamp: new Date(),
+      type
+    };
+    setMessages(prev => [...prev, newMessage]);
+    
+    // Update conversation context
+    setConversationContext(prev => ({
+      ...prev,
+      topicsDiscussed: [...prev.topicsDiscussed, text.toLowerCase()],
+      lastInteraction: new Date()
+    }));
+  };
+
+  // Generate intelligent Eline response
+  const generateElineResponse = async (userMessage: string): Promise<string> => {
+    const lowerMessage = userMessage.toLowerCase();
+    
+    // Update context based on user message
+    if (lowerMessage.includes('career') || lowerMessage.includes('experience')) {
+      setConversationContext(prev => ({ ...prev, currentPage: 'career' }));
+    } else if (lowerMessage.includes('certification') || lowerMessage.includes('credential')) {
+      setConversationContext(prev => ({ ...prev, currentPage: 'certifications' }));
+    } else if (lowerMessage.includes('about') || lowerMessage.includes('who')) {
+      setConversationContext(prev => ({ ...prev, currentPage: 'about' }));
+    }
+
+    // Intelligent response generation with context awareness
+    if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('merhaba')) {
+      return "Merhaba! It's wonderful to meet you! I'm Eline, your personal digital assistant. I'm here to help you discover Ahmet Doğan's remarkable expertise and achievements. What would you like to know about? ✨";
+    }
+    
+    if (lowerMessage.includes('ahmet') || lowerMessage.includes('doğan') || lowerMessage.includes('who')) {
+      return `Ahmet Doğan is an exceptional ${elineKnowledge.aboutAhmet.title}! He holds ${elineKnowledge.aboutAhmet.qualifications} and has ${elineKnowledge.aboutAhmet.residency}. His expertise spans across ${elineKnowledge.aboutAhmet.expertise.join(', ')}. He's truly one of the most qualified ICT professionals globally! 🌟`;
+    }
+    
+    if (lowerMessage.includes('service') || lowerMessage.includes('help') || lowerMessage.includes('what can')) {
+      return `I'd be delighted to tell you about Ahmet's services! He specializes in: ${elineKnowledge.services.map(s => `• ${s}`).join('\n')}\n\nEach service is tailored to help organizations achieve digital excellence. Which area interests you most? 💫`;
+    }
+    
+    if (lowerMessage.includes('achievement') || lowerMessage.includes('accomplishment')) {
+      return `Ahmet's achievements are absolutely remarkable! ${elineKnowledge.achievements.join(' ')} His portfolio represents the pinnacle of ICT professional excellence. He's in the top 0.001% globally - that's truly extraordinary! 🏆✨`;
+    }
+    
+    if (lowerMessage.includes('certification') || lowerMessage.includes('credential')) {
+      return `Ahmet's certification portfolio is exceptional! He holds ${elineKnowledge.certifications.join(', ')}. These are among the most prestigious and rare certifications in the ICT industry. His PgMP alone puts him in the top 0.001% globally! 🎯🏅`;
+    }
+    
+    if (lowerMessage.includes('project') || lowerMessage.includes('work')) {
+      return `Ahmet has delivered incredible projects! ${elineKnowledge.projects.join(', ')}. His work on NEOM smart city infrastructure is particularly impressive - he's helping build the future of sustainable urban development! 🏗️🌆`;
+    }
+    
+    if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('reach')) {
+      return "I'd be happy to help you connect with Ahmet! You can reach him at info@doganahmet.com. He's always open to discussing how his expertise can benefit your organization. Would you like me to tell you more about his consultation process? 📧💼";
+    }
+    
+    if (lowerMessage.includes('experience') || lowerMessage.includes('background') || lowerMessage.includes('career')) {
+      return "Ahmet has an incredible career journey! He's led transformational projects across the Middle East, managed teams of 130+ professionals, and delivered cutting-edge smart city infrastructure. His experience spans multiple countries and industries. It's truly inspiring! 🌍🚀";
+    }
+    
+    if (lowerMessage.includes('saudi') || lowerMessage.includes('middle east')) {
+      return "Ahmet has deep expertise in the Middle East, particularly Saudi Arabia! He holds Saudi Premium Residency and has worked extensively on Vision 2030 projects. His understanding of regional business culture and ICT needs is exceptional! 🇸🇦🌟";
+    }
+    
+    if (lowerMessage.includes('thank') || lowerMessage.includes('thanks')) {
+      return "You're very welcome! It's my pleasure to help you learn about Ahmet's expertise. Is there anything else you'd like to know? I'm here to make your experience as informative and engaging as possible! 💖✨";
+    }
+    
+    // Context-aware responses
+    if (conversationContext.currentPage === 'career') {
+      return "Since you're exploring Ahmet's career, let me highlight that he's progressed from technical specialist to C-suite executive over 20+ years. His journey includes leading major digital transformation initiatives and managing large international teams. Would you like me to elaborate on any specific aspect? 📈💼";
+    }
+    
+    if (conversationContext.currentPage === 'certifications') {
+      return "You're looking at Ahmet's certification portfolio! These aren't just credentials - they represent years of dedication and expertise. His PgMP certification alone is held by fewer than 0.001% of professionals globally. It's truly an elite portfolio! 🏆✨";
+    }
+    
+    // Default intelligent response
+    return "That's a fascinating question! While I'm specifically designed to help you learn about Ahmet Doğan's expertise and services, I'd be happy to discuss any topic related to digital transformation, ICT leadership, or professional development. What would you like to explore? 💫🤔";
+  };
+
+  // Handle quick reply selection
+  const handleQuickReply = async (action: string) => {
+    let message = '';
+    switch (action) {
+      case 'about':
+        message = "Tell me about Ahmet Doğan";
+        break;
+      case 'services':
+        message = "What services does Ahmet offer?";
+        break;
+      case 'achievements':
+        message = "What are Ahmet's achievements?";
+        break;
+      case 'career':
+        message = "Walk me through Ahmet's career";
+        break;
+      case 'certifications':
+        message = "Explain Ahmet's certifications";
+        break;
+      default:
+        message = "Tell me more";
+    }
+    
+    addMessage(message, true, 'quick-reply');
+    setInputValue(message);
+    await handleSendMessage(message);
+  };
+
+  // Handle voice input
+  const toggleVoiceInput = () => {
+    if (isListening) {
+      recognitionRef.current?.stop();
+      setIsListening(false);
+    } else {
+      setIsListening(true);
+      recognitionRef.current?.start();
+    }
+  };
+
+  // Handle text-to-speech
+  const speakText = (text: string) => {
+    if (isMuted) return;
+    
+    if ('speechSynthesis' in window) {
+      if (utteranceRef.current) {
+        speechSynthesis.cancel();
+      }
+      
+      utteranceRef.current = new SpeechSynthesisUtterance(text);
+      utteranceRef.current.rate = 0.9;
+      utteranceRef.current.pitch = 1.1;
+      utteranceRef.current.volume = 0.8;
+      
+      utteranceRef.current.onstart = () => setIsSpeaking(true);
+      utteranceRef.current.onend = () => setIsSpeaking(false);
+      
+      speechSynthesis.speak(utteranceRef.current);
+    }
+  };
+
+  // Handle message sending
+  const handleSendMessage = async (customInput?: string) => {
+    const messageToSend = customInput || inputValue;
+    if (!messageToSend.trim()) return;
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      text: messageToSend,
+      isUser: true,
+      timestamp: new Date(),
+      type: 'text'
+    };
+
+    addMessage(messageToSend, true);
+    setInputValue('');
+    setIsTyping(true);
 
     try {
-      const userMessage: Message = {
-        id: Date.now().toString(),
-        text: input.trim(),
-        isUser: true,
-        timestamp: new Date()
-      };
-
-      setMessages(prev => [...prev, userMessage]);
-      const userInput = input.trim();
-      setInput('');
-      setIsTyping(true);
+      const response = await generateElineResponse(messageToSend);
 
       setTimeout(() => {
-        try {
-          const response = getIntelligentResponse(userInput);
-          
-          if (!response || response.trim().length === 0) {
-            throw new Error("Empty response generated");
-          }
-          
-          const botMessage: Message = {
-            id: (Date.now() + 1).toString(),
-            text: response,
-            isUser: false,
-            timestamp: new Date()
-          };
-
-          setMessages(prev => [...prev, botMessage]);
-          setIsTyping(false);
-          
-          // Auto-scroll to bottom
-          setTimeout(() => {
-            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-          }, 100);
-          
-        } catch (error) {
-          console.error("Chat response error:", error);
-          
-          const errorMessage: Message = {
-            id: (Date.now() + 1).toString(),
-            text: "I apologize, but I'm having trouble generating a response right now. Please try asking your question again, or feel free to contact Ahmet directly at info@doganahmet.com for immediate assistance.",
-            isUser: false,
-            timestamp: new Date()
-          };
-          
-          setMessages(prev => [...prev, errorMessage]);
-          setIsTyping(false);
+        addMessage(response, false);
+        setIsTyping(false);
+        
+        // Speak the response if voice is enabled
+        if (!isMuted) {
+          speakText(response);
         }
-      }, 1200 + Math.random() * 800);
-      
+        
+        // Show quick replies after response
+        setShowQuickReplies(true);
+      }, 1000 + Math.random() * 1000);
     } catch (error) {
-      console.error("Chat send error:", error);
+      console.error('Error generating response:', error);
       setIsTyping(false);
-      
-      const errorMessage: Message = {
-        id: (Date.now() + 2).toString(),
-        text: "Sorry, there was an error processing your message. Please try again.",
-        isUser: false,
-        timestamp: new Date()
-      };
-      
-      setMessages(prev => [...prev, errorMessage]);
     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      handleSend();
+      handleSendMessage();
     }
   };
 
+  const scrollToBottom = () => {
+    if (messagesEndRef.current?.scrollIntoView && typeof messagesEndRef.current.scrollIntoView === 'function') {
+      try {
+        messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      } catch (error) {
+        // Fallback for test environments where scrollIntoView might not work
+        console.warn('scrollIntoView not supported in this environment');
+      }
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   return (
     <>
-      {/* Floating Chat Button */}
+      {/* Floating Hologram Chat Button - 3D Design */}
       {!isOpen && (
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-8 right-8 w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 z-50 animate-pulse hover:animate-none"
-          style={{
-            filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.2))',
-            transition: 'all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)'
-          }}
-          data-testid="button-chat-open"
+        <motion.div 
+          className="fixed bottom-6 right-6 z-50"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5, type: "spring" }}
         >
-          <MessageCircle className="w-8 h-8 text-white" />
-        </Button>
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            whileTap={{ scale: 0.95 }}
+            className="relative"
+          >
+            <Button
+              onClick={() => setIsOpen(true)}
+              className="group relative bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 hover:from-purple-600 hover:via-pink-600 hover:to-blue-600 text-white p-4 rounded-full shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 transform border-0 overflow-hidden"
+              data-testid="chat-open-button"
+            >
+              {/* Holographic Turkish Lady Avatar */}
+              <div className="relative">
+                <div className="w-12 h-12 bg-gradient-to-br from-amber-200 via-rose-300 to-purple-400 rounded-full flex items-center justify-center shadow-lg relative overflow-hidden">
+                  <span className="text-2xl relative z-10">👩‍💼</span>
+                  {/* Holographic glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
+                </div>
+                
+                {/* Floating holographic elements */}
+                <div className="absolute -top-2 -right-2">
+                  <Sparkles className="w-4 h-4 text-yellow-300 animate-pulse" />
+                </div>
+                <div className="absolute -bottom-1 -left-1">
+                  <Brain className="w-4 h-4 text-blue-300 animate-bounce" />
+                </div>
+              </div>
+              
+              {/* Floating Text */}
+              <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-1 rounded-full text-sm font-medium shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                Chat with Eline ✨
+              </div>
+            </Button>
+          </motion.div>
+        </motion.div>
       )}
 
-      {/* Chat Interface */}
-      {isOpen && (
-        <div className="fixed bottom-8 right-8 w-96 h-[600px] bg-white rounded-2xl shadow-2xl border-2 border-gray-200 z-50 flex flex-col overflow-hidden animate-scale-in">
-          {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center animate-float">
-                <Zap className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-bold text-lg">Doğan AI</h3>
-                <p className="text-xs opacity-90">Powered by GPT - Ask me anything</p>
-              </div>
-            </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsOpen(false)}
-              className="text-white hover:bg-white/20 transition-all duration-200"
-              data-testid="button-chat-close"
+      {/* Floating Hologram Chat Interface - 3D, Light, No Box */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            className="fixed bottom-6 right-6 z-50 w-96 max-w-[90vw]"
+            initial={{ scale: 0, opacity: 0, y: 50 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0, opacity: 0, y: 50 }}
+            transition={{ duration: 0.3, type: "spring" }}
+          >
+            {/* Header - Elegant, Light Design */}
+            <motion.div 
+              className="bg-gradient-to-r from-white/95 to-gray-50/95 backdrop-blur-md rounded-t-2xl shadow-2xl border border-white/20 mb-2"
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.1 }}
             >
-              <X className="w-5 h-5" />
-            </Button>
-          </div>
-
-          {/* Messages */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-gradient-to-b from-gray-50 to-white">
-            {messages.map((message, index) => (
-              <div
-                key={message.id}
-                className={`flex items-start gap-3 ${message.isUser ? 'flex-row-reverse' : ''} fade-in visible`}
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                  message.isUser ? 'bg-gradient-to-r from-primary-500 to-primary-600' : 'bg-gradient-to-r from-gray-100 to-gray-200'
-                } shadow-md`}>
-                  {message.isUser ? (
-                    <User className="w-5 h-5 text-white" />
-                  ) : (
-                    <Zap className="w-5 h-5 text-gray-600" />
-                  )}
-                </div>
-                <div
-                  className={`max-w-[260px] p-4 rounded-2xl shadow-lg hover-lift ${
-                    message.isUser
-                      ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-tr-sm'
-                      : 'bg-white text-gray-900 rounded-tl-sm border border-gray-100'
-                  }`}
-                >
-                  <p className="text-sm leading-relaxed">{message.text}</p>
-                  <p className={`text-xs mt-3 ${
-                    message.isUser ? 'text-primary-100' : 'text-gray-400'
-                  }`}>
-                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </p>
-                </div>
-              </div>
-            ))}
-            
-            {isTyping && (
-              <div className="flex items-start gap-3 animate-fade-in-up">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-gray-100 to-gray-200 flex items-center justify-center shadow-md">
-                  <Bot className="w-5 h-5 text-gray-600" />
-                </div>
-                <div className="bg-white p-4 rounded-2xl rounded-tl-sm shadow-lg border border-gray-100">
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-primary-500 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-primary-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="w-2 h-2 bg-primary-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+              <div className="flex items-center justify-between p-4">
+                <div className="flex items-center space-x-3">
+                  {/* Eline Holographic Avatar */}
+                  <motion.div 
+                    className="w-10 h-10 bg-gradient-to-br from-amber-200 via-rose-300 to-purple-400 rounded-full flex items-center justify-center shadow-lg relative overflow-hidden"
+                    animate={{ rotate: [0, 5, -5, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <span className="text-xl relative z-10">👩‍💼</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
+                  </motion.div>
+                  
+                  <div>
+                    <h3 className="font-semibold text-gray-800">Eline</h3>
+                    <p className="text-xs text-gray-600">Your AI Assistant</p>
                   </div>
                 </div>
+                
+                <div className="flex items-center space-x-2">
+                  {/* Voice controls */}
+                  <Button
+                    onClick={toggleVoiceInput}
+                    variant="ghost"
+                    size="sm"
+                    className={`text-gray-500 hover:text-gray-700 hover:bg-white/50 rounded-full p-2 ${isListening ? 'text-red-500' : ''}`}
+                  >
+                    {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+                  </Button>
+                  
+                  <Button
+                    onClick={() => setIsMuted(!isMuted)}
+                    variant="ghost"
+                    size="sm"
+                    className={`text-gray-500 hover:text-gray-700 hover:bg-white/50 rounded-full p-2 ${isMuted ? 'text-red-500' : ''}`}
+                  >
+                    {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                  </Button>
+                  
+                  <Button
+                    onClick={() => setIsOpen(false)}
+                    variant="ghost"
+                    size="sm"
+                    className="text-gray-500 hover:text-gray-700 hover:bg-white/50 rounded-full p-2"
+                    data-testid="chat-close-button"
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
               </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
+            </motion.div>
 
-          {/* Input Area */}
-          <div className="p-4 border-t bg-white">
-            <div className="flex gap-3">
-              <textarea
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Ask about Ahmet's profile, tech trends, or anything..."
-                className="flex-1 p-3 border-2 border-gray-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm transition-all duration-200"
-                rows={1}
-                data-testid="input-chat-message"
-              />
-              <Button
-                onClick={handleSend}
-                disabled={!input.trim()}
-                className="px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
-                data-testid="button-chat-send"
-              >
-                <Send className="w-4 h-4" />
-              </Button>
-            </div>
-            <p className="text-xs text-gray-500 mt-3 text-center">
-              For executive discussions: info@doganahmet.com | LinkedIn: https://www.linkedin.com/in/ahmet-dogan-ict/
-            </p>
-          </div>
-        </div>
-      )}
+            {/* Messages Area - Light, Floating */}
+            <motion.div 
+              className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20 max-h-96 overflow-hidden"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              <ScrollArea className="h-80 p-4">
+                <div className="space-y-4">
+                  {messages.map((message) => (
+                    <motion.div
+                      key={message.id}
+                      className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div
+                        className={`max-w-[80%] p-3 rounded-2xl ${
+                          message.isUser
+                            ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
+                            : 'bg-gradient-to-r from-gray-50 to-gray-100 text-gray-800 shadow-md border border-gray-100'
+                        }`}
+                      >
+                        <p className="text-sm leading-relaxed">{message.text}</p>
+                        <p className={`text-xs mt-2 ${message.isUser ? 'text-purple-100' : 'text-gray-500'}`}>
+                          {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                  
+                  {isTyping && (
+                    <motion.div 
+                      className="flex justify-start"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                    >
+                      <div className="bg-gradient-to-r from-gray-50 to-gray-100 text-gray-800 p-3 rounded-2xl shadow-md border border-gray-100">
+                        <div className="flex space-x-1">
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                  
+                  <div ref={messagesEndRef} />
+                </div>
+              </ScrollArea>
+
+              {/* Quick Reply Buttons */}
+              {showQuickReplies && messages.length > 1 && (
+                <motion.div 
+                  className="px-4 pb-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <div className="flex flex-wrap gap-2">
+                    {getQuickReplies().map((reply) => (
+                      <Button
+                        key={reply.id}
+                        onClick={() => handleQuickReply(reply.action)}
+                        variant="outline"
+                        size="sm"
+                        className="text-xs bg-white/80 hover:bg-purple-50 border-purple-200 hover:border-purple-300 text-purple-700 rounded-full px-3 py-1 h-auto"
+                      >
+                        {reply.icon}
+                        <span className="ml-1">{reply.text}</span>
+                      </Button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Input Area - Light, Elegant */}
+              <div className="p-4 border-t border-gray-100/50 bg-gradient-to-r from-gray-50/50 to-white/50">
+                <div className="flex space-x-2">
+                  <Input
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Ask Eline anything... ✨"
+                    className="flex-1 bg-white/80 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-300 focus:border-transparent shadow-sm"
+                    data-testid="chat-input"
+                  />
+                  <Button
+                    onClick={() => handleSendMessage()}
+                    disabled={!inputValue.trim() || isTyping}
+                    className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-4 rounded-xl shadow-lg hover:shadow-purple-500/25 transition-all duration-300 disabled:opacity-50"
+                    data-testid="chat-send-button"
+                  >
+                    <Send className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

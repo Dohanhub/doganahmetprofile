@@ -2,7 +2,7 @@ import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Award, Shield, Users, TrendingUp, Building2, Zap, CheckCircle, Star, Trophy, Target } from "lucide-react";
+import { Award, Shield, Users, TrendingUp, Building2, Zap, CheckCircle, Star, Trophy, Target, ChevronRight, Crown, Gem, Medal } from "lucide-react";
 
 export default function Certifications() {
   const certificationStats = [
@@ -10,24 +10,28 @@ export default function Certifications() {
       number: "25+",
       label: "Active Certifications",
       description: "Across multiple domains",
+      icon: <Award className="w-8 h-8 text-blue-600" />,
       testId: "stat-certifications"
     },
     {
       number: "7",
       label: "Certification Categories",
       description: "Complete expertise coverage",
+      icon: <Target className="w-8 h-8 text-green-600" />,
       testId: "stat-categories"
     },
     {
       number: "15+",
       label: "Certifying Organizations",
       description: "Global recognition",
+      icon: <Building2 className="w-8 h-8 text-indigo-600" />,
       testId: "stat-organizations"
     },
     {
       number: "0.001%",
       label: "Global Rarity Ranking",
       description: "Ultra-rare combination",
+      icon: <Crown className="w-8 h-8 text-orange-600" />,
       testId: "stat-rarity"
     }
   ];
@@ -153,6 +157,8 @@ export default function Certifications() {
   const rarityAnalysis = [
     {
       category: "Ultra-Rare (<0.01%)",
+      icon: <Crown className="w-8 h-8 text-yellow-600" />,
+      color: "from-yellow-500 to-orange-500",
       certifications: [
         { name: "PgMP", count: "~5,350 globally (0.009%)" },
         { name: "ATD/AOS", count: "Hundreds globally (<0.002%)" },
@@ -161,6 +167,8 @@ export default function Certifications() {
     },
     {
       category: "Rare (<0.3%)",
+      icon: <Gem className="w-8 h-8 text-purple-600" />,
+      color: "from-purple-500 to-indigo-500",
       certifications: [
         { name: "CRISC", count: "~30,000 globally (0.05%)" },
         { name: "CISM", count: "~46,000 globally (0.07%)" },
@@ -169,6 +177,8 @@ export default function Certifications() {
     },
     {
       category: "Specialized (1-3%)",
+      icon: <Medal className="w-8 h-8 text-blue-600" />,
+      color: "from-blue-500 to-cyan-500",
       certifications: [
         { name: "PMP", count: "~1.45M globally (2.3%)" },
         { name: "PRINCE2", count: "~1M globally (1.6%)" },
@@ -177,42 +187,65 @@ export default function Certifications() {
     }
   ];
 
+  const getRarityBadge = (rarity: string) => {
+    if (rarity.includes("<0.002%")) {
+      return <span className="bg-gradient-to-r from-red-500 to-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold">Ultra-Rare</span>;
+    } else if (rarity.includes("Ultra Rare") || rarity.includes("<0.01%")) {
+      return <span className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold">Ultra-Rare</span>;
+    } else if (rarity.includes("<0.3%")) {
+      return <span className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-3 py-1 rounded-full text-xs font-bold">Rare</span>;
+    } else {
+      return <span className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-xs font-bold">Specialized</span>;
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-white to-gray-50 py-20 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 1. Hero Section - Intro with Pattern */}
+      <section className="relative py-16 bg-gradient-to-br from-white to-gray-50 overflow-hidden">
+        {/* Subtle Pattern Overlay */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, #000 1px, transparent 0)`,
+            backgroundSize: '20px 20px'
+          }}></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-6" data-testid="badge-certifications">
-              <Award className="w-4 h-4" />
+            {/* Complete Global Certification Portfolio Badge */}
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6 shadow-lg" data-testid="badge-certifications">
+              <Award className="w-5 h-5" />
               Complete Global Certification Portfolio
             </div>
+            
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-900 mb-6 leading-tight" data-testid="text-hero-title">
               Elite Professional Certifications
-              <span className="block text-accent mt-2">Global Top 0.001% Credential Portfolio</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed" data-testid="text-hero-subtitle">
-              Comprehensive credential portfolio spanning technical excellence, strategic leadership, and academic achievement. 
-              Unprecedented multi-domain expertise positioning among the most qualified ICT professionals globally.
+            
+            <h2 className="text-2xl md:text-3xl font-bold text-yellow-500 mb-6 leading-tight">
+              Global Top 0.001% Credential Portfolio
+            </h2>
+            
+            <p className="text-xl text-gray-600 mb-8 leading-relaxed" data-testid="text-hero-subtitle">
+              Comprehensive credential portfolio spanning technical excellence, strategic leadership, and academic achievement.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Statistics Section */}
+      {/* 2. Portfolio Statistics - Uniform Cards */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-4" data-testid="text-stats-title">
-              Portfolio Statistics
-            </h2>
-          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {certificationStats.map((stat) => (
-              <div key={stat.testId} className="text-center bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl" data-testid={stat.testId}>
-                <div className="text-3xl md:text-4xl font-bold text-primary-700 mb-2">
+              <div key={stat.testId} className="text-center bg-white border border-gray-200 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full" data-testid={stat.testId}>
+                <div className="flex justify-center mb-4">
+                  {stat.icon}
+                </div>
+                <div className="text-3xl font-bold text-primary-700 mb-2">
                   {stat.number}
                 </div>
                 <div className="text-lg font-semibold text-gray-900 mb-1">
@@ -227,136 +260,178 @@ export default function Certifications() {
         </div>
       </section>
 
-      {/* Program & Project Management Section */}
-      <section className="py-20 bg-gray-50">
+      {/* 3. Certification Categories - Thematic Blocks */}
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-project-management-title">
-              🏆 Program & Project Management Excellence
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Elite certifications in program and project management from globally recognized institutions.
-            </p>
-          </div>
+          {/* Program & Project Management Excellence */}
+          <div className="mb-16">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-project-management-title">
+                🏆 Program & Project Management Excellence
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Elite certifications in program and project management from globally recognized institutions.
+              </p>
+            </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {projectManagementCerts.map((cert) => (
-              <div key={cert.testId} className="bg-white p-6 rounded-xl shadow-sm border border-gray-200" data-testid={cert.testId}>
-                <div className="flex items-start gap-4 mb-4">
-                  <Trophy className="w-8 h-8 text-yellow-600 flex-shrink-0 mt-1" />
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">{cert.name}</h3>
-                    <p className="text-blue-600 font-semibold">{cert.issuer}</p>
+            <div className="grid md:grid-cols-2 gap-8">
+              {projectManagementCerts.map((cert) => (
+                <div key={cert.testId} className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300" data-testid={cert.testId}>
+                  <div className="flex items-start gap-4 mb-4">
+                    <Trophy className="w-8 h-8 text-yellow-600 flex-shrink-0 mt-1" />
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-1">{cert.name}</h3>
+                      <p className="text-blue-600 font-semibold">{cert.issuer}</p>
+                    </div>
+                  </div>
+                  {cert.rarity && (
+                    <div className="mb-3">
+                      {getRarityBadge(cert.rarity)}
+                    </div>
+                  )}
+                  <p className="text-sm text-gray-600 mb-3">{cert.period}</p>
+                  {cert.credentialId && (
+                    <p className="text-xs text-gray-500 mb-3">Credential ID: {cert.credentialId}</p>
+                  )}
+                  <div className="flex flex-wrap gap-2">
+                    {cert.skills.map((skill, index) => (
+                      <span key={index} className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
+                        {skill}
+                      </span>
+                    ))}
                   </div>
                 </div>
-                {cert.rarity && (
-                  <p className="text-sm font-bold text-red-600 mb-2">{cert.rarity}</p>
-                )}
-                <p className="text-sm text-gray-600 mb-3">{cert.period}</p>
-                {cert.credentialId && (
+              ))}
+            </div>
+          </div>
+
+          {/* Information Security Excellence */}
+          <div className="mb-16">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-security-title">
+                🔐 Information Security & Risk Management
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Advanced cybersecurity and risk management certifications from ISACA, the global authority in IT governance.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
+              {securityCerts.map((cert) => (
+                <div key={cert.testId} className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300" data-testid={cert.testId}>
+                  <div className="flex items-start gap-4 mb-4">
+                    <Shield className="w-8 h-8 text-red-600 flex-shrink-0 mt-1" />
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-1">{cert.name}</h3>
+                      <p className="text-red-600 font-semibold">{cert.issuer}</p>
+                    </div>
+                  </div>
+                  <div className="mb-3">
+                    {getRarityBadge(cert.rarity)}
+                  </div>
+                  <p className="text-sm text-gray-600 mb-3">{cert.period}</p>
                   <p className="text-xs text-gray-500 mb-3">Credential ID: {cert.credentialId}</p>
-                )}
-                <div className="flex flex-wrap gap-2">
-                  {cert.skills.map((skill, index) => (
-                    <span key={index} className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Information Security Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-security-title">
-              🔐 Information Security & Risk Management
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Advanced cybersecurity and risk management certifications from ISACA, the global authority in IT governance.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
-            {securityCerts.map((cert) => (
-              <div key={cert.testId} className="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-xl border border-gray-200" data-testid={cert.testId}>
-                <div className="flex items-start gap-4 mb-4">
-                  <Shield className="w-8 h-8 text-red-600 flex-shrink-0 mt-1" />
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">{cert.name}</h3>
-                    <p className="text-red-600 font-semibold">{cert.issuer}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {cert.skills.map((skill, index) => (
+                      <span key={index} className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
+                        {skill}
+                      </span>
+                    ))}
                   </div>
                 </div>
-                <p className="text-sm font-bold text-red-600 mb-2">{cert.rarity}</p>
-                <p className="text-sm text-gray-600 mb-3">{cert.period}</p>
-                <p className="text-xs text-gray-500 mb-3">Credential ID: {cert.credentialId}</p>
-                <div className="flex flex-wrap gap-2">
-                  {cert.skills.map((skill, index) => (
-                    <span key={index} className="bg-white/80 px-3 py-1 rounded-full text-xs font-medium text-gray-700">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Infrastructure Design Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-infrastructure-title">
-              🏗️ Data Center Infrastructure & Design Excellence
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Ultra-rare certifications in data center design and telecommunications infrastructure from industry leaders.
-            </p>
+              ))}
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {infrastructureCerts.map((cert) => (
-              <div key={cert.testId} className="bg-white p-6 rounded-xl shadow-sm border border-gray-200" data-testid={cert.testId}>
-                <div className="flex items-start gap-4 mb-4">
-                  <Building2 className="w-8 h-8 text-green-600 flex-shrink-0 mt-1" />
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">{cert.name}</h3>
-                    <p className="text-green-600 font-semibold">{cert.issuer}</p>
+          {/* Data Center Infrastructure Excellence */}
+          <div className="mb-16">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-infrastructure-title">
+                🏗️ Data Center Infrastructure & Design Excellence
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Ultra-rare certifications in data center design and telecommunications infrastructure from industry leaders.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {infrastructureCerts.map((cert) => (
+                <div key={cert.testId} className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300" data-testid={cert.testId}>
+                  <div className="flex items-start gap-4 mb-4">
+                    <Building2 className="w-8 h-8 text-green-600 flex-shrink-0 mt-1" />
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-1">{cert.name}</h3>
+                      <p className="text-green-600 font-semibold">{cert.issuer}</p>
+                    </div>
+                  </div>
+                  {cert.rarity && (
+                    <div className="mb-3">
+                      {getRarityBadge(cert.rarity)}
+                    </div>
+                  )}
+                  <p className="text-sm text-gray-600 mb-3">{cert.period}</p>
+                  {cert.credentialId && (
+                    <p className="text-xs text-gray-500 mb-3">Credential ID: {cert.credentialId}</p>
+                  )}
+                  <div className="flex flex-wrap gap-2">
+                    {cert.skills.map((skill, index) => (
+                      <span key={index} className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
+                        {skill}
+                      </span>
+                    ))}
                   </div>
                 </div>
-                {cert.rarity && (
-                  <p className="text-sm font-bold text-red-600 mb-2">{cert.rarity}</p>
-                )}
-                <p className="text-sm text-gray-600 mb-3">{cert.period}</p>
-                {cert.credentialId && (
-                  <p className="text-xs text-gray-500 mb-3">Credential ID: {cert.credentialId}</p>
-                )}
-                <div className="flex flex-wrap gap-2">
-                  {cert.skills.map((skill, index) => (
-                    <span key={index} className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-medium">
-                      {skill}
-                    </span>
-                  ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Strategic Leadership Excellence */}
+          <div>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6">
+                👑 Strategic Leadership Excellence
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Executive leadership and management certifications from prestigious international institutions.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {managementCerts.map((cert) => (
+                <div key={cert.testId} className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300" data-testid={cert.testId}>
+                  <div className="flex items-start gap-4 mb-4">
+                    <Crown className="w-8 h-8 text-purple-600 flex-shrink-0 mt-1" />
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-1">{cert.name}</h3>
+                      <p className="text-purple-600 font-semibold">{cert.issuer}</p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-gray-600 mb-3">{cert.period}</p>
+                  {cert.credentialId && (
+                    <p className="text-xs text-gray-500 mb-3">Credential ID: {cert.credentialId}</p>
+                  )}
+                  <div className="flex flex-wrap gap-2">
+                    {cert.skills.map((skill, index) => (
+                      <span key={index} className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Rarity Analysis Section */}
-      <section className="py-20 bg-white">
+      {/* 4. Certification Rarity Analysis - 3-Column Cards */}
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6" data-testid="text-rarity-title">
               📊 Certification Rarity Analysis
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-8">
+            <p className="text-xl text-gray-600 max-w-4xl mx-auto">
               Statistical analysis of global certification rarity. The probability of holding this complete combination 
               is astronomically low, placing Ahmet among fewer than 620 individuals worldwide with comparable qualifications.
             </p>
@@ -364,9 +439,14 @@ export default function Certifications() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {rarityAnalysis.map((category, index) => (
-              <div key={index} className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-200">
-                <h3 className="text-lg font-bold text-gray-900 mb-4">{category.category}</h3>
-                <div className="space-y-3">
+              <div key={index} className="bg-white border border-gray-200 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="text-center mb-6">
+                  <div className="flex justify-center mb-4">
+                    {category.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">{category.category}</h3>
+                </div>
+                <div className="space-y-4">
                   {category.certifications.map((cert, certIndex) => (
                     <div key={certIndex} className="border-l-4 border-blue-500 pl-4">
                       <p className="font-semibold text-gray-900">{cert.name}</p>
@@ -377,21 +457,44 @@ export default function Certifications() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="mt-12 bg-gradient-to-br from-blue-600 to-blue-700 text-white p-8 rounded-xl text-center">
-            <Star className="w-12 h-12 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold mb-4">Global Standing Analysis</h3>
-            <p className="text-lg leading-relaxed max-w-4xl mx-auto">
-              Conservative estimates place this certification combination within the top 0.001% of global ICT professionals, 
-              representing fewer than 620 individuals worldwide with comparable qualifications among 62 million ICT professionals globally.
+      {/* 5. Global Standing Analysis - Blue Section */}
+      <section className="py-16 bg-gradient-to-br from-blue-50 to-blue-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-6">
+              Global Standing Analysis
+            </h2>
+            <p className="text-xl text-gray-600 mb-8">
+              <strong>&lt; 620 professionals globally</strong> hold this combination of certifications.
             </p>
+            
+            {/* Comparison Progress Bar */}
+            <div className="bg-white rounded-full h-4 mb-8 overflow-hidden">
+              <div className="bg-gradient-to-r from-blue-500 to-blue-600 h-full rounded-full" style={{ width: '0.001%' }}></div>
+            </div>
+            <p className="text-sm text-gray-600 mb-8">
+              Visual representation: The blue bar represents Ahmet's position among 62 million global ICT professionals
+            </p>
+
+            <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white p-8 rounded-xl shadow-xl">
+              <Star className="w-12 h-12 mx-auto mb-4" />
+              <h3 className="text-2xl font-bold mb-4">Exceptionally Rare Combination</h3>
+              <p className="text-lg leading-relaxed">
+                Conservative estimates place this certification combination within the top 0.001% of global ICT professionals, 
+                representing fewer than 620 individuals worldwide with comparable qualifications among 62 million ICT professionals globally.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-600 to-accent text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* 6. Closing CTA - Pre-Footer */}
+      <section className="py-16 bg-gradient-to-br from-primary-600 to-accent text-white overflow-hidden relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-blue-700/20 animate-pulse"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-6" data-testid="text-cta-title">
             Partner with Global Top 0.001% Expertise
           </h2>
@@ -399,11 +502,11 @@ export default function Certifications() {
             Leverage unprecedented certification portfolio and global expertise for your organization's 
             most critical digital transformation initiatives.
           </p>
-          <Link href="/contact" data-testid="button-cta-contact">
-            <Button className="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+          <a href="mailto:info@doganahmet.com?subject=Schedule%20Executive%20Consultation%20with%20Ahmet%20Doğan" data-testid="button-cta-contact">
+            <Button className="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold transition-all duration-500 transform hover:scale-110 hover:shadow-2xl animate-bounce-subtle">
               Schedule Executive Consultation
             </Button>
-          </Link>
+          </a>
         </div>
       </section>
 
