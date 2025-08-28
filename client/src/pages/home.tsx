@@ -161,28 +161,7 @@ export default function Home() {
             </motion.span>
           </motion.div>
 
-          {/* Theme Status Indicator (Debug) */}
-          <motion.div 
-            className="mt-4 text-sm text-gray-500 dark:text-gray-400"
-            variants={itemVariants}
-          >
-            Current Theme: <span className="font-mono">{theme}</span>
-            <br />
-            <motion.button 
-              onClick={() => {
-                const root = document.documentElement
-                const newTheme = root.classList.contains('dark') ? 'light' : 'dark'
-                root.classList.remove('light', 'dark')
-                root.classList.add(newTheme)
-                console.log('Manual theme change to:', newTheme)
-              }}
-              className="mt-2 px-3 py-1 bg-blue-500 text-white rounded text-xs hover:bg-blue-600"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Test Theme Toggle
-            </motion.button>
-          </motion.div>
+
         </div>
       </motion.section>
 

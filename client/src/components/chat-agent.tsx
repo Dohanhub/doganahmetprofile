@@ -224,9 +224,12 @@ export default function ChatAgent() {
     }));
   };
 
-  // Generate intelligent Eline response
+  // Generate intelligent Eline response with improved human-like interaction
   const generateElineResponse = async (userMessage: string): Promise<string> => {
     const lowerMessage = userMessage.toLowerCase();
+    
+    // Add a small delay to simulate thinking
+    await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 1000));
     
     // Update context based on user message
     if (lowerMessage.includes('career') || lowerMessage.includes('experience')) {
@@ -237,9 +240,14 @@ export default function ChatAgent() {
       setConversationContext(prev => ({ ...prev, currentPage: 'about' }));
     }
 
-    // Intelligent response generation with context awareness
+    // Enhanced response generation with more natural language
     if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('merhaba')) {
-      return "Merhaba! It's wonderful to meet you! I'm Eline, your personal digital assistant. I'm here to help you discover Ahmet Doğan's remarkable expertise and achievements. What would you like to know about? ✨";
+      const greetings = [
+        "Merhaba! It's wonderful to meet you! I'm Eline, your personal digital assistant. I'm here to help you discover Ahmet Doğan's remarkable expertise and achievements. What would you like to know about? ✨",
+        "Hi there! I'm Eline, and I'm excited to help you learn about Ahmet Doğan's incredible journey. How can I assist you today? 🌟",
+        "Hello! I'm Eline, your guide to Ahmet Doğan's professional world. What interests you most about his expertise? 💫"
+      ];
+      return greetings[Math.floor(Math.random() * greetings.length)];
     }
     
     if (lowerMessage.includes('ahmet') || lowerMessage.includes('doğan') || lowerMessage.includes('who')) {
@@ -287,8 +295,13 @@ export default function ChatAgent() {
       return "You're looking at Ahmet's certification portfolio! These aren't just credentials - they represent years of dedication and expertise. His PgMP certification alone is held by fewer than 0.001% of professionals globally. It's truly an elite portfolio! 🏆✨";
     }
     
-    // Default intelligent response
-    return "That's a fascinating question! While I'm specifically designed to help you learn about Ahmet Doğan's expertise and services, I'd be happy to discuss any topic related to digital transformation, ICT leadership, or professional development. What would you like to explore? 💫🤔";
+    // Enhanced default responses with more variety
+    const defaultResponses = [
+      "That's a great question! I'm here to help you learn about Ahmet Doğan's expertise and services. What specific aspect would you like to explore? 💫🤔",
+      "Interesting! While I'm designed to help you discover Ahmet's professional background, I'd be happy to discuss digital transformation, ICT leadership, or any related topics. What catches your interest? 🌟",
+      "I'd love to help you with that! My focus is on Ahmet's expertise, but I can also share insights about the ICT industry, leadership, or digital innovation. What would you like to know more about? ✨"
+    ];
+    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
   };
 
   // Handle quick reply selection
