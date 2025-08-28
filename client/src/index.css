@@ -3,6 +3,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide Vercel Toolbar for Production */
+[data-vercel-toolbar],
+[class*="vercel"],
+[class*="Vercel"],
+iframe[src*="vercel"],
+div[class*="vercel-toolbar"],
+div[class*="VercelToolbar"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* Enhanced Performance Optimizations */
 * {
   box-sizing: border-box;
