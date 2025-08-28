@@ -10,6 +10,29 @@ import { PerformanceMonitor, DataFlowIndicator } from "@/components/ui/performan
 import { ErrorBoundary } from "@/components/error-boundary";
 // import serviceWorkerManager from "@/lib/service-worker-manager";
 import ChatAgent from "@/components/chat-agent";
+
+// Hide Vercel toolbar for production visitors
+if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
+  const hideVercelToolbar = () => {
+    const vercelToolbar = document.querySelector('[data-vercel-toolbar]');
+    if (vercelToolbar) {
+      vercelToolbar.style.display = 'none';
+    }
+    
+    // Also hide any elements with vercel-related classes
+    const vercelElements = document.querySelectorAll('[class*="vercel"], [class*="Vercel"]');
+    vercelElements.forEach(el => {
+      if (el instanceof HTMLElement) {
+        el.style.display = 'none';
+      }
+    });
+  };
+  
+  // Run immediately and also on DOM changes
+  hideVercelToolbar();
+  const observer = new MutationObserver(hideVercelToolbar);
+  observer.observe(document.body, { childList: true, subtree: true });
+}
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import About from "@/pages/about";

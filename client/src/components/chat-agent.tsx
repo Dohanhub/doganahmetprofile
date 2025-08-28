@@ -228,8 +228,8 @@ export default function ChatAgent() {
   const generateElineResponse = async (userMessage: string): Promise<string> => {
     const lowerMessage = userMessage.toLowerCase();
     
-    // Add a small delay to simulate thinking
-    await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 1000));
+    // Add a small delay to simulate thinking (shorter for better responsiveness)
+    await new Promise(resolve => setTimeout(resolve, 300 + Math.random() * 500));
     
     // Update context based on user message
     if (lowerMessage.includes('career') || lowerMessage.includes('experience')) {
@@ -240,66 +240,66 @@ export default function ChatAgent() {
       setConversationContext(prev => ({ ...prev, currentPage: 'about' }));
     }
 
-    // Enhanced response generation with more natural language
+    // Professional response generation with better context awareness
     if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('merhaba')) {
       const greetings = [
-        "Merhaba! It's wonderful to meet you! I'm Eline, your personal digital assistant. I'm here to help you discover Ahmet Doğan's remarkable expertise and achievements. What would you like to know about? ✨",
-        "Hi there! I'm Eline, and I'm excited to help you learn about Ahmet Doğan's incredible journey. How can I assist you today? 🌟",
-        "Hello! I'm Eline, your guide to Ahmet Doğan's professional world. What interests you most about his expertise? 💫"
+        "Merhaba! I'm Eline, your digital assistant. I'm here to help you discover Ahmet Doğan's expertise. What would you like to know about his professional background?",
+        "Hello! I'm Eline. I can help you learn about Ahmet Doğan's career, certifications, or services. What interests you most?",
+        "Hi there! I'm Eline, your guide to Ahmet Doğan's professional portfolio. How can I assist you today?"
       ];
       return greetings[Math.floor(Math.random() * greetings.length)];
     }
     
     if (lowerMessage.includes('ahmet') || lowerMessage.includes('doğan') || lowerMessage.includes('who')) {
-      return `Ahmet Doğan is an exceptional ${elineKnowledge.aboutAhmet.title}! He holds ${elineKnowledge.aboutAhmet.qualifications} and has ${elineKnowledge.aboutAhmet.residency}. His expertise spans across ${elineKnowledge.aboutAhmet.expertise.join(', ')}. He's truly one of the most qualified ICT professionals globally! 🌟`;
+      return `Ahmet Doğan is a distinguished ICT Executive and Digital Transformation Leader. He holds a Doctor of Business Administration candidacy, PgMP, MBA, and multiple professional certifications including CISM, CISA, and CRISC. He's a Saudi Premium Residency holder with expertise in digital transformation, cybersecurity, and strategic leadership.`;
     }
     
     if (lowerMessage.includes('service') || lowerMessage.includes('help') || lowerMessage.includes('what can')) {
-      return `I'd be delighted to tell you about Ahmet's services! He specializes in: ${elineKnowledge.services.map(s => `• ${s}`).join('\n')}\n\nEach service is tailored to help organizations achieve digital excellence. Which area interests you most? 💫`;
+      return `Ahmet offers specialized services in:\n• Digital Transformation Leadership\n• Cybersecurity Governance\n• ICT Strategy & Architecture\n• Program Management\n• Executive Consulting\n\nEach service is designed to help organizations achieve strategic objectives and operational excellence.`;
     }
     
     if (lowerMessage.includes('achievement') || lowerMessage.includes('accomplishment')) {
-      return `Ahmet's achievements are absolutely remarkable! ${elineKnowledge.achievements.join(' ')} His portfolio represents the pinnacle of ICT professional excellence. He's in the top 0.001% globally - that's truly extraordinary! 🏆✨`;
+      return `Ahmet's key achievements include:\n• Global top 0.001% portfolio with elite certifications\n• Led 130+ member teams across multiple countries\n• Delivered NEOM smart city infrastructure projects\n• Transformed underperforming regions to #1 national ranking\n• 20+ years of progressive ICT leadership experience`;
     }
     
     if (lowerMessage.includes('certification') || lowerMessage.includes('credential')) {
-      return `Ahmet's certification portfolio is exceptional! He holds ${elineKnowledge.certifications.join(', ')}. These are among the most prestigious and rare certifications in the ICT industry. His PgMP alone puts him in the top 0.001% globally! 🎯🏅`;
+      return `Ahmet holds prestigious certifications including:\n• PgMP (Program Management Professional)\n• CISM (Certified Information Security Manager)\n• CISA (Certified Information Systems Auditor)\n• CRISC (Certified in Risk and Information Systems Control)\n• Chartered Manager (CMgr MCMI)\n\nHis PgMP certification alone places him in the top 0.001% of professionals globally.`;
     }
     
     if (lowerMessage.includes('project') || lowerMessage.includes('work')) {
-      return `Ahmet has delivered incredible projects! ${elineKnowledge.projects.join(', ')}. His work on NEOM smart city infrastructure is particularly impressive - he's helping build the future of sustainable urban development! 🏗️🌆`;
+      return `Ahmet has delivered significant projects including:\n• NEOM Smart City Infrastructure\n• Digital transformation for Fortune 500 companies\n• Government ICT modernization initiatives\n• Cybersecurity framework implementations\n• Cross-border technology integration projects`;
     }
     
     if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('reach')) {
-      return "I'd be happy to help you connect with Ahmet! You can reach him at info@doganahmet.com. He's always open to discussing how his expertise can benefit your organization. Would you like me to tell you more about his consultation process? 📧💼";
+      return "You can reach Ahmet at info@doganahmet.com. He's available for consultation on digital transformation, ICT strategy, and executive leadership projects. Would you like me to provide more details about his consultation process?";
     }
     
     if (lowerMessage.includes('experience') || lowerMessage.includes('background') || lowerMessage.includes('career')) {
-      return "Ahmet has an incredible career journey! He's led transformational projects across the Middle East, managed teams of 130+ professionals, and delivered cutting-edge smart city infrastructure. His experience spans multiple countries and industries. It's truly inspiring! 🌍🚀";
+      return "Ahmet's career spans 20+ years, progressing from technical specialist to C-suite executive. He's led transformational projects across Saudi Arabia, Kuwait, Turkey, and Egypt, managing large international teams and delivering cutting-edge ICT solutions. His experience includes strategic leadership, P&L management, and government relations.";
     }
     
     if (lowerMessage.includes('saudi') || lowerMessage.includes('middle east')) {
-      return "Ahmet has deep expertise in the Middle East, particularly Saudi Arabia! He holds Saudi Premium Residency and has worked extensively on Vision 2030 projects. His understanding of regional business culture and ICT needs is exceptional! 🇸🇦🌟";
+      return "Ahmet has extensive Middle East expertise, particularly in Saudi Arabia where he holds Premium Residency. He's worked extensively on Vision 2030 projects, government ICT initiatives, and regional digital transformation programs. His understanding of local business culture and regulatory requirements is exceptional.";
     }
     
     if (lowerMessage.includes('thank') || lowerMessage.includes('thanks')) {
-      return "You're very welcome! It's my pleasure to help you learn about Ahmet's expertise. Is there anything else you'd like to know? I'm here to make your experience as informative and engaging as possible! 💖✨";
+      return "You're welcome! I'm here to help you learn about Ahmet's expertise. Is there anything specific about his background, services, or achievements you'd like to know more about?";
     }
     
     // Context-aware responses
     if (conversationContext.currentPage === 'career') {
-      return "Since you're exploring Ahmet's career, let me highlight that he's progressed from technical specialist to C-suite executive over 20+ years. His journey includes leading major digital transformation initiatives and managing large international teams. Would you like me to elaborate on any specific aspect? 📈💼";
+      return "Regarding Ahmet's career, he's progressed from technical roles to executive leadership over 20+ years. His journey includes leading major digital transformation initiatives, managing international teams, and delivering strategic ICT solutions. What specific aspect of his career interests you?";
     }
     
     if (conversationContext.currentPage === 'certifications') {
-      return "You're looking at Ahmet's certification portfolio! These aren't just credentials - they represent years of dedication and expertise. His PgMP certification alone is held by fewer than 0.001% of professionals globally. It's truly an elite portfolio! 🏆✨";
+      return "Ahmet's certification portfolio represents the highest levels of professional achievement. His PgMP certification is particularly rare, held by fewer than 0.001% of professionals globally. These credentials demonstrate his commitment to excellence and continuous professional development.";
     }
     
-    // Enhanced default responses with more variety
+    // Professional default responses
     const defaultResponses = [
-      "That's a great question! I'm here to help you learn about Ahmet Doğan's expertise and services. What specific aspect would you like to explore? 💫🤔",
-      "Interesting! While I'm designed to help you discover Ahmet's professional background, I'd be happy to discuss digital transformation, ICT leadership, or any related topics. What catches your interest? 🌟",
-      "I'd love to help you with that! My focus is on Ahmet's expertise, but I can also share insights about the ICT industry, leadership, or digital innovation. What would you like to know more about? ✨"
+      "I can help you learn about Ahmet's expertise, career, certifications, or services. What specific information would you like to know?",
+      "I'm here to provide information about Ahmet Doğan's professional background. Would you like to know about his career, certifications, achievements, or services?",
+      "I can share details about Ahmet's ICT leadership experience, digital transformation expertise, or professional services. What would you like to explore?"
     ];
     return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
   };
