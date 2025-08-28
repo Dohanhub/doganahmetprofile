@@ -1,9 +1,14 @@
 import { Switch, Route } from "wouter";
-import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
+import { SmoothPageTransition } from "@/components/ui/page-transition";
+import { enhancedQueryClient } from "./lib/enhanced-queryClient";
+import { EnhancedReactQueryDevtools } from "./lib/react-query-devtools";
+import { PerformanceMonitor, DataFlowIndicator } from "@/components/ui/performance-monitor";
+import { ErrorBoundary } from "@/components/error-boundary";
+import serviceWorkerManager from "@/lib/service-worker-manager";
 import ChatAgent from "@/components/chat-agent";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
@@ -15,31 +20,45 @@ import Contact from "@/pages/contact";
 
 function AppRouter() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/experience" component={Experience} />
-      <Route path="/certifications" component={Certifications} />
-      <Route path="/organizations" component={Organizations} />
-      <Route path="/contact" component={Contact} />
-      <Route component={NotFound} />
-    </Switch>
+    <SmoothPageTransition>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/experience" component={Experience} />
+        <Route path="/certifications" component={Certifications} />
+        <Route path="/organizations" component={Organizations} />
+        <Route path="/contact" component={Contact} />
+        <Route component={NotFound} />
+      </Switch>
+    </SmoothPageTransition>
   );
 }
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="light" storageKey="dogan-theme">
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <div className="min-h-screen bg-background text-foreground transition-colors">
-            <Toaster />
-            <AppRouter />
-            <ChatAgent />
-          </div>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <ErrorBoundary 
+      retryCount={3} 
+      retryDelay={2000}
+      onError={(error, errorInfo) => {
+        console.error('App Error:', error, errorInfo);
+        // In production, you'd send this to your error monitoring service
+      }}
+    >
+      <ThemeProvider defaultTheme="light" storageKey="dogan-theme">
+        <QueryClientProvider client={enhancedQueryClient}>
+          <TooltipProvider>
+            <div className="min-h-screen bg-background text-foreground transition-all duration-300 ease-in-out">
+              <Toaster />
+              <AppRouter />
+              <ChatAgent />
+              {process.env.NODE_ENV === 'development' && <EnhancedReactQueryDevtools />}
+              <PerformanceMonitor />
+              <DataFlowIndicator />
+            </div>
+          </TooltipProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 

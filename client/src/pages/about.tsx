@@ -1,8 +1,10 @@
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
-import { Award, Building2, Globe, Shield, Target, TrendingUp, Users, Zap, ChevronRight, GraduationCap, BookOpen, Clock, CheckCircle } from "lucide-react";
+// Unused imports - keeping for future use
+// import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+// import { Badge } from "@/components/ui/badge";
+import { Award, Building2, Globe, Shield, TrendingUp, Zap, ChevronRight, GraduationCap, Clock, Users, Target } from "lucide-react";
 
 export default function About() {
   const credentials = [

@@ -15,34 +15,34 @@ vi.mock('wouter', () => ({
 describe('Footer Component', () => {
   it('should render footer', () => {
     render(<Footer />);
-    expect(screen.getByRole('contentinfo')).toBeInTheDocument();
+    expect(screen.getByRole('contentinfo')).to.exist;
   });
 
   it('should render copyright information', () => {
     render(<Footer />);
-    expect(screen.getByText(/© 2025 DoganConsult\. All rights reserved\./i)).toBeInTheDocument();
+    expect(screen.getByText(/© 2025 DoganConsult\. All rights reserved\./i)).to.exist;
   });
 
   it('should render brand name and description', () => {
     render(<Footer />);
-    expect(screen.getByText(/Ahmet Doğan/i)).toBeInTheDocument();
-    expect(screen.getByText(/Elite ICT Executive & Digital Transformation Leader/i)).toBeInTheDocument();
+    expect(screen.getByText(/Ahmet Doğan/i)).to.exist;
+    expect(screen.getByText(/Elite ICT Executive & Digital Transformation Leader/i)).to.exist;
   });
 
   it('should render navigation links', () => {
     render(<Footer />);
     expect(screen.getByText(/About/i)).toBeInTheDocument();
     expect(screen.getByText(/Career Experience/i)).toBeInTheDocument();
-    expect(screen.getByText(/Certifications/i)).toBeInTheDocument();
-    expect(screen.getByText(/Professional Organizations/i)).toBeInTheDocument();
-    expect(screen.getByText(/Contact/i)).toBeInTheDocument();
+    expect(screen.getByText(/Certifications/i)).to.exist;
+    expect(screen.getByText(/Professional Organizations/i)).to.exist;
+    expect(screen.getByText(/Contact/i)).to.exist;
   });
 
   it('should render social media links', () => {
     render(<Footer />);
     const linkedinLink = screen.getByTestId('link-linkedin');
-    expect(linkedinLink).toBeInTheDocument();
-    expect(linkedinLink).toHaveAttribute('href', 'https://www.linkedin.com/in/ahmet-dogan-ict/');
+    expect(linkedinLink).to.exist;
+    expect(linkedinLink.getAttribute('href')).toBe('https://www.linkedin.com/in/ahmet-dogan-ict/');
   });
 
   it('should render contact information', () => {

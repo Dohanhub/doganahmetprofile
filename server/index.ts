@@ -1,7 +1,10 @@
 import express, { type Request, Response, NextFunction } from "express";
 import helmet from "helmet";
-import { setupVite, serveStatic, log } from "./vite";
+import { setupVite, serveStatic } from "./vite.js";
 import routes from "./routes.js";
+import { config, allowedOrigins } from "../shared/config.js";
+import { log } from "../shared/logger.js";
+import { checkDatabaseConnection, closeDatabaseConnection } from "../shared/database.js";
 
 const app = express();
 
@@ -25,9 +28,13 @@ app.use(express.urlencoded({ extended: false, limit: '10mb' }));
 
 // CORS headers
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  const origin = req.headers.origin;
+  if (origin && allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Credentials', 'true');
   if (req.method === 'OPTIONS') {
     res.sendStatus(200);
   } else {
@@ -49,16 +56,7 @@ app.use((req, res, next) => {
   res.on("finish", () => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
-      }
-
-      if (logLine.length > 80) {
-        logLine = logLine.slice(0, 79) + "…";
-      }
-
-      log(logLine);
+      log.api(req.method, path, res.statusCode, duration, capturedJsonResponse);
     }
   });
 
@@ -70,12 +68,23 @@ app.use((req, res, next) => {
   app.use('/api', routes);
 
   // Health check endpoint for Azure
-  app.get('/api/health', (req, res) => {
-    res.status(200).json({ 
-      status: 'healthy', 
-      timestamp: new Date().toISOString(),
-      environment: process.env.NODE_ENV 
-    });
+  app.get('/health', async (_req, res) => {
+    try {
+      const dbHealthy = await checkDatabaseConnection();
+      res.status(200).json({ 
+        status: dbHealthy ? 'healthy' : 'degraded',
+        timestamp: new Date().toISOString(),
+        environment: config.NODE_ENV,
+        database: dbHealthy ? 'connected' : 'disconnected'
+      });
+    } catch (error) {
+      res.status(503).json({ 
+        status: 'unhealthy',
+        timestamp: new Date().toISOString(),
+        environment: config.NODE_ENV,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
   });
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -83,41 +92,38 @@ app.use((req, res, next) => {
     const message = err.message || "Internal Server Error";
 
     res.status(status).json({ message });
-    throw err;
+    console.error('Error:', err);
   });
 
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app);
+  if (process.env.NODE_ENV === "development") {
+    await setupVite(app, undefined as any);
   } else {
     serveStatic(app);
   }
 
-  // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 5000 if not specified.
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = parseInt(process.env.PORT || '5000', 10);
-  
-  const httpServer = app.listen(port, () => {
-    log(`serving on port ${port}`);
+  // Start server on configured port
+  const httpServer = app.listen(config.PORT, () => {
+    log.info(`Server running on port ${config.PORT} in ${config.NODE_ENV} mode`);
   });
 
   // Graceful shutdown for Azure
-  process.on('SIGTERM', () => {
-    log('SIGTERM received, shutting down gracefully');
+  process.on('SIGTERM', async () => {
+    log.info('SIGTERM received, shutting down gracefully');
+    await closeDatabaseConnection();
     httpServer.close(() => {
-      log('Process terminated');
+      log.info('Process terminated');
       process.exit(0);
     });
   });
 
-  process.on('SIGINT', () => {
-    log('SIGINT received, shutting down gracefully');
+  process.on('SIGINT', async () => {
+    log.info('SIGINT received, shutting down gracefully');
+    await closeDatabaseConnection();
     httpServer.close(() => {
-      log('Process terminated');
+      log.info('Process terminated');
       process.exit(0);
     });
   });

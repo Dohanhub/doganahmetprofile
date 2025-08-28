@@ -2,7 +2,7 @@ import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Building2, Globe2, Award, Users, CheckCircle, Star, Trophy, Shield } from "lucide-react";
+import { Building2, Globe2, Users, Shield, Trophy } from "lucide-react";
 
 export default function Organizations() {
   const globalOrganizations = [

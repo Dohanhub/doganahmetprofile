@@ -1,7 +1,8 @@
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Trophy, Star, Target, TrendingUp, Award as AwardIcon } from 'lucide-react';
+import { Trophy, Star, Target, TrendingUp, Building2, CheckCircle } from 'lucide-react';
+import Navigation from '@/components/navigation';
+import Footer from '@/components/footer';
+import { Button } from '@/components/ui/button';
+import { Link } from 'wouter';
 
 export default function Achievements() {
   const keyAchievements = [

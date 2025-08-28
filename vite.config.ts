@@ -47,6 +47,10 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
     // Enable source maps for debugging
     sourcemap: process.env.NODE_ENV === 'development',
+    // Ensure assets are properly referenced
+    assetsDir: 'assets',
+    // Copy public assets
+    copyPublicDir: true,
   },
   server: {
     fs: {
@@ -58,4 +62,6 @@ export default defineConfig({
   optimizeDeps: {
     include: ['react', 'react-dom'],
   },
+  // Ensure proper base path for production
+  base: process.env.NODE_ENV === 'production' ? '/' : '/',
 });

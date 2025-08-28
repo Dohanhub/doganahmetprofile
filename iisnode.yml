@@ -1,8 +1,0 @@
-# Azure App Service IIS Node.js configuration
-nodeProcessCommandLine: node dist/index.js
-interceptor: iisnode/interceptor.js
-watchedFiles: web.config;*.js;dist/*.js
-loggingEnabled: true
-logDirectory: LogFiles
-debuggingEnabled: false
-node_env: production

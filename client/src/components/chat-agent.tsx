@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/hooks/use-toast';
 import { 
-  MessageCircle, X, Send, User, Sparkles, Heart, Star, 
-  Mic, MicOff, Volume2, VolumeX, Brain, Globe, Award,
-  Building2, GraduationCap, Shield, Target, Users, Zap,
-  ChevronRight, Play, Pause, Settings
+  X, Send, User, Sparkles, 
+  Mic, MicOff, Volume2, VolumeX, Brain, Award,
+  Zap, Building2, Shield
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -36,9 +35,9 @@ interface ConversationContext {
 export default function ChatAgent() {
   const [isOpen, setIsOpen] = useState(false);
   const [isListening, setIsListening] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [isAutoGreeting, setIsAutoGreeting] = useState(true);
+  const [isAutoGreeting] = useState(true);
+  const [, setIsSpeaking] = useState(false);
   const [conversationContext, setConversationContext] = useState<ConversationContext>({
     currentPage: 'home',
     topicsDiscussed: [],
@@ -357,13 +356,7 @@ export default function ChatAgent() {
     const messageToSend = customInput || inputValue;
     if (!messageToSend.trim()) return;
 
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      text: messageToSend,
-      isUser: true,
-      timestamp: new Date(),
-      type: 'text'
-    };
+    // User message is added directly via addMessage function
 
     addMessage(messageToSend, true);
     setInputValue('');

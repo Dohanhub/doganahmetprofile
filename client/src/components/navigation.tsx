@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Menu, X, Calendar, Linkedin } from "lucide-react";
@@ -21,125 +22,267 @@ export default function Navigation() {
     return false;
   };
 
+  const navVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.4, 0, 0.2, 1],
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: {
+        duration: 0.4,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+
+  const mobileMenuVariants = {
+    hidden: { 
+      opacity: 0, 
+      height: 0,
+      transition: {
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    visible: { 
+      opacity: 1, 
+      height: "auto",
+      transition: {
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1],
+        staggerChildren: 0.1
+      }
+    }
+  };
+
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50">
+    <motion.nav 
+      className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50"
+      initial="hidden"
+      animate="visible"
+      variants={navVariants}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <div className="flex-shrink-0">
+          <motion.div 
+            className="flex-shrink-0"
+            variants={itemVariants}
+          >
             <Link href="/" data-testid="link-home">
-              <span className="text-2xl font-bold text-primary-900 dark:text-white">Ahmet Doğan</span>
+              <motion.span 
+                className="text-2xl font-bold text-primary-900 dark:text-white cursor-pointer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+              >
+                Ahmet Doğan
+              </motion.span>
             </Link>
-          </div>
+          </motion.div>
           
-          <div className="hidden md:block">
+          <motion.div 
+            className="hidden md:block"
+            variants={itemVariants}
+          >
             <div className="ml-10 flex items-center space-x-10">
-              {navItems.map((item) => (
-                <Link
+              {navItems.map((item, index) => (
+                <motion.div
                   key={item.href}
-                  href={item.href}
-                  data-testid={`link-nav-${item.label.toLowerCase()}`}
+                  variants={itemVariants}
+                  custom={index}
                 >
-                  <span
-                    className={`px-4 py-2 text-base font-medium transition-colors rounded-md ${
-                      isActive(item.href)
-                        ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-gray-800"
-                        : "text-gray-700 hover:text-primary-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-primary-400 dark:hover:bg-gray-800"
-                    }`}
-                  >
-                    {item.label}
-                  </span>
-                </Link>
+                  <Link href={item.href} data-testid={`link-nav-${item.label.toLowerCase()}`}>
+                    <motion.span
+                      className={`px-4 py-2 text-base font-medium transition-colors rounded-md cursor-pointer ${
+                        isActive(item.href)
+                          ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-gray-800"
+                          : "text-gray-700 hover:text-primary-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-primary-400 dark:hover:bg-gray-800"
+                      }`}
+                      whileHover={{ 
+                        scale: 1.05,
+                        transition: { duration: 0.2 }
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {item.label}
+                    </motion.span>
+                  </Link>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Right side icons - LinkedIn, Calendar, and Theme Toggle */}
-          <div className="flex items-center space-x-2">
+          <motion.div 
+            className="flex items-center space-x-2"
+            variants={itemVariants}
+          >
             {/* Calendar Icon - Opens Email */}
-            <a 
+            <motion.a 
               href="mailto:info@doganahmet.com?subject=Contact%20Ahmet%20Doğan"
               className="group relative"
               data-testid="button-calendar-email-nav"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.2 }}
             >
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-lg shadow-md hover:shadow-blue-400/30 transform hover:scale-105 transition-all duration-300 flex items-center justify-center border border-white/20">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-lg shadow-md hover:shadow-blue-400/30 transform transition-all duration-300 flex items-center justify-center border border-white/20">
                 <Calendar className="w-4 h-4 text-white" />
               </div>
               {/* Floating Label */}
-              <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm text-gray-800 px-2 py-1 rounded-lg text-xs font-medium shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+              <motion.div 
+                className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm text-gray-800 px-2 py-1 rounded-lg text-xs font-medium shadow-lg whitespace-nowrap"
+                initial={{ opacity: 0, y: 10 }}
+                whileHover={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2 }}
+              >
                 Schedule Meeting
-              </div>
-            </a>
+              </motion.div>
+            </motion.a>
 
             {/* LinkedIn Icon - Opens LinkedIn */}
-            <a 
+            <motion.a 
               href="https://www.linkedin.com/in/ahmet-dogan-ict-executive"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative"
               data-testid="button-linkedin-profile-nav"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.2 }}
             >
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-lg shadow-md hover:shadow-blue-600/30 transform hover:scale-105 transition-all duration-300 flex items-center justify-center border border-white/20">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-lg shadow-md hover:shadow-blue-600/30 transform transition-all duration-300 flex items-center justify-center border border-white/20">
                 <Linkedin className="w-4 h-4 text-white" />
               </div>
               {/* Floating Label */}
-              <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm text-gray-800 px-2 py-1 rounded-lg text-xs font-medium shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+              <motion.div 
+                className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm text-gray-800 px-2 py-1 rounded-lg text-xs font-medium shadow-lg whitespace-nowrap"
+                initial={{ opacity: 0, y: 10 }}
+                whileHover={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2 }}
+              >
                 LinkedIn Profile
-              </div>
-            </a>
+              </motion.div>
+            </motion.a>
             
-            <ThemeToggle />
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+            >
+              <ThemeToggle />
+            </motion.div>
             
             {/* Theme Debug Display */}
-            <div className="ml-2 text-xs text-white/70 font-mono">
+            <motion.div 
+              className="ml-2 text-xs text-white/70 font-mono"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
               {document.documentElement.classList.contains('dark') ? 'DARK' : 'LIGHT'}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
           
-          <div className="md:hidden">
+          <motion.div 
+            className="md:hidden"
+            variants={itemVariants}
+          >
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               data-testid="button-mobile-menu"
             >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <AnimatePresence mode="wait">
+                {mobileMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X className="h-6 w-6" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu className="h-6 w-6" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </Button>
-          </div>
+          </motion.div>
         </div>
         
         {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-100 dark:border-gray-800">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  data-testid={`link-mobile-${item.label.toLowerCase()}`}
-                >
-                  <span
-                    className={`block px-3 py-2 text-base font-medium transition-colors ${
-                      isActive(item.href)
-                        ? "text-primary-600 dark:text-primary-400"
-                        : "text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400"
-                    }`}
-                    onClick={() => setMobileMenuOpen(false)}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div 
+              className="md:hidden overflow-hidden"
+              variants={mobileMenuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-100 dark:border-gray-800">
+                {navItems.map((item, index) => (
+                  <motion.div
+                    key={item.href}
+                    variants={itemVariants}
+                    custom={index}
                   >
-                    {item.label}
-                  </span>
-                </Link>
-              ))}
-              
-              <div className="flex items-center justify-between px-3 py-2">
-                <span className="text-base font-medium text-gray-700 dark:text-gray-300">Theme</span>
-                <ThemeToggle />
+                    <Link
+                      href={item.href}
+                      data-testid={`link-mobile-${item.label.toLowerCase()}`}
+                    >
+                      <motion.span
+                        className={`block px-3 py-2 text-base font-medium transition-colors cursor-pointer ${
+                          isActive(item.href)
+                            ? "text-primary-600 dark:text-primary-400"
+                            : "text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400"
+                        }`}
+                        onClick={() => setMobileMenuOpen(false)}
+                        whileHover={{ x: 5 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {item.label}
+                      </motion.span>
+                    </Link>
+                  </motion.div>
+                ))}
+                
+                <motion.div 
+                  className="flex items-center justify-between px-3 py-2"
+                  variants={itemVariants}
+                >
+                  <span className="text-base font-medium text-gray-700 dark:text-gray-300">Theme</span>
+                  <ThemeToggle />
+                </motion.div>
               </div>
-              
-              {/* Contact button removed from mobile menu - now handled by calendar icon on home page */}
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

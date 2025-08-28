@@ -1,8 +1,7 @@
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
-import { Award, Shield, Users, TrendingUp, Building2, Zap, CheckCircle, Star, Trophy, Target, ChevronRight, Crown, Gem, Medal } from "lucide-react";
+import { Award, Shield, Building2, Crown, Gem, Medal, Target, Trophy, Star } from "lucide-react";
 
 export default function Certifications() {
   const certificationStats = [
@@ -407,9 +406,6 @@ export default function Certifications() {
                     </div>
                   </div>
                   <p className="text-sm text-gray-600 mb-3">{cert.period}</p>
-                  {cert.credentialId && (
-                    <p className="text-xs text-gray-500 mb-3">Credential ID: {cert.credentialId}</p>
-                  )}
                   <div className="flex flex-wrap gap-2">
                     {cert.skills.map((skill, index) => (
                       <span key={index} className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium">

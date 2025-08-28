@@ -1,15 +1,12 @@
-import React from "react";
-
 interface ServiceCardProps {
   title: string;
   subtitle: string;
   description: string;
   image?: string;
-  href: string;
   testId: string;
 }
 
-export default function ServiceCard({ title, subtitle, description, image, href, testId }: ServiceCardProps) {
+export default function ServiceCard({ title, subtitle, description, image, testId }: ServiceCardProps) {
   return (
     <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-6 sm:p-8 hover:shadow-2xl hover:-translate-y-3 hover:scale-105 transition-all duration-500 transform hover:rotate-1 hover:shadow-blue-200/30 group fade-in">
       {image && (

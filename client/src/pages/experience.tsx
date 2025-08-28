@@ -1,8 +1,7 @@
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
-import { Building2, Calendar, MapPin, TrendingUp, Users, Award, Target, CheckCircle, ChevronRight, ChevronDown, ChevronUp, Zap, Shield, Users2, DollarSign } from "lucide-react";
+import { Building2, Calendar, MapPin, TrendingUp, Target, ChevronDown, ChevronUp, Zap, Shield, Users2, DollarSign, Award, CheckCircle } from "lucide-react";
 import { useState } from "react";
 
 export default function Experience() {
