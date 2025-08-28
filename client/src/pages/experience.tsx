@@ -40,11 +40,11 @@ export default function Experience() {
       testId: "stat-team-members"
     },
     {
-      number: "$125M+",
-      label: "Contracts Secured",
-      description: "Lifetime achievement",
-      icon: <DollarSign className="w-8 h-8 text-orange-600" />,
-      testId: "stat-contracts"
+      number: "50+",
+      label: "Major Projects",
+      description: "Successfully delivered",
+      icon: <Award className="w-8 h-8 text-orange-600" />,
+      testId: "stat-projects"
     }
   ];
 
@@ -75,8 +75,8 @@ export default function Experience() {
       type: "Full-time • 1 year",
       description: "Turnaround leader for an underperforming region. Transformed Western Region from bottom-tier to #1 nationwide position through strategic leadership and market expansion.",
       achievements: [
-        "SAR 125M New Contracts (2024)",
-        "SAR 110M Collections Achieved", 
+        "Regional Market Leadership",
+        "Team Performance Excellence", 
         "#1 National Ranking",
         "5× Profit Increase"
       ],

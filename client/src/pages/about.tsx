@@ -21,7 +21,7 @@ export default function About() {
     {
       icon: <TrendingUp className="w-8 h-8 text-indigo-600" />,
       title: "Business Transformation Expert",
-      description: "Transformed underperforming Western Region to #1 nationwide position with SAR 125M in contracts and 5× profit increase within one year."
+      description: "Transformed underperforming Western Region to #1 nationwide position with exceptional market leadership and 5× profit increase within one year."
     },
     {
       icon: <Globe className="w-8 h-8 text-orange-600" />,

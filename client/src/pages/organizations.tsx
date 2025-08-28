@@ -2,7 +2,7 @@ import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Building2, Globe2, Users, Shield, Trophy } from "lucide-react";
+import { Building2, Globe2, Users, Shield, Trophy, ExternalLink } from "lucide-react";
 
 export default function Organizations() {
   const globalOrganizations = [
@@ -13,6 +13,8 @@ export default function Organizations() {
       duration: "15+ years",
       description: "Global leader in project management standards and certification",
       certifications: ["PgMP", "PMP", "PMI-ACP"],
+      logo: "https://www.pmi.org/-/media/pmi/other-images/pmi-logo.png",
+      url: "https://www.pmi.org",
       testId: "org-pmi"
     },
     {
@@ -21,6 +23,8 @@ export default function Organizations() {
       period: "Multiple certifications holder",
       description: "Leading global IT governance and cybersecurity organization",
       certifications: ["CISM", "CISA", "CRISC"],
+      logo: "https://www.isaca.org/-/media/images/isaca-logo.png",
+      url: "https://www.isaca.org",
       testId: "org-isaca"
     },
     {
@@ -29,6 +33,8 @@ export default function Organizations() {
       period: "2019 - Present",
       description: "International accreditation body for MBA programs",
       certifications: ["Leicester MBA Graduate"],
+      logo: "https://www.associationofmbas.com/wp-content/uploads/2021/03/amba-logo.png",
+      url: "https://www.associationofmbas.com",
       testId: "org-amba"
     },
     {
@@ -37,6 +43,8 @@ export default function Organizations() {
       period: "2019 - Present",
       description: "UK's chartered professional body for management and leadership",
       certifications: ["Chartered Manager"],
+      logo: "https://www.managers.org.uk/-/media/images/cmi-logo.png",
+      url: "https://www.managers.org.uk",
       testId: "org-cmi"
     },
     {
@@ -45,6 +53,8 @@ export default function Organizations() {
       period: "November 2010 - Present",
       duration: "14+ years",
       description: "Leading quality management professional society",
+      logo: "https://www.esq.org.eg/images/logo.png",
+      url: "https://www.esq.org.eg",
       testId: "org-quality"
     }
   ];
@@ -56,6 +66,8 @@ export default function Organizations() {
       period: "August 2016 - Present",
       description: "Licensed Consultant Engineer (Electronics & Communications)",
       country: "🇸🇦",
+      logo: "https://www.saudieng.sa/images/logo.png",
+      url: "https://www.saudieng.sa",
       testId: "org-saudi-engineers"
     },
     {
@@ -64,6 +76,8 @@ export default function Organizations() {
       period: "Active Membership",
       description: "Professional engineering body of Kuwait",
       country: "🇰🇼",
+      logo: "https://www.kes.org.kw/images/logo.png",
+      url: "https://www.kes.org.kw",
       testId: "org-kuwait-engineers"
     },
     {
@@ -72,6 +86,8 @@ export default function Organizations() {
       period: "January 2016 - Present",
       description: "Pan-Arab professional engineering federation",
       country: "🌍",
+      logo: "https://www.arabeng.org/images/logo.png",
+      url: "https://www.arabeng.org",
       testId: "org-arab-engineers"
     },
     {
@@ -81,6 +97,8 @@ export default function Organizations() {
       duration: "20+ years",
       description: "National engineering syndicate of Egypt",
       country: "🇪🇬",
+      logo: "https://www.egyptianeng.org/images/logo.png",
+      url: "https://www.egyptianeng.org",
       testId: "org-egyptian-engineers"
     }
   ];
@@ -147,13 +165,37 @@ export default function Organizations() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {globalOrganizations.map((org) => (
-              <div key={org.testId} className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border border-gray-200" data-testid={org.testId}>
+              <div key={org.testId} className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-shadow duration-300" data-testid={org.testId}>
                 <div className="flex items-start gap-4 mb-4">
-                  <Building2 className="w-8 h-8 text-blue-600 flex-shrink-0 mt-1" />
-                  <div>
+                  <div className="flex-shrink-0 mt-1">
+                    {org.logo ? (
+                      <img 
+                        src={org.logo} 
+                        alt={`${org.name} logo`}
+                        className="w-12 h-12 object-contain rounded-lg bg-white p-1 shadow-sm"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.nextSibling.style.display = 'block';
+                        }}
+                      />
+                    ) : null}
+                    <Building2 className="w-8 h-8 text-blue-600 hidden" />
+                  </div>
+                  <div className="flex-1">
                     <h3 className="text-lg font-bold text-gray-900 mb-1">{org.name}</h3>
                     <p className="text-blue-600 font-semibold">{org.level}</p>
                   </div>
+                  {org.url && (
+                    <a 
+                      href={org.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 transition-colors"
+                      title={`Visit ${org.name} website`}
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
                 </div>
                 <p className="text-sm text-gray-600 mb-3">{org.period}</p>
                 {org.duration && (
@@ -167,6 +209,19 @@ export default function Organizations() {
                         {cert}
                       </span>
                     ))}
+                  </div>
+                )}
+                {org.url && (
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <a 
+                      href={org.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                    >
+                      Visit Official Website
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
                   </div>
                 )}
               </div>
@@ -190,19 +245,56 @@ export default function Organizations() {
 
           <div className="grid md:grid-cols-2 gap-8">
             {regionalOrganizations.map((org) => (
-              <div key={org.testId} className="bg-white p-6 rounded-xl shadow-sm border border-gray-200" data-testid={org.testId}>
+              <div key={org.testId} className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition-shadow duration-300" data-testid={org.testId}>
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="text-2xl">{org.country}</div>
-                  <div>
+                  <div className="flex-shrink-0 mt-1">
+                    {org.logo ? (
+                      <img 
+                        src={org.logo} 
+                        alt={`${org.name} logo`}
+                        className="w-12 h-12 object-contain rounded-lg bg-gray-50 p-1 shadow-sm"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.nextSibling.style.display = 'block';
+                        }}
+                      />
+                    ) : null}
+                    <div className="text-2xl hidden">{org.country}</div>
+                  </div>
+                  <div className="flex-1">
                     <h3 className="text-lg font-bold text-gray-900 mb-1">{org.name}</h3>
                     <p className="text-blue-600 font-semibold">{org.level}</p>
                   </div>
+                  {org.url && (
+                    <a 
+                      href={org.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 transition-colors"
+                      title={`Visit ${org.name} website`}
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
                 </div>
                 <p className="text-sm text-gray-600 mb-3">{org.period}</p>
                 {org.duration && (
                   <p className="text-sm font-semibold text-green-600 mb-3">{org.duration}</p>
                 )}
-                <p className="text-gray-700">{org.description}</p>
+                <p className="text-gray-700 mb-4">{org.description}</p>
+                {org.url && (
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <a 
+                      href={org.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                    >
+                      Visit Official Website
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                )}
               </div>
             ))}
           </div>

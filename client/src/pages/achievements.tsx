@@ -18,8 +18,8 @@ export default function Achievements() {
       icon: <TrendingUp className="w-12 h-12 text-green-600" />,
       title: "Regional Business Transformation",
       subtitle: "Turnaround Excellence",
-      description: "Transformed underperforming Western Region to #1 nationwide position. Achieved SAR 125M in new contracts and SAR 110M in collections within one year, establishing market leadership across multiple provinces.",
-      metrics: ["SAR 125M New Contracts", "SAR 110M Collections", "#1 National Ranking", "5× Profit Increase"],
+      description: "Transformed underperforming Western Region to #1 nationwide position. Achieved market leadership and exceptional team performance within one year, establishing dominance across multiple provinces.",
+      metrics: ["Regional Market Leadership", "Team Performance Excellence", "#1 National Ranking", "5× Profit Increase"],
       testId: "achievement-transformation"
     },
     {
@@ -60,7 +60,7 @@ export default function Achievements() {
       company: "Abdullah Fouad Group - InfoTech Division",
       location: "Jeddah, Makkah, Saudi Arabia",
       highlights: [
-        "SAR 125M New Contracts (2024)",
+        "Regional Market Leadership (2024)",
         "SAR 110M Collections Achieved",
         "#1 National Ranking",
         "5× Profit Increase"
@@ -158,7 +158,7 @@ export default function Achievements() {
             </p>
             <div className="grid md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary-700">SAR 125M+</div>
+                <div className="text-3xl font-bold text-primary-700">50+ Projects</div>
                 <div className="text-sm text-gray-600">Contracts Secured</div>
               </div>
               <div className="text-center">
