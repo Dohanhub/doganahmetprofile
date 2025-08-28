@@ -172,7 +172,7 @@ class ServiceWorkerManager {
       const messageChannel = new MessageChannel();
       
       messageChannel.port1.onmessage = (event) => {
-        const { type, data, error } = event.data;
+        const { data, error } = event.data;
         
         if (error) {
           reject(new Error(error));
@@ -319,7 +319,7 @@ class ServiceWorkerManager {
     }
 
     try {
-      await this.registration.sync.register(tag);
+      await (this.registration as any).sync.register(tag);
       console.log('[SW Manager] Background sync registered:', tag);
       return true;
     } catch (error) {

@@ -8,7 +8,7 @@ import { enhancedQueryClient } from "./lib/enhanced-queryClient";
 import { EnhancedReactQueryDevtools } from "./lib/react-query-devtools";
 import { PerformanceMonitor, DataFlowIndicator } from "@/components/ui/performance-monitor";
 import { ErrorBoundary } from "@/components/error-boundary";
-import serviceWorkerManager from "@/lib/service-worker-manager";
+// import serviceWorkerManager from "@/lib/service-worker-manager";
 import ChatAgent from "@/components/chat-agent";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";

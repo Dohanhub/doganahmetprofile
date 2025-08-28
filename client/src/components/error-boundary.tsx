@@ -139,7 +139,7 @@ export class ErrorBoundary extends Component<Props, State> {
       }
 
       const canRetry = this.state.retryAttempts < this.maxRetries;
-      const timeSinceError = Date.now() - this.state.lastErrorTime;
+      // const timeSinceError = Date.now() - this.state.lastErrorTime;
 
       return (
         <AnimatePresence>

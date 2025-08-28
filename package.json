@@ -8,6 +8,7 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build",
     "build:server": "tsc --project server/tsconfig.json",
+    "vercel-build": "npm run build:client",
     "build:analyze": "npm run build:client -- --analyze",
     "build:prod": "cross-env NODE_ENV=production npm run build",
     "start": "node dist/index.js",
